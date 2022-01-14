@@ -21,6 +21,9 @@ yarn-error.log*
 # mobile
 .dart_tool
 pubspec.lock
+.flutter-plugins-dependencies
+.flutter-plugins
+.packages
 
 # server 
 .dart_tool
