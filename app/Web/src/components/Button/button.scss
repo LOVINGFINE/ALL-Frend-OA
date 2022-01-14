@@ -1,0 +1,51 @@
+.dyl {
+  &-button {
+    display: inline-block;
+    border-radius: 2px;
+    max-width: 100%;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all linear 0.1s;
+    &-default {
+      color: #666;
+      background-color: transparent;
+      &:hover {
+        color: #1890ff;
+        border-color: #1890ff;
+      }
+    }
+    &-error {
+      color: #fff;
+      background-color: red;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+    &-primary {
+      color: #fff;
+      background-color: #1890ff;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    &-middle {
+      font-size: 12px;
+      padding: 7px 15px;
+    }
+    &-small {
+      font-size: 12px;
+      padding: 5px 12px;
+    }
+    &-large {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+    &-disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      &:hover {
+        opacity: 0.4;
+      }
+    }
+  }
+}

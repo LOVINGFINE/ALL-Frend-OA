@@ -1,0 +1,16 @@
+.dyl {
+  &-global-header {
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-left {
+      display: flex;
+      align-content: center;
+    }
+    &-right {
+      display: flex;
+      align-content: center;
+    }
+  }
+}

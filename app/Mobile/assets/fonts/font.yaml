@@ -1,0 +1,5 @@
+# 字体图标集合配置清单
+iconFont:
+  add-to-list: \\e900
+  classic-computer: \\e901
+  controller-fast-backward: \\e902

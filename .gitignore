@@ -1,0 +1,31 @@
+
+.DS_Store
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# web
+node_modules
+package-lock.json
+yarn.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.local
+.env.*.local
+
+# mobile
+.dart_tool
+pubspec.lock
+
+# server 
+.dart_tool
+pubspec.lock
+
+# dist output
+packages
+

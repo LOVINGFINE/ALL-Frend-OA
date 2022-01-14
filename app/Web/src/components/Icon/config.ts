@@ -1,0 +1,27 @@
+export default {
+  "not-found": "",
+  "classic-computer": "",
+  "add-to-list": "",
+  "open-book": "",
+  "trash-tob": "",
+  "archive-icon": "",
+  "beamed-note": "",
+  "browser-icon": "",
+  "calculator-icon": "",
+  "check-right": "",
+  "circle-with-cross": "",
+  "clapperboard-icon": "",
+  "setting-cog": "",
+  "close-cross": "",
+  "spaning-cycle": "",
+  "folder-music": "",
+  "new-message": "",
+  "shop-icon": "",
+  "thumbs-up": "",
+  "evernote-icon": "",
+  "arrow-thin-left": "",
+  "arrow-thin-down": "",
+  "icon-translate": "",
+} as {
+  [key: string]: string;
+};

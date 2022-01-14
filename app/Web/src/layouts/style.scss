@@ -1,0 +1,31 @@
+.basicLayout-contanier {
+  width: 100vw;
+  height: 100vh;
+  &-main {
+    height: calc(100vh - 50px);
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+  }
+  &-left {
+    width: 230px;
+    height: 100%;
+    background-color: #fff;
+    border-left: solid 2px #ddd;
+    border-top: solid 2px rgb(245, 245, 245);
+    box-sizing: border-box;
+    overflow-y: auto;
+    padding: 20px 0;
+    box-sizing: border-box;
+  }
+  &-right {
+    flex: 1;
+    padding: 12px;
+    background-color: #edecec;
+    &-card {
+      width: 100%;
+      min-height: 100%;
+      background-color: #fff;
+    }
+  }
+}
