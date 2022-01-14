@@ -1,0 +1,18 @@
+name: dart_server
+description: A new dart server.
+version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: ">=2.15.0-15.0.dev <3.0.0"
+
+dependencies:
+  http_server: ^1.0.0
+  mongo_dart: ^0.7.2
+  shelf: ^1.2.0
+  shelf_router: ^1.1.2
+  dart_server_helper: ^0.0.6
+
+dev_dependencies:
+  shelf_router_generator: ^1.0.1
+  build_runner: ^2.1.7
