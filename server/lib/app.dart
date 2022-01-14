@@ -22,3 +22,7 @@ void app() async {
       .add("Access-Control-Max-Age", "3600"); //跨域时候预检周期，防止重复性预检
   print('Listening on localhost:${server.port}');
 }
+
+main() {
+  app();
+}
