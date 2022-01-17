@@ -1,42 +1,102 @@
-import 'package:dart_server/setting/_setting.dart';
-import './dart_server_helper.dart';
-import 'package:dart_server/models/user.dart';
+import 'package:server/setting/_setting.dart';
+import 'package:dart_server_helper/dart_server_helper.dart';
+import 'package:server/models/user.dart';
 import 'package:shelf/shelf.dart';
-import 'package:shelf_router/shelf_router.dart';
 
 class AccountHelper extends DartServerHelper {
- Map<String, dynamic> params;
-  AccountHelper(Request request,this.params) : super(request);
+  String code;
+  AccountHelper(Request request, this.code) : super(request);
 
   @override
   void delete() {
-    helper({'message': 'error delete key'});
+    error(AppStatus.notAllow, message: 'not notAllow remove user');
   }
 
   @override
   void put() async {
-    // 手机号 密码登录
-    Map<String, dynamic> body = await getBody();
-    if (body['mobile'] == null) {
-      paramNotFound('mobile');
+    // 修改密码
+    Map<String, dynamic> body = getBody();
+    if (body['oldPassword'] == null) {
+      paramNotFound('oldPassword');
       return;
     }
-    if (body['password'] == null) {
-      paramNotFound('password');
+    if (body['newPassword'] == null) {
+      paramNotFound('newPassword');
       return;
     }
-    String userId =
-        User(body['mobile'], user: {'password': body['password']}).id;
-    var res = await User.get(userId);
-    if (res != null) {
-      helper(User(res['mobile'], user: res).toMap());
+    var user = await User.get(code);
+
+    if (user != null) {
+      if (user['password'] == body['oldPassword']) {
+        // 密码正确
+        User(user['mobile'], user: user)
+            .update({'password': body['newPassword']});
+        helper(user);
+      } else {
+        error(AppStatus.notAllow, message: '原始密码不正确');
+      }
     } else {
-      error(AppStatus.notFound, message: 'not has user[$userId]');
+      error(AppStatus.notFound, message: 'user Id [$code] not found');
+    }
+  }
+
+  @override
+  void post() async {
+    // 手机号 注册
+    if (code == 'register') {
+      register();
+    }
+
+    if (code == 'login') {
+      login();
     }
   }
 
   @override
   get() async {
-    print(params);
+    var user = await User.get(code);
+    if (user != null) {
+      helper(user);
+    } else {
+      error(AppStatus.notFound, message: 'user Id [$code] not found');
+    }
+  }
+
+  login() async {
+    Map<String, dynamic> body = getBody();
+
+    if (body['mobile'] == null) {
+      paramNotFound('mobile');
+      return;
+    }
+
+    if (body['password'] == null) {
+      paramNotFound('password');
+      return;
+    }
+
+    var user = await User.getUserInfoByMobile(body['mobile']);
+    if (user != null && user['password'] == body['password']) {
+      helper(User(user['mobile']).toMap());
+    } else {
+      error(AppStatus.notFound,
+          message: 'password [${body['password']}] error');
+    }
+  }
+
+  register() async {
+    Map<String, dynamic> body = getBody();
+    if (body['mobile'] == null) {
+      paramNotFound('mobile');
+      return;
+    }
+    var user = User(body['mobile']);
+    var userMap = user.toMap();
+    int status = await User(body['mobile']).add();
+    if (status == AppStatus.ok) {
+      helper(userMap);
+    } else {
+      error(AppStatus.paramsError, message: '注册失败');
+    }
   }
 }

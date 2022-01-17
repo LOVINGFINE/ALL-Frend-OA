@@ -44,8 +44,11 @@ function easyUpload() {
 
 const createUser = () => {
   sendHttp({
-    method: "GET",
-    path: "http://localhost:8080/user/LF-536647ff248913af41a5a83f8aaddb94",
+    method: "POST",
+    path: "http://localhost:8080/account/register",
+    data: {
+      mobile: "13154245367",
+    },
   });
 };
 

@@ -1,4 +1,4 @@
-import 'package:dart_server/setting/_setting.dart';
+import 'package:server/setting/_setting.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongodPlugin {

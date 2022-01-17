@@ -1,5 +1,5 @@
-import 'package:dart_server/plugins/_plugins.dart';
-import 'package:dart_server/setting/status.dart';
+import 'package:server/plugins/_plugins.dart';
+import 'package:server/setting/status.dart';
 
 class Role {
   static MongodPlugin mongod = MongodPlugin('role');

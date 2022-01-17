@@ -1,8 +1,8 @@
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:convert/convert.dart';
-import 'package:dart_server/plugins/_plugins.dart';
-import 'package:dart_server/setting/status.dart';
+import 'package:server/plugins/_plugins.dart';
+import 'package:server/setting/status.dart';
 
 class User {
   static MongodPlugin mongod = MongodPlugin('user');
@@ -100,6 +100,11 @@ class User {
       return await mongod.delate(userId);
     }
     return AppStatus.error;
+  }
+
+  static Future<dynamic> getUserInfoByMobile(String mobile) async {
+    // 通过 mobile
+    return await mongod.find({'mobile': mobile});
   }
 }
 
