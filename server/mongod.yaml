@@ -2,6 +2,7 @@ name: DARTSERVER
 port: 27017
 host: localhost
 collections:
+  auth: AUTH
   user: USERS
   authentication: AUTHENTICATION
   role: ROLE

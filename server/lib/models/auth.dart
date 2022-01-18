@@ -1,62 +1,52 @@
 import 'package:server/plugins/_plugins.dart';
 import 'package:server/setting/status.dart';
 
-class Authentication {
-  static MongodPlugin mongod = MongodPlugin('authentication');
-
+class Auth {
+  static MongodPlugin mongod = MongodPlugin('auth');
   String key;
   String title = '';
   String desc = '';
-  Authentication(this.key, {title, desc}) {
+  Auth(this.key, {title, desc}) {
     title = title ?? '';
     desc = desc ?? '';
   }
-  Map<String, dynamic> toMap() {
-    return {
-      'key': key,
-      'title': title,
-      'desc': desc,
-    };
-  }
 
-  // get
-  static Future<List<Map<String, dynamic>>> getAll() async {
-    // 查找用户
-    List<Map<String, dynamic>> all = await mongod.findAll();
-    return all;
-  }
-
-  // create
-  Future<int> add() async {
-    // 查找用户
-    var hasUser = await mongod.find({'key': key});
-    if (hasUser == null) {
-      return await mongod.insert(toMap());
+  Future<AppStatus> create() async {
+    var hasKey = await mongod.find({'id': key});
+    if (hasKey != null) {
+      await mongod.insert({'id': key, 'title': title, 'desc': desc});
+      return AppStatus.OK;
+    } else {
+      return AppStatus.ParamsError;
     }
-    return AppStatus.error;
   }
 
-  Future<int> update(Map<String, dynamic> options) async {
-    // 查找用户
-    var hasUser = await mongod.find({'key': key});
-    if (hasUser != null) {
-      Map auth = toMap();
-      options.forEach((key, value) {
-        if (auth[key] != null) {
-          auth[key] = value;
-        }
-      });
-      return await mongod.update(key, auth);
-    }
-    return AppStatus.error;
+  Future<List<Map>> get() async {
+    List<Map> list = await mongod.findAll();
+    List<Map> res = [];
+    list.forEach((ele) {
+      res.add({key: ele['id'], title: ele['title'], desc: ele['desc']});
+    });
+    return res;
   }
 
-  static Future<int> delete(String key) async {
-    // 查找用户
-    var hasUser = await mongod.find({'key': key});
-    if (hasUser != null) {
-      return await mongod.delate(key);
+  Future<AppStatus> delete() async {
+    var hasKey = await mongod.find({'id': key});
+    if (hasKey != null) {
+      await mongod.delate(key);
+      return AppStatus.OK;
+    } else {
+      return AppStatus.Unknown;
     }
-    return AppStatus.error;
+  }
+
+  Future<AppStatus> update(options) async {
+    var hasKey = await mongod.find({'id': key});
+    if (hasKey != null) {
+      await mongod.update(key, options);
+      return AppStatus.OK;
+    } else {
+      return AppStatus.Unknown;
+    }
   }
 }

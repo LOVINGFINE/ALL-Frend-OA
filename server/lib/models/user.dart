@@ -5,7 +5,7 @@ import 'package:server/plugins/_plugins.dart';
 import 'package:server/setting/status.dart';
 
 class User {
-  static MongodPlugin mongod = MongodPlugin('user');
+  static final MongodPlugin mongod = MongodPlugin('user');
   String id = '';
   String username = '';
   String password = '';
@@ -69,16 +69,16 @@ class User {
   }
 
   // create
-  Future<int> add() async {
+  Future<AppStatus> add() async {
     // 查找用户
     var hasUser = await mongod.find({'id': id});
     if (hasUser == null) {
       return await mongod.insert(parse());
     }
-    return AppStatus.error;
+    return AppStatus.Error;
   }
 
-  Future<int> update(Map<String, dynamic> options) async {
+  Future<AppStatus> update(Map<String, dynamic> options) async {
     // 查找用户
     var hasUser = await mongod.find({'id': id});
     if (hasUser != null) {
@@ -90,16 +90,16 @@ class User {
       });
       return await mongod.update(id, user);
     }
-    return AppStatus.error;
+    return AppStatus.Error;
   }
 
-  static Future<int> delete(String userId) async {
+  static Future<AppStatus> delete(String userId) async {
     // 查找用户
     var hasUser = await mongod.find({'id': userId});
     if (hasUser != null) {
       return await mongod.delate(userId);
     }
-    return AppStatus.error;
+    return AppStatus.Error;
   }
 
   static Future<dynamic> getUserInfoByMobile(String mobile) async {

@@ -9,7 +9,7 @@ class AccountHelper extends DartServerHelper {
 
   @override
   void delete() {
-    error(AppStatus.notAllow, message: 'not notAllow remove user');
+    error(405, message: 'not notAllow remove user');
   }
 
   @override
@@ -33,10 +33,10 @@ class AccountHelper extends DartServerHelper {
             .update({'password': body['newPassword']});
         helper(user);
       } else {
-        error(AppStatus.notAllow, message: '原始密码不正确');
+        error(405, message: '原始密码不正确');
       }
     } else {
-      error(AppStatus.notFound, message: 'user Id [$code] not found');
+      error(404, message: 'user Id [$code] not found');
     }
   }
 
@@ -58,7 +58,7 @@ class AccountHelper extends DartServerHelper {
     if (user != null) {
       helper(user);
     } else {
-      error(AppStatus.notFound, message: 'user Id [$code] not found');
+      error(404, message: 'user Id [$code] not found');
     }
   }
 
@@ -77,10 +77,9 @@ class AccountHelper extends DartServerHelper {
 
     var user = await User.getUserInfoByMobile(body['mobile']);
     if (user != null && user['password'] == body['password']) {
-      helper(User(user['mobile']).toMap());
+      helper({"info": User(user['mobile']).toMap(), "token": '', "auth": []});
     } else {
-      error(AppStatus.notFound,
-          message: 'password [${body['password']}] error');
+      error(404, message: 'password [${body['password']}] error');
     }
   }
 
@@ -92,11 +91,11 @@ class AccountHelper extends DartServerHelper {
     }
     var user = User(body['mobile']);
     var userMap = user.toMap();
-    int status = await User(body['mobile']).add();
-    if (status == AppStatus.ok) {
+    AppStatus status = await User(body['mobile']).add();
+    if (status == AppStatus.OK) {
       helper(userMap);
     } else {
-      error(AppStatus.paramsError, message: '注册失败');
+      error(401, message: '注册失败');
     }
   }
 }

@@ -9,14 +9,14 @@ class MongodPlugin {
         .collection(MongodSetting.config['collections'][name]);
   }
 
-  Future<int> insert(Map<String, dynamic> data) async {
+  Future<AppStatus> insert(Map<String, dynamic> data) async {
     await MongodSetting.mongodDB.open();
     WriteResult? one = await document?.insertOne(data);
     await MongodSetting.mongodDB.close();
     if (one is WriteResult) {
-      return AppStatus.ok;
+      return AppStatus.OK;
     } else {
-      return AppStatus.paramsError;
+      return AppStatus.ParamsError;
     }
   }
 
@@ -36,15 +36,15 @@ class MongodPlugin {
     if (res is Map<String, dynamic>) {
       return res;
     } else {
-      return AppStatus.paramsError;
+      return AppStatus.ParamsError;
     }
   }
 
-  Future<int> delate(String id) async {
+  Future<AppStatus> delate(String id) async {
     await MongodSetting.mongodDB.open();
-    var res = await document?.deleteOne(where.eq('id', id));
+    await document?.deleteOne(where.eq('id', id));
     await MongodSetting.mongodDB.close();
-    return AppStatus.ok;
+    return AppStatus.OK;
   }
 
   Future<List<Map<String, dynamic>>> findBy(SelectorBuilder selector) async {
