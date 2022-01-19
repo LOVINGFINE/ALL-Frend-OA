@@ -7,6 +7,7 @@
 *.njsproj
 *.sln
 *.sw*
+build
 
 # web
 node_modules
