@@ -1,18 +1,49 @@
 import svgToFont from "svgtofont";
+import { resolve } from "path";
 import document from "./unicode.json";
 import { AppStatus } from "../../app.setting";
-class FontHelper {
+import fs from "fs";
+
+export class FontHelper {
   document: { [key: string]: any } = document;
+  fontName = "all-frend-oa-font";
   constructor() {}
 
-  write(): Promise<AppStatus> {
-    const { document } = this;
-    return Promise.resolve(AppStatus.OK);
+  async write() {
+    const { fontName } = this;
+    try {
+      await svgToFont({
+        src: "public/svg",
+        dist: resolve(__dirname, ".dev/font"),
+        fontName,
+        emptyDist: true,
+        outSVGPath: false,
+        startUnicode: 0xea01,
+        css: {
+          output: "src/helpers/font_helper/.dev/styles",
+        },
+      });
+      const files = fs.readdirSync(resolve(__dirname, ".dev/font"));
+      files.forEach((file) => {
+        const outs = [`${fontName}.svg`, `${fontName}.symbol.svg`];
+        if (outs.includes(file)) {
+          fs.unlinkSync(resolve(__dirname, ".dev/font/" + file));
+        }
+      });
+      const styles = fs.readdirSync(resolve(__dirname, ".dev/styles"));
+      styles.forEach((file) => {
+        if (file === `${fontName}.styl`) {
+          fs.unlinkSync(resolve(__dirname, ".dev/styles/" + file));
+        }
+      });
+      return AppStatus.OK;
+    } catch (e) {
+      console.log(e);
+      return AppStatus.ERROR;
+    }
   }
 
-  create(file: File) {
-    const { document } = this;
-  }
+  create(file: File) {}
   update() {}
 
   async delete(key: string) {
@@ -40,5 +71,3 @@ class FontHelper {
     }
   }
 }
-
-export default FontHelper;

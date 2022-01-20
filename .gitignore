@@ -30,6 +30,11 @@ pubspec.lock
 .dart_tool
 pubspec.lock
 
+# dev 
+.dev
+
 # dist output
-packages
+
+
+
 

@@ -1,5 +1,5 @@
 import express from "express";
-import setting from "./src/app.setting";
+import { AppSetting } from "./src/app.setting";
 import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
@@ -14,6 +14,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(register(routes));
 // 监听端口
-app.listen(setting.port, () => {
-  console.log("a server is listen on port:", setting.port);
+app.listen(AppSetting.port, () => {
+  console.log("a server is listen on port:", AppSetting.port);
 });

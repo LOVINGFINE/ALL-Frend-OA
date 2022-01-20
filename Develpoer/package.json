@@ -4,7 +4,28 @@
   "main": "app.ts",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --watch \"ts-node\""
+    "start": "nodemon \"ts-node\"",
+    "test": "ts-node ./__test__/index.ts"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      ".git",
+      "node_modules/"
+    ],
+    "verbose": true,
+    "execMap": {
+      "": "node",
+      "js": "node --harmony"
+    },
+    "ext": "js json ts tsx jsx",
+    "watch": [
+      "src"
+    ],
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "legacy-watch": false
   },
   "dependencies": {
     "body-parser": "^1.19.1",
