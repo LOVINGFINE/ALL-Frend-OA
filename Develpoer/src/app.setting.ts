@@ -1,6 +1,6 @@
 const setting = {
   APIPATH: "/api",
-  port: 8989,
+  port: 9999,
 };
 
 export interface settingProps {

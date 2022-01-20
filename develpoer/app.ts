@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
 import routes from "./src/app.routes";
-import { register } from "./src/routes";
+import { register } from "./src/utils/router";
 
 const app = express();
 // 允许跨域

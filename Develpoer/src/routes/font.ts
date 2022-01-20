@@ -1,4 +1,4 @@
-import { RouterHelper } from ".";
+import { RouterHelper } from "../utils/router";
 import { Request, Response } from "express";
 
 export default class FontRouter extends RouterHelper {
@@ -6,7 +6,7 @@ export default class FontRouter extends RouterHelper {
     super(request, response);
   }
   override get() {
-    console.log(this.method);
+    console.log(this.params);
     this.helper({
       code: 200,
       message: "ok",
