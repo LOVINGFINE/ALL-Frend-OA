@@ -9,7 +9,9 @@
   "dependencies": {
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "font-carrier": "^0.3.1",
+    "svgtofont": "^3.14.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

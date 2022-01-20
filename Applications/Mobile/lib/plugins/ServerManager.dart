@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dart_server_helper/dart_server_helper.dart' show DioManager;
-import 'package:netease/global.dart';
+import 'package:frend_mobile/global.dart';
 
 class ServerManager {
   BaseOptions config = BaseOptions(

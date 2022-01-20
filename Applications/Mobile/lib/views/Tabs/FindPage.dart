@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netease/global.dart';
+import 'package:frend_mobile/global.dart';
 
 class FindPage extends StatefulWidget {
   @override

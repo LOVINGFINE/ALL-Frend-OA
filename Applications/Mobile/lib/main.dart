@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netease/views/Tabs/_.dart';
+import 'package:frend_mobile/views/Tabs/_.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'NETEASE',
+      title: 'frend_mobile',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

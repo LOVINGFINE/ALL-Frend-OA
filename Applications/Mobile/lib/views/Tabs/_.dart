@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:netease/views/Tabs/FindPage.dart';
-import 'package:netease/views/Tabs/SongPage.dart';
-import 'package:netease/views/Tabs/AlbumPage.dart';
-import 'package:netease/views/Tabs/UserPage.dart';
-import 'package:netease/global.dart';
-import 'package:netease/views/Login/LoginPage.dart';
+import 'package:frend_mobile/views/Tabs/FindPage.dart';
+import 'package:frend_mobile/views/Tabs/SongPage.dart';
+import 'package:frend_mobile/views/Tabs/AlbumPage.dart';
+import 'package:frend_mobile/views/Tabs/UserPage.dart';
+import 'package:frend_mobile/global.dart';
+import 'package:frend_mobile/views/Login/LoginPage.dart';
 
 class Tabs extends StatefulWidget {
   @override

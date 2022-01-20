@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:netease/theme/index.dart';
-import 'package:netease/plugins/ServerManager.dart';
+import 'package:frend_mobile/theme/index.dart';
+import 'package:frend_mobile/plugins/ServerManager.dart';
 
 class GlobalContext {
   
