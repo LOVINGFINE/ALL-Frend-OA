@@ -1,0 +1,381 @@
+// @ts-nocheck
+import SVGIcons2SVGFont, { Glyphs } from "svgicons2svgfont";
+import fs from "fs-extra";
+import path from "path";
+import ejs from "ejs";
+import cheerio from "cheerio";
+import svg2ttf from "svg2ttf";
+import ttf2eot from "ttf2eot";
+import ttf2woff from "ttf2woff";
+import ttf2woff2 from "ttf2woff2";
+import copy from "copy-template-dir";
+import del from "del";
+import moveFile from "move-file";
+import { SvgToFontOptions } from "./";
+
+let UnicodeObj: Record<string, string> = {};
+/**
+ * Unicode Private Use Area start.
+ * https://en.wikipedia.org/wiki/Private_Use_Areas
+ */
+let startUnicode = 0xea01;
+
+/**
+ * SVG to SVG font
+ */
+export function createSVG(
+  options: SvgToFontOptions = {}
+): Promise<Record<string, string>> {
+  startUnicode = options.startUnicode || 10000;
+  UnicodeObj = {};
+  return new Promise((resolve, reject) => {
+    // init
+    const fontStream = new SVGIcons2SVGFont({
+      ...options.svgicons2svgfont,
+    });
+
+    function writeFontStream(svgPath: string) {
+      // file name
+      let _name = path.basename(svgPath, ".svg");
+      const glyph = fs.createReadStream(svgPath) as Glyphs;
+      glyph.metadata = {
+        unicode: getIconUnicode(_name, !!options.useNameAsUnicode),
+        name: _name,
+      };
+      fontStream.write(glyph);
+    }
+
+    const DIST_PATH = path.join(
+      options.dist || path.join(process.cwd(), "fonts"),
+      options.fontName + ".svg"
+    );
+    // Setting the font destination
+    fontStream
+      .pipe(fs.createWriteStream(DIST_PATH))
+      .on("finish", () => {
+        resolve(UnicodeObj);
+      })
+      .on("error", (err) => {
+        if (err) {
+          reject(err);
+        }
+      });
+    filterSvgFiles(options.src || path.join(process.cwd(), "svg")).forEach(
+      (svg: string) => {
+        if (typeof svg !== "string") return false;
+        writeFontStream(svg);
+      }
+    );
+
+    // Do not forget to end the stream
+    fontStream.end();
+  });
+}
+
+/*
+ * Filter svg files
+ * @return {Array} svg files
+ */
+export function filterSvgFiles(svgFolderPath: string): string[] {
+  let files = fs.readdirSync(svgFolderPath, "utf-8");
+  let svgArr = [];
+  if (!files) {
+    throw new Error(`Error! Svg folder is empty.${svgFolderPath}`);
+  }
+
+  for (let i in files) {
+    if (typeof files[i] !== "string" || path.extname(files[i]) !== ".svg")
+      continue;
+    if (!~svgArr.indexOf(files[i])) {
+      svgArr.push(path.join(svgFolderPath, files[i]));
+    }
+  }
+  return svgArr;
+}
+
+export function snakeToUppercase(str: string) {
+  return str
+    .split(/[-_]/)
+    .map((partial) => partial.charAt(0).toUpperCase() + partial.slice(1))
+    .join("");
+}
+
+export type TypescriptOptions = {
+  extension?: "d.ts" | "ts" | "tsx";
+  enumName?: string;
+};
+
+/**
+ * Create typescript declarations for icon classnames
+ */
+export async function createTypescript(
+  options: Omit<SvgToFontOptions, "typescript"> & {
+    typescript: TypescriptOptions | true;
+  }
+) {
+  const tsOptions = options.typescript === true ? {} : options.typescript;
+  const uppercaseFontName = snakeToUppercase(options.fontName || "iconfont");
+  const { extension = "d.ts", enumName = uppercaseFontName } = tsOptions;
+  const DIST_PATH = path.join(
+    options.dist || path.join(process.cwd(), "fonts"),
+    `${options.fontName}.${extension}`
+  );
+  const fileNames = filterSvgFiles(
+    options.src || path.join(process.cwd(), "svg")
+  ).map((svgPath) => path.basename(svgPath, path.extname(svgPath)));
+  await fs.writeFile(
+    DIST_PATH,
+    `export enum ${enumName} {\n` +
+      fileNames
+        .map(
+          (name) =>
+            `  ${snakeToUppercase(name)} = "${options.classNamePrefix}-${name}"`
+        )
+        .join(",\n") +
+      "\n}\n\n" +
+      `export type ${enumName}Classname = ${fileNames
+        .map((name) => `"${options.classNamePrefix}-${name}"`)
+        .join(" | ")}\n` +
+      `export type ${enumName}Icon = ${fileNames
+        .map((name) => `"${name}"`)
+        .join(" | ")}\n` +
+      `export const ${enumName}Prefix = "${options.classNamePrefix}-"`
+  );
+}
+
+/*
+ * Get icon unicode
+ * @return {Array} unicode array
+ */
+function getIconUnicode(name: string, useNameAsUnicode: boolean) {
+  let unicode = !useNameAsUnicode ? String.fromCharCode(startUnicode++) : name;
+  UnicodeObj[name] = unicode;
+  return [unicode];
+}
+
+/**
+ * SVG font to TTF
+ */
+export function createTTF(options: SvgToFontOptions = {}): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    options.svg2ttf = options.svg2ttf || {};
+    const DIST_PATH = path.join(
+      options.dist || path.join(process.cwd(), "fonts"),
+      options.fontName + ".ttf"
+    );
+    let ttf = svg2ttf(
+      fs.readFileSync(
+        path.join(
+          options.dist || path.join(process.cwd(), "fonts"),
+          options.fontName + ".svg"
+        ),
+        "utf8"
+      ),
+      options.svg2ttf
+    );
+    const ttfBuf = Buffer.from(ttf.buffer);
+    fs.writeFile(DIST_PATH, ttfBuf, (err: NodeJS.ErrnoException) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(ttfBuf);
+    });
+  });
+}
+
+/**
+ * TTF font to EOT
+ */
+export function createEOT(options: SvgToFontOptions = {}, ttf: Buffer) {
+  return new Promise((resolve, reject) => {
+    const DIST_PATH = path.join(
+      options.dist || path.join(process.cwd(), "fonts"),
+      options.fontName + ".eot"
+    );
+    const eot = Buffer.from(ttf2eot(ttf).buffer);
+
+    fs.writeFile(DIST_PATH, eot, (err: NodeJS.ErrnoException) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(eot);
+    });
+  });
+}
+
+/**
+ * TTF font to WOFF
+ */
+export function createWOFF(options: SvgToFontOptions = {}, ttf: Buffer) {
+  return new Promise((resolve, reject) => {
+    const DIST_PATH = path.join(
+      options.dist || path.join(process.cwd(), "fonts"),
+      options.fontName + ".woff"
+    );
+    const woff = Buffer.from(ttf2woff(ttf).buffer);
+    fs.writeFile(DIST_PATH, woff, (err) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(woff);
+    });
+  });
+}
+
+/**
+ * TTF font to WOFF2
+ */
+export function createWOFF2(options: SvgToFontOptions = {}, ttf: Buffer) {
+  return new Promise((resolve, reject) => {
+    const DIST_PATH = path.join(
+      options.dist || path.join(process.cwd(), "fonts"),
+      options.fontName + ".woff2"
+    );
+    const woff2 = Buffer.from(ttf2woff2(ttf).buffer);
+    fs.writeFile(DIST_PATH, woff2, (err) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve({
+        path: DIST_PATH,
+      });
+    });
+  });
+}
+
+/**
+ * Create SVG Symbol
+ */
+export function createSvgSymbol(options: SvgToFontOptions = {}) {
+  const DIST_PATH = path.join(
+    options.dist || path.join(process.cwd(), "fonts"),
+    `${options.fontName}.symbol.svg`
+  );
+  const $ = cheerio.load(
+    '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="display:none;"></svg>'
+  );
+  return new Promise((resolve, reject) => {
+    filterSvgFiles(options.src).forEach((svgPath) => {
+      const fileName = path.basename(svgPath, path.extname(svgPath));
+      const file = fs.readFileSync(svgPath, "utf8");
+      const svgNode = $(file);
+      const symbolNode = $("<symbol></symbol>");
+      symbolNode.attr("viewBox", svgNode.attr("viewBox"));
+      symbolNode.attr("id", `${options.classNamePrefix}-${fileName}`);
+      symbolNode.append(svgNode.html());
+      $("svg").append(symbolNode);
+    });
+
+    fs.writeFile(DIST_PATH, $.html("svg"), (err) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve({
+        path: DIST_PATH,
+        svg: $.html("svg"),
+      });
+    });
+  });
+}
+
+export type CSSOptions = {
+  /**
+   * Output the css file to the specified directory
+   */
+  output?: string;
+  /**
+   * Which files are exported.
+   */
+  include?: RegExp;
+  /**
+   * Setting font size.
+   */
+  fontSize?: string;
+  /**
+   * Set the path in the css file
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */
+  cssPath?: string;
+  /**
+   * Set file name
+   * https://github.com/jaywcjlove/svgtofont/issues/48#issuecomment-739547189
+   */
+  fileName?: string;
+};
+
+/**
+ * Copy template files
+ */
+export function copyTemplate(
+  inDir: string,
+  outDir: string,
+  { _opts, ...vars }: Record<string, any> & { _opts: CSSOptions }
+) {
+  const removeFiles: Array<string> = [];
+  return new Promise((resolve, reject) => {
+    copy(
+      inDir,
+      outDir,
+      {
+        ...vars,
+        cssPath: _opts.cssPath || "",
+        filename: _opts.fileName || vars.fontname,
+      },
+      async (err, createdFiles) => {
+        if (err) reject(err);
+        createdFiles = createdFiles
+          .map((filePath) => {
+            if (
+              (_opts.include && new RegExp(_opts.include).test(filePath)) ||
+              !_opts.include
+            ) {
+              return filePath;
+            } else {
+              removeFiles.push(filePath);
+            }
+          })
+          .filter(Boolean);
+        if (removeFiles.length > 0) {
+          await del([...removeFiles]);
+        }
+        createdFiles = await Promise.all(
+          createdFiles.map(async (file) => {
+            if (!file.endsWith(".template")) {
+              return file;
+            }
+
+            const changedFile = file.replace(".template", "");
+            await moveFile(file, changedFile);
+            return changedFile;
+          })
+        );
+        if (_opts.output) {
+          const output = path.join(process.cwd(), _opts.output);
+          await Promise.all(
+            createdFiles.map(async (file) => {
+              await moveFile(file, path.join(output, path.basename(file)));
+              return null;
+            })
+          );
+        }
+        resolve(createdFiles);
+      }
+    );
+  });
+}
+
+/**
+ * Create HTML
+ */
+export function createHTML(
+  outPath: string,
+  data: ejs.Data,
+  options?: ejs.Options
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    ejs.renderFile(outPath, data, options, (err, str) => {
+      if (err) reject(err);
+      resolve(str);
+    });
+  });
+}

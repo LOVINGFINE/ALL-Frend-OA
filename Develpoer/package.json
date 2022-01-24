@@ -1,26 +1,26 @@
 {
   "name": "develpoer-server",
   "version": "1.0.0",
-  "main": "app.ts",
+  "main": "main.ts",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon \"ts-node\"",
-    "test": "ts-node ./__test__/index.ts"
+    "start": "nodemon",
+    "test": "nodemon ./__test__/index.ts"
   },
   "nodemonConfig": {
-    "restartable": "rs",
     "ignore": [
       ".git",
-      "node_modules/"
+      "node_modules",
+      "src/helpers/font_helper/.dev/*",
+      "src/helpers/font_helper/unicode.json"
     ],
-    "verbose": true,
-    "execMap": {
-      "": "node",
-      "js": "node --harmony"
-    },
     "ext": "js json ts tsx jsx",
+    "execMap": {
+      "ts": "ts-node"
+    },
     "watch": [
-      "src"
+      "src",
+      "main.ts"
     ],
     "env": {
       "NODE_ENV": "development"
@@ -31,13 +31,14 @@
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",
-    "font-carrier": "^0.3.1",
+    "moment": "^2.29.1",
     "svgtofont": "^3.14.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.10",
+    "@types/yargs": "^17.0.8",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"

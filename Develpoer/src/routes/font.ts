@@ -1,16 +1,27 @@
 import { RouterHelper } from "../utils/router";
 import { Request, Response } from "express";
-
+import { FontHelper } from "../helpers/font_helper";
 export default class FontRouter extends RouterHelper {
   constructor(request: Request, response: Response) {
     super(request, response);
   }
   override get() {
-    console.log(this.params);
-    this.helper({
-      code: 200,
-      message: "ok",
-    });
+    const id = this.query["id"] || "";
+    if (typeof id === "string") {
+      console.log(id);
+      const data = FontHelper.get(id);
+      this.helper({
+        code: 200,
+        message: "ok",
+        data,
+      });
+    } else {
+      this.helper({
+        code: 200,
+        message: "ok",
+        data: [],
+      });
+    }
   }
-  post() {}
+  override post() {}
 }

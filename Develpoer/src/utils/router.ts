@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { IncomingHttpHeaders } from "http";
-import setting from "../app.setting";
+import { AppSetting } from "../app.setting";
 
 export interface ItemProps {
   path: string;
@@ -18,7 +18,7 @@ export const register = (routes: ItemProps[]): Router => {
       new module(req, res).hander();
     };
 
-    router.all(setting.APIPATH + path, hander);
+    router.all(AppSetting.APIPATH + path, hander);
   });
   return router;
 };
