@@ -1,17 +1,18 @@
 import svgToFont from "./utils";
 import { resolve } from "path";
 import { AppSetting, AppStatus } from "../../app.setting";
+import AppServer from "../../app";
+
 import fs from "fs";
-import color from "colors-cli";
 import { EasyDate } from "../../utils/date_format";
 export class FontHelper {
   fontName = "all-frend-oa-font";
 
   static async init() {
-    await new FontHelper().write();
+    await new FontHelper().write(true);
   }
   // 生成文件 修改配置
-  async write() {
+  async write(init = false) {
     const { fontName } = this;
     try {
       await svgToFont({
@@ -27,18 +28,18 @@ export class FontHelper {
         },
       });
       this.removeFontFile();
-      await this.writeDocument();
+      await this.writeDocument(init);
       return AppStatus.OK;
     } catch (e) {
-      console.log(e);
+      AppServer.error(JSON.stringify(e));
       return AppStatus.ERROR;
     }
   }
-  writeDocument(): Promise<AppStatus> {
+  writeDocument(init: Boolean): Promise<AppStatus> {
     return new Promise((res, rej) => {
       try {
         const { fontName } = this;
-        const json: { [k: string]: any } = {};
+        const json: { [k: string]: any } = require("./unicode.json");
         const contentString = fs
           .readFileSync(resolve(__dirname, ".dev/styles/style.scss"))
           .toString()
@@ -63,7 +64,12 @@ export class FontHelper {
           JSON.stringify(json, null, "\t"),
           (err) => {
             if (!err) {
-              EasyDate.printLine("font helper success saved");
+              if (init) {
+                AppServer.print("Font Helper init success");
+              } else {
+                AppServer.print("Font Helper success saved");
+              }
+
               res(AppStatus.OK);
             } else {
               rej(AppStatus.ERROR);
@@ -115,11 +121,11 @@ export class FontHelper {
 class DocumentItem {
   key = "";
   value = "";
-  createTime = new Date().toDateString();
+  createTime = EasyDate.currentFullDate;
   svg_url = "";
   constructor(options: { [k: string]: any }) {
     this.key = options["key"];
     this.value = options["value"];
-    this.svg_url = `http://${AppSetting.host}:${AppSetting.port}/${options["key"]}.svg`;
+    this.svg_url = `http://${AppSetting.host}:${AppSetting.port}/svg/${options["key"]}.svg`;
   }
 }

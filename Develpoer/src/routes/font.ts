@@ -8,7 +8,6 @@ export default class FontRouter extends RouterHelper {
   override get() {
     const id = this.query["id"] || "";
     if (typeof id === "string") {
-      console.log(id);
       const data = FontHelper.get(id);
       this.helper({
         code: 200,

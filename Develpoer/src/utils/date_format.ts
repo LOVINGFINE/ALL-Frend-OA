@@ -1,12 +1,8 @@
 import moment from "moment";
-import { blue } from "colors-cli";
 export class EasyDate {
-  static fullDate = moment().format("YYYY/MM/DD HH:mm:ss");
-  static getFullDate() {
-    return;
-  }
+  static currentFullDate = moment().format("YYYY/MM/DD HH:mm:ss");
 
-  static printLine(text: string) {
-    console.log(blue(`\n[${EasyDate.fullDate}] ╰┈▶ ${text}.`));
+  static format(date: Date | string, format?: string) {
+    return   moment(date).format(format || "YYYY/MM/DD HH:mm:ss");
   }
 }

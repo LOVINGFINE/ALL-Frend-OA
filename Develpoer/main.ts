@@ -1,3 +1,4 @@
 import AppServer from "./src/app";
 
-AppServer.run();
+const server = new AppServer();
+server.run();
