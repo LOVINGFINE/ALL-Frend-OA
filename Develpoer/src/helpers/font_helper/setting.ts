@@ -8,6 +8,7 @@ interface FontConfigProps {
     output: string;
     style: string;
     json: string;
+    scssTemp: string;
   };
 }
 
@@ -20,6 +21,7 @@ const setting: FontConfigProps = {
     output: resolve("../Applications/Web/src/components/Icon/fonts"),
     style: "font-face.scss",
     json: "font-unicode.json",
+    scssTemp: `@font-face {\nfont-family: "all-frend-oa-font";\nsrc: url("all-frend-oa-font.eot?t=1643192025160#iefix")\nformat("embedded-opentype"),\nurl("all-frend-oa-font.woff2?t=1643192025160") format("woff2"),\nurl("all-frend-oa-font.woff?t=1643192025160") format("woff"),\nurl("all-frend-oa-font.ttf?t=1643192025160") format("truetype"),\n}\n`,
   },
 };
 

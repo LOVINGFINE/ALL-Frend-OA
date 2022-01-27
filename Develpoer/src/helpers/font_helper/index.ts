@@ -26,7 +26,7 @@ export class FontHelper {
         startUnicode: 0xea01,
         css: {
           fileName: "style",
-          output: "src/helpers/font_helper/temp",
+          output: "src/helpers/font_helper/.temp",
         },
       });
       console.log = temp;
@@ -42,7 +42,7 @@ export class FontHelper {
     return new Promise((res, rej) => {
       const unicode: any = require(setting["unicode-path"]);
       const contentString = fs
-        .readFileSync(resolve(__dirname, `temp/style.scss`))
+        .readFileSync(resolve(__dirname, `.temp/style.scss`))
         .toString()
         .replace(/[\n\s]+/g, "");
 
@@ -93,16 +93,7 @@ export class FontHelper {
       json[key] = document[key]["value"];
     }
 
-    const fontFaceStr = `@font-face {
-      font-family: "${setting["font-name"]}";
-      src: url("${setting["font-name"]}.eot?t=1643192025160#iefix")
-           format("embedded-opentype"),
-           url("${setting["font-name"]}.woff2?t=1643192025160") format("woff2"),
-           url("${setting["font-name"]}.woff?t=1643192025160") format("woff"),
-           url("${setting["font-name"]}.ttf?t=1643192025160") format("truetype"),
-      }`;
-
-    fs.writeFile(`${Web["output"]}/${Web["style"]}`, fontFaceStr, (err) => {
+    fs.writeFile(`${Web["output"]}/${Web["style"]}`, Web["scssTemp"], (err) => {
       if (!err) {
         AppServer.print("web font write scss file success");
       } else {
@@ -133,7 +124,7 @@ export class FontHelper {
       if (outs.includes(file)) {
         fs.unlinkSync(`${setting["font-dist-path"]}/${file}`);
       }
-      remove_dir(resolve(__dirname, "temp"));
+      remove_dir(resolve(__dirname, ".temp"));
     });
   }
 

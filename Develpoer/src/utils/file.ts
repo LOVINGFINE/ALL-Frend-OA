@@ -1,9 +1,10 @@
 import fs from "fs";
 import { join } from "path";
+import AppServer from "../app";
 
 export const remove_dir = (dir: string) => {
   const files = fs.readdirSync(dir);
-  for (var i = 0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i++) {
     let newPath = join(dir, files[i]);
     let stat = fs.statSync(newPath);
     if (stat.isDirectory()) {
@@ -14,7 +15,33 @@ export const remove_dir = (dir: string) => {
       fs.unlinkSync(newPath);
     }
   }
-  if (files.length === 0) {
-    fs.rmdirSync(dir); //如果文件夹是空的，就将自己删除掉
-  }
+  fs.rmdirSync(dir); //如果文件夹是空的，就将自己删除掉
+};
+
+export const cp_dir = ({ dir, target }: { dir: string; target: string }) => {
+  return new Promise<void>((res, rej) => {
+    try {
+      const files = fs.readdirSync(dir);
+      for (let i = 0; i < files.length; i++) {
+        let path = join(dir, files[i]);
+        let cp_path = join(target, files[i]);
+        fs.readFile(path, "utf-8", (err, data: any) => {
+          if (err) {
+            throw err;
+          } else {
+            fs.writeFile(cp_path, data, "utf-8", (err) => {
+              if (err) {
+                throw err;
+              } else {
+                res();
+              }
+            });
+          }
+        });
+      }
+    } catch (e) {
+      rej(e);
+      AppServer.error("cp dir Error:" + JSON.stringify(e));
+    }
+  });
 };
