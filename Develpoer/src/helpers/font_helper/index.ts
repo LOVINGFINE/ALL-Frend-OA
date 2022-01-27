@@ -5,7 +5,7 @@ import fs from "fs";
 import { resolve } from "path";
 import { EasyDate } from "../../utils/date_format";
 import setting from "./setting";
-import { remove_dir } from "../../utils";
+import { remove_dir, cp_dir } from "../../utils";
 
 export class FontHelper {
   static async init() {
@@ -38,7 +38,7 @@ export class FontHelper {
       return AppStatus.ERROR;
     }
   }
-  writeDocument(init: Boolean): Promise<AppStatus> {
+  async writeDocument(init: Boolean): Promise<AppStatus> {
     return new Promise((res, rej) => {
       const unicode: any = require(setting["unicode-path"]);
       const contentString = fs
@@ -75,7 +75,10 @@ export class FontHelper {
               AppServer.print("Font Helper success saved");
             }
             res(AppStatus.OK);
-            this.writeWeb();
+            this.removeFontFile();
+            this.writeWeb().then(() => {
+              remove_dir(resolve(__dirname, ".temp"));
+            });
           } else {
             AppServer.error(JSON.stringify(err));
             rej(AppStatus.ERROR);
@@ -86,32 +89,42 @@ export class FontHelper {
   }
 
   writeWeb() {
-    const { Web } = setting;
-    const document = require(setting["unicode-path"]);
-    const json: { [key: string]: any } = {};
-    for (let key in document) {
-      json[key] = document[key]["value"];
-    }
-
-    fs.writeFile(`${Web["output"]}/${Web["style"]}`, Web["scssTemp"], (err) => {
-      if (!err) {
-        AppServer.print("web font write scss file success");
-      } else {
-        AppServer.error(JSON.stringify(err));
+    return new Promise<void>((res) => {
+      const { Web } = setting;
+      const document = require(setting["unicode-path"]);
+      const json: { [key: string]: any } = {};
+      for (let key in document) {
+        json[key] = document[key]["value"];
       }
+      cp_dir({
+        dir: setting["font-dist-path"],
+        target: Web["output"],
+      }).then(() => {
+        fs.writeFile(
+          `${Web["output"]}/${Web["style"]}`,
+          Web["scssTemp"],
+          (err) => {
+            if (!err) {
+              fs.writeFile(
+                `${Web["output"]}/${Web["json"]}`,
+                JSON.stringify(json, null, "\t"),
+                (err) => {
+                  if (!err) {
+                    AppServer.print("web font file write unicode json success");
+                  } else {
+                    AppServer.error(JSON.stringify(err));
+                  }
+                  res();
+                }
+              );
+            } else {
+              AppServer.error(JSON.stringify(err));
+              res();
+            }
+          }
+        );
+      });
     });
-
-    fs.writeFile(
-      `${Web["output"]}/${Web["json"]}`,
-      JSON.stringify(json, null, "\t"),
-      (err) => {
-        if (!err) {
-          AppServer.print("web font file write unicode json success");
-        } else {
-          AppServer.error(JSON.stringify(err));
-        }
-      }
-    );
   }
   // 移除多余文件
   removeFontFile() {
@@ -124,7 +137,6 @@ export class FontHelper {
       if (outs.includes(file)) {
         fs.unlinkSync(`${setting["font-dist-path"]}/${file}`);
       }
-      remove_dir(resolve(__dirname, ".temp"));
     });
   }
 

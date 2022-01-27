@@ -1,5 +1,5 @@
 import config from "./config";
-import "./icon.scss";
+import "./font-face.scss";
 const Icon = ({
   fontSize = 16,
   color = "#333",
@@ -10,15 +10,15 @@ const Icon = ({
   type?: string;
 }): React.ReactElement => {
   return (
-    <span
+    <i
+      className="icon-font"
       style={{
-        fontFamily: "all-frend-oa-font",
         fontSize,
         color,
       }}
     >
       {config[type]}
-    </span>
+    </i>
   );
 };
 
