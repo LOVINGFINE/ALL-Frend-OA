@@ -1,0 +1,38 @@
+{
+	"file_type_affinitypublisher": {
+		"key": "file_type_affinitypublisher",
+		"value": "\\ea01",
+		"createTime": "2022/01/26 18:10:15",
+		"svg_url": "http://127.0.0.1:9999/font-svg/file_type_affinitypublisher.svg"
+	},
+	"file_type_ai": {
+		"key": "file_type_ai",
+		"value": "\\ea02",
+		"createTime": "2022/01/26 18:10:15",
+		"svg_url": "http://127.0.0.1:9999/font-svg/file_type_ai.svg"
+	},
+	"file_type_ai2": {
+		"key": "file_type_ai2",
+		"value": "\\ea03",
+		"createTime": "2022/01/26 18:10:15",
+		"svg_url": "http://127.0.0.1:9999/font-svg/file_type_ai2.svg"
+	},
+	"file_type_al": {
+		"key": "file_type_al",
+		"value": "\\ea04",
+		"createTime": "2022/01/26 18:10:15",
+		"svg_url": "http://127.0.0.1:9999/font-svg/file_type_al.svg"
+	},
+	"file_type_angular": {
+		"key": "file_type_angular",
+		"value": "\\ea05",
+		"createTime": "2022/01/26 18:10:15",
+		"svg_url": "http://127.0.0.1:9999/font-svg/file_type_angular.svg"
+	},
+	"file_type_ansible": {
+		"key": "file_type_ansible",
+		"value": "\\ea06",
+		"createTime": "2022/01/26 18:10:15",
+		"svg_url": "http://127.0.0.1:9999/font-svg/file_type_ansible.svg"
+	}
+}

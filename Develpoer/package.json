@@ -11,8 +11,8 @@
     "ignore": [
       ".git",
       "node_modules",
-      "src/helpers/font_helper/.dev/*",
-      "src/helpers/font_helper/unicode.json"
+      "public/font-unicode.json",
+      "public/.development/*"
     ],
     "ext": "js json ts tsx jsx",
     "execMap": {
@@ -20,6 +20,7 @@
     },
     "watch": [
       "src",
+      "public",
       "main.ts"
     ],
     "env": {

@@ -10,6 +10,7 @@ import { EasyDate } from "./utils/date_format";
 import { register } from "./utils/router";
 import { info_log } from "./utils/info_log";
 export default class AppServer {
+  
   static info(text: string) {
     console.log(green(`     ${text}`));
   }

@@ -12,7 +12,7 @@ const Icon = ({
   return (
     <span
       style={{
-        fontFamily: "icon_font",
+        fontFamily: "all-frend-oa-font",
         fontSize,
         color,
       }}

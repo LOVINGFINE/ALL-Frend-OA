@@ -31,7 +31,7 @@ export const info_log = () => {
     return cyan(`\n${sp}` + leftStr) + green(str) + cyan(endStr);
   };
   const getTitle = () => {
-    const title = " Developer Server In listen ";
+    const title = " Developer Server In Listen ";
     const startNum = parseInt((sum / 2 - title.length / 2).toString());
     const endNum = sum - startNum + 1;
     let leftStr = "";
