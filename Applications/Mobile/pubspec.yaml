@@ -33,6 +33,3 @@ flutter:
 
 # 自定义字体
 fonts:
-  - family: iconFont # 字体图标
-    fonts:
-      - assets: assets/fonts/icon/fonts-01.ttf

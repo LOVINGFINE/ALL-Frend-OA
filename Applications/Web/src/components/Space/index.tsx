@@ -1,16 +1,16 @@
 /*
  * Created by zhangq on 2021/11/26
- * row 组件
+ * Space 组件
  */
 import { ReactElement, FC, MouseEvent } from "react";
-import "./row.scss";
+import "./space.scss";
 
-const Row: FC<RowProps> = ({
+const Space: FC<SpaceProps> = ({
   children,
   style,
   className,
   onClick,
-}: RowProps): ReactElement => {
+}: SpaceProps): ReactElement => {
   /** render */
   const boxClassName = `dyl-column ${className}`;
   return (
@@ -20,10 +20,10 @@ const Row: FC<RowProps> = ({
   );
 };
 
-export interface RowProps {
+export interface SpaceProps {
   children?: ReactElement | ReactElement[];
   className?: string;
   style?: React.CSSProperties;
   onClick?(e: MouseEvent): void;
 }
-export default Row;
+export default Space;

@@ -1,22 +1,15 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:frend_mobile/theme/index.dart';
 import 'package:frend_mobile/plugins/ServerManager.dart';
 
 class GlobalContext {
-  
-  static Future serverManager<T>(String action, {Map<String, dynamic> params}) async {
+  String token = '';
+  static Future serverManager<T>(String action,
+      {Map<String, dynamic> params}) async {
     return await ServerManager().dispath<T>(action, params: params);
   }
 
   // Create storage
   FlutterSecureStorage get storage => new FlutterSecureStorage();
-
-  String token = '';
-  Map themeData = {};
-
-  setTheme(key) {
-    this.themeData = ThemeDataMap.readData(key);
-  }
 
 // Read value
   readStoreageByKey(key) {

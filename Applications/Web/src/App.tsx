@@ -9,7 +9,7 @@ import GlobalContextProvider, {
   useGlobalContext,
   ProviderType,
 } from "@/GlobalContext";
-import { routes } from "./config";
+import routes from "./app.routes";
 const App = (): ReactElement => {
   /** state */
   const globalContext: ProviderType = useGlobalContext();

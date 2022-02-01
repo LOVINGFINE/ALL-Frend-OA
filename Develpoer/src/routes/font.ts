@@ -1,6 +1,7 @@
 import { RouterHelper } from "../utils/router";
 import { Request, Response } from "express";
 import { FontHelper } from "../helpers/font_helper";
+
 export default class FontRouter extends RouterHelper {
   constructor(request: Request, response: Response) {
     super(request, response);
@@ -22,5 +23,7 @@ export default class FontRouter extends RouterHelper {
       });
     }
   }
-  override post() {}
+  override post() {
+    console.log(this.body);
+  }
 }

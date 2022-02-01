@@ -30,6 +30,7 @@ export class RouterHelper {
     this.response = response;
     this.method = request.method;
     this.query = request.query;
+    this.body = request.body;
   }
 
   headers: IncomingHttpHeaders;
@@ -37,7 +38,7 @@ export class RouterHelper {
   query: ParsedQs;
   response: Response;
   method: String;
-
+  body: any;
   hander() {
     switch (this.method) {
       case "GET":

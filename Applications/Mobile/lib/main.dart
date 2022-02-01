@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frend_mobile/views/Tabs/_.dart';
+import 'package:frend_mobile/pages/Login/_.dart';
+import 'package:frend_mobile/theme/_.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'frend_mobile',
+      title: 'ALL-FREND-OA',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: ThemeColors['main'],
       ),
-      home: Tabs(),
+      home: LoginPage(),
     );
   }
 }

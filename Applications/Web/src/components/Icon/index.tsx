@@ -1,5 +1,5 @@
 import config from "./config";
-import "./font-face.scss";
+import "./fonts/font-face.scss";
 const Icon = ({
   fontSize = 16,
   color = "#333",

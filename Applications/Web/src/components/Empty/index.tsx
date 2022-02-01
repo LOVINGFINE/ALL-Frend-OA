@@ -1,33 +1,21 @@
 /*
- * Created by zhangq on 2021/07/12
- * error 组件
+ * Created by zhangq on 2022/01/27
+ * empty component
  */
-import { ReactElement, useEffect } from "react";
-import style from "./style.scss";
+import { ReactElement, FC, useEffect, useState, CSSProperties } from "react";
+import "./empty.scss";
 
-const ErrorComponent = ({ children }: ErrorProps): ReactElement => {
-  /** state */
-  // const [tep, setTep] = useState<string>("");
-
-  /** LifeCycle */
-  useEffect(() => {
-    // init
-  }, []);
-
-  /**
-   * @method
-   */
-  // const init = () => {};
-
+const Empty: FC<EmptyProps> = ({ children }: EmptyProps): ReactElement => {
   /** render */
-  return <div className={style.content}>{children}</div>;
+  return <div className={"dyl-empty"}>{children}</div>;
 };
 
 /**
  * @interface props
  */
-export interface ErrorProps {
+export interface EmptyProps {
   children?: ReactElement;
+  style?: CSSProperties;
 }
 
-export default ErrorComponent;
+export default Empty;
