@@ -3,10 +3,10 @@
  * style
  */
 import { ReactElement, useEffect } from "react";
-import "./header.scss";
-
+import className from "./header.scss";
+import { imgFaviconIco } from "@/assets";
 const GlobalHeader = ({ style }: GlobalHeaderPorops): ReactElement => {
-  const boxClassName = `dyl-global-header`;
+  const basic = `dyl-global-header`;
   /** LifeCycle */
   useEffect(() => {
     // init
@@ -18,9 +18,13 @@ const GlobalHeader = ({ style }: GlobalHeaderPorops): ReactElement => {
 
   /** render */
   return (
-    <div className={boxClassName} style={style}>
-      <div className="dyl-global-header-left"></div>
-      <div className="dyl-global-header-right"></div>
+    <div className={className[basic]} style={style}>
+      <div className={className[`${basic}-left`]}>
+        <div className={className[`${basic}-left-logo`]}>
+          <img src={imgFaviconIco} alt="" />
+        </div>
+      </div>
+      <div className={className[`${basic}-right`]}></div>
     </div>
   );
 };

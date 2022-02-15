@@ -3,10 +3,12 @@
  * 登录页
  */
 import { ReactElement, FC, useEffect, useState } from "react";
-import style from "./style.scss";
+import className from "./style.scss";
+import { Button } from "@/components";
+import Input from "@/components/Input";
 const LoginPage: FC = (): ReactElement => {
   /** state */
-  const [tep, setTep] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
 
   /** LifeCycle */
   useEffect(() => {
@@ -19,7 +21,19 @@ const LoginPage: FC = (): ReactElement => {
   const init = () => {};
 
   /** render */
-  return <div className={style.content}></div>;
+  return (
+    <div className={className["login-page"]}>
+      <div className={className["login-page-logo"]}></div>
+      <div className={className["login-page-form"]}>
+        <Input
+          value={phone}
+          change={(e) => {
+            console.log(e);
+          }}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default LoginPage;

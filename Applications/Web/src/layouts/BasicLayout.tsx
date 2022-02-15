@@ -3,59 +3,19 @@
  * layout
  */
 
-import { ReactElement, useEffect, FC } from "react";
-import { RouteItem } from "dyl-plugins";
+import { ReactElement, FC } from "react";
 import { BasicLayoutProps } from "./type";
 import className from "./style.scss";
-import GlobalHeader from "@/components/GlobalHeader";
-import BasicMenu from "./BasicMenu";
+import GlobalHeader from "@/layouts/GlobalHeader";
 
 const BasicLayout: FC<BasicLayoutProps> = ({
-  routes,
-  path,
   children,
 }: BasicLayoutProps): ReactElement => {
-  /** LifeCycle */
-  useEffect(() => {
-    // init
-  }, []);
-
-  /**
-   * @method
-   */
-  const getRoutes = (list: RouteItem[]): RouteItem[] => {
-    return list.map((ele) => {
-      return {
-        ...ele,
-        rooutes: ele.routes
-          ? ele.routes.map((item) => ({
-              ...item,
-              path: (ele.path || "*") + item.path,
-            }))
-          : undefined,
-      };
-    });
-  };
   /** render */
   return (
-    <div className={className["basicLayout-contanier"]}>
+    <div className={className["basicLayout-page"]}>
       <GlobalHeader />
-      <div className={className["basicLayout-contanier-main"]}>
-        <BasicMenu
-          routes={getRoutes(
-            routes.map((item) => ({
-              ...item,
-              path: (path || "") + item.path,
-            }))
-          )}
-          basePath={path || ""}
-        />
-        <div className={className["basicLayout-contanier-right"]}>
-          <div className={className["basicLayout-contanier-right-card"]}>
-            {children}
-          </div>
-        </div>
-      </div>
+      <div className={className["basicLayout-contanier"]}>{children}</div>
     </div>
   );
 };

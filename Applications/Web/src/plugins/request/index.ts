@@ -1,4 +1,11 @@
 import { Request } from "./helper";
-import { requestSetting } from "@/config";
+import { InitRequestProps } from "@/plugins/request/helper";
+import { interceptors, beforeRequest } from "./interceptor";
 
-export const request = new Request(requestSetting).send;
+const setting: InitRequestProps = {
+  BASE_PATH: "/",
+  interceptors,
+  beforeRequest,
+};
+
+export default new Request(setting).send;

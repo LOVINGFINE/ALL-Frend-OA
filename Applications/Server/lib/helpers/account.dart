@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:server/setting/_setting.dart';
 import 'package:dart_server_helper/dart_server_helper.dart';
 import 'package:server/models/user.dart';
@@ -85,6 +87,7 @@ class AccountHelper extends DartServerHelper {
 
   register() async {
     Map<String, dynamic> body = getBody();
+    print(body);
     if (body['mobile'] == null) {
       paramNotFound('mobile');
       return;

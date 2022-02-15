@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ALL-FREND-OA',
       theme: ThemeData(
-        primarySwatch: ThemeColors['main'],
+        primarySwatch: themeColors['main'],
       ),
       home: LoginPage(),
     );

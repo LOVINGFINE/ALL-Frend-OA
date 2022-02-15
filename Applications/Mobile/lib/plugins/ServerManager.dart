@@ -4,22 +4,26 @@ import 'package:frend_mobile/global.dart';
 
 class ServerManager {
   BaseOptions config = BaseOptions(
-      baseUrl: 'https://localhost:8888/',
+      baseUrl: 'http://localhost:8080',
       responseType: ResponseType.json,
       connectTimeout: 30000,
       receiveTimeout: 30000);
 
   DioManager get server => DioManager(config);
 
-  void interceptor() {
-    config.headers['Access-Token'] = GlobalContext().readStoreageByKey('token');
+  interceptor() async {
+    await GlobalContext().readStoreageByKey('token').then((value) {
+      config.headers['Access-Token'] = '';
+    });
   }
 
-  Future dispath<T>(String action, {Map<String, dynamic> params}) async {
-    interceptor();
+  dispath<T>(String action, {Map<String, dynamic> params}) async {
+    await interceptor();
     switch (action) {
       case 'USER_LOGIN':
-        return server.post<T>('login', data: params);
+        return server.post<T>('account/login', data: params);
+      case 'USER_REGISTER':
+        return server.post<T>('/account/register', data: params);
       case 'USER_LOGOUT':
         return server.delete<T>('logout');
       default:

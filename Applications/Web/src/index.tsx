@@ -1,7 +1,7 @@
 import React from "react";
 import { ReportHandler } from "web-vitals";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "./app";
 // import "@testing-library/jest-dom";
 const reportWebVitals = (onPerfEntry?: ReportHandler) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {

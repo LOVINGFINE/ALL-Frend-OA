@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frend_mobile/theme/_.dart';
+import 'package:frend_mobile/global.dart';
 
 class PhoneInput extends StatefulWidget {
   @override
@@ -7,16 +7,26 @@ class PhoneInput extends StatefulWidget {
 }
 
 class _PhoneInput extends State<PhoneInput> {
+  String phone = '';
   @override
   void initState() {
     super.initState();
   }
 
-  void _getCode() {
+  void _ok() {
     //获取验证码
+    GlobalContext.serverManager('USER_REGISTER', params: {'mobile': phone})
+        .then((res) {
+      print(res);
+    });
   }
+
   void changeValue(e) {
     print(e);
+  }
+
+  void changePhone(e) {
+    phone = e;
   }
 
   @override
@@ -28,7 +38,7 @@ class _PhoneInput extends State<PhoneInput> {
         ),
         Container(
           height: 40.0,
-          padding: EdgeInsets.only(top: 20.0, left: 12.0),
+          padding: EdgeInsets.only(top: 15, left: 12.0),
           decoration: BoxDecoration(
               color: Color(0x21ffffff),
               border: Border.all(color: Color(0x00000000), width: 1),
@@ -36,6 +46,26 @@ class _PhoneInput extends State<PhoneInput> {
           child: TextField(
             decoration: InputDecoration(
                 hintText: '请输入手机号',
+                border: OutlineInputBorder(borderSide: BorderSide.none)),
+            style: TextStyle(color: Colors.black, fontSize: 16.0),
+            onChanged: changePhone,
+            cursorHeight: 16.0,
+            cursorColor: Colors.black38,
+          ),
+        ),
+        SizedBox(
+          height: 15.0,
+        ),
+        Container(
+          height: 40.0,
+          padding: EdgeInsets.only(top: 15, left: 12.0),
+          decoration: BoxDecoration(
+              color: Color(0x21ffffff),
+              border: Border.all(color: Color(0x00000000), width: 1),
+              borderRadius: BorderRadius.circular(8.0)),
+          child: TextField(
+            decoration: InputDecoration(
+                hintText: '请输入密码',
                 border: OutlineInputBorder(borderSide: BorderSide.none)),
             style: TextStyle(color: Colors.black, fontSize: 16.0),
             onChanged: changeValue,
@@ -48,8 +78,8 @@ class _PhoneInput extends State<PhoneInput> {
         ),
         InkWell(
           child: ElevatedButton(
-            child: Text('获取验证码'),
-            onPressed: _getCode,
+            child: Text('登录'),
+            onPressed: _ok,
           ),
         )
       ],

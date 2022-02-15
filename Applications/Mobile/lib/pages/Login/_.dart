@@ -30,14 +30,14 @@ class _LoginPage extends State<LoginPage> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 160.0,
+            top: 125.0,
             child: Container(
               decoration: BoxDecoration(
                   color: Color(0x59000000),
                   border: Border.all(color: Color(0x00000000), width: 1),
                   borderRadius: BorderRadius.circular(16.0)),
               width: MediaQuery.of(context).size.width - 70,
-              height: 300.0,
+              height: 450.0,
               child: Padding(
                 padding: EdgeInsets.only(left: 30.0, right: 30.0),
                 child: Column(

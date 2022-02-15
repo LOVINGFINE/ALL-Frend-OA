@@ -1,9 +1,10 @@
 .dyl {
   &-global-header {
-    height: 55px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 2px 2px 2px #eee;
     &-left {
       display: flex;
       align-content: center;

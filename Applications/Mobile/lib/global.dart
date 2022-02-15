@@ -5,7 +5,10 @@ class GlobalContext {
   String token = '';
   static Future serverManager<T>(String action,
       {Map<String, dynamic> params}) async {
-    return await ServerManager().dispath<T>(action, params: params);
+    print(params);
+    return ServerManager().dispath<T>(action, params: params).then((value) {
+      print(value);
+    });
   }
 
   // Create storage
