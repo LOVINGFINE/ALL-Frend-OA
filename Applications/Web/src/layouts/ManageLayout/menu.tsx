@@ -4,15 +4,15 @@
  */
 import { ReactElement, FC, useEffect, useState } from "react";
 import { RouteItem } from "dyl-plugins";
-import { BasicMenuProps } from "./type";
+import { ManageMenuProps } from "../type";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Menu } from "@/components";
 import { MenuItemType } from "@/components/Menu";
-import className from "./style.scss";
+import className from "../style.scss";
 
-const BasicMenu: FC<BasicMenuProps> = ({
+const ManageMenu: FC<ManageMenuProps> = ({
   routes,
-}: BasicMenuProps): ReactElement => {
+}: ManageMenuProps): ReactElement => {
   /** state */
   const location = useLocation();
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const BasicMenu: FC<BasicMenuProps> = ({
   };
   /** render */
   return (
-    <div className={className["basicLayout-contanier-left"]}>
+    <div className={className["manageLayout-left"]}>
       <Menu
         dataSource={menuItems}
         selectKeys={[location.pathname]}
@@ -54,4 +54,4 @@ const BasicMenu: FC<BasicMenuProps> = ({
   );
 };
 
-export default BasicMenu;
+export default ManageMenu;

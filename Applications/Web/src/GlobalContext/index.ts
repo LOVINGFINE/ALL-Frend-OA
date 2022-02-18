@@ -8,7 +8,7 @@ export interface ProviderType extends StateProps {
 }
 
 export interface StateProps {
-  [key: string]: any;
+  [key: string]: unknown;
   theme: ThemeType;
   locale: LocaleKey;
 }
@@ -40,6 +40,7 @@ export const useGlobalContext = () => {
   };
 };
 
-const { Provider } = createContext(initGlobal);
+const context = createContext(initGlobal);
 
-export default Provider;
+export default context;
+export const GlobalContextProvider = context.Provider;

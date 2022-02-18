@@ -5,70 +5,67 @@ import axios, {
   AxiosError,
 } from "axios";
 
-/**
- * @method 请求拦截器
- * */
-export const defaultBeforeRequest = {
-  config: (params: AxiosRequestConfig): AxiosRequestConfig => {
-    return params;
-  },
-  error: (res: AxiosError): Promise<AxiosError> => {
-    // 返回错误
-    return Promise.reject(res);
-  },
-};
-
-/**
- * @method 返回拦截器
- * */
-export const defaultInterceptors = {
-  success: (response: AxiosResponse): Promise<unknown> =>
-    Promise.resolve(response.data || "success"),
-  fail: (error: AxiosError): Promise<AxiosError> => Promise.reject(error),
-};
-
-const { success, fail } = defaultInterceptors;
-const { config, error } = defaultBeforeRequest;
-
 export class Request {
   constructor(props?: InitRequestProps) {
     this.axios = axios;
-    this.default(props && props.defaults);
+    this.axios.interceptors.response.use(
+      this.defaultInterceptors.success,
+      this.defaultInterceptors.fail
+    );
+    this.axios.interceptors.request.use(
+      this.defaultBeforeRequest.config,
+      this.defaultBeforeRequest.error
+    );
     if (props) {
-      const { interceptors, beforeRequest, BASE_PATH } = props;
+      const { interceptors, beforeRequest, BASE_PATH, TIMEOUT } = props;
       if (interceptors) {
         this.axios.interceptors.response.use(
-          interceptors.success || success,
-          interceptors.fail || fail
+          interceptors.success || this.defaultInterceptors.success,
+          interceptors.fail || this.defaultInterceptors.fail
         );
       }
       if (beforeRequest) {
         this.axios.interceptors.request.use(
-          beforeRequest.config || config,
-          beforeRequest.error || error
+          beforeRequest.config || this.defaultBeforeRequest.config,
+          beforeRequest.error || this.defaultBeforeRequest.error
         );
       }
       if (BASE_PATH) {
         // 服务器地址 API_PATH + * [path]
         this.axios.defaults.baseURL = BASE_PATH;
       }
-    } else {
-      this.axios.interceptors.response.use(success, fail);
-      this.axios.interceptors.request.use(config, error);
+      if (TIMEOUT) {
+        this.axios.defaults.timeout = TIMEOUT || 30000;
+      }
     }
   }
+  /**
+   * @method 请求拦截器
+   * */
+  get defaultBeforeRequest() {
+    return {
+      config: (params: AxiosRequestConfig): AxiosRequestConfig => {
+        return params;
+      },
+      error: (res: AxiosError): Promise<AxiosError> => {
+        // 返回错误
+        return Promise.reject(res);
+      },
+    };
+  }
+
+  /**
+   * @method 返回拦截器
+   * */
+  get defaultInterceptors() {
+    return {
+      success: (response: AxiosResponse): Promise<unknown> =>
+        Promise.resolve(response.data || "success"),
+      fail: (error: AxiosError): Promise<AxiosError> => Promise.reject(error),
+    };
+  }
+
   private axios: AxiosStatic;
-
-  private TIMEOUT = 30000;
-
-  private default(defaults?: AxiosRequestConfig) {
-    // 超时时间
-    if (defaults) {
-      this.axios.defaults = defaults;
-    } else {
-      this.axios.defaults.timeout = this.TIMEOUT;
-    }
-  }
 
   public send(
     props: string | ActionType | Array<ActionType>
@@ -119,6 +116,7 @@ export interface ActionType {
 export interface InitRequestProps {
   BASE_PATH?: string;
   defaults?: AxiosRequestConfig;
+  TIMEOUT?: number;
   interceptors?: {
     success?: (response: AxiosResponse) => Promise<unknown>;
     fail?: (error: AxiosError) => Promise<unknown>;

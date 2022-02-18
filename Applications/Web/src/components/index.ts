@@ -11,7 +11,6 @@ export { default as Button } from "./Button";
 export { default as Column } from "./Column";
 export { default as Empty } from "./Empty";
 export { default as ErrorBoundary } from "./ErrorBoundary";
-export { default as GlobalHeader } from "../layouts/GlobalHeader";
 export { default as Icon } from "./Icon";
 export { default as Loading } from "./Loading";
 export { default as Menu } from "./Menu";

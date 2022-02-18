@@ -5,7 +5,8 @@
 import { ReactElement } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { DynamicRouteProvider } from "dyl-plugins";
-import GlobalContextProvider, {
+import {
+  GlobalContextProvider,
   useGlobalContext,
   ProviderType,
 } from "@/GlobalContext";

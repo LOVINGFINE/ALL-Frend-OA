@@ -3,7 +3,7 @@ export interface ManageLayoutProps {
   path?: string;
   children?: React.ReactElement;
 }
-export interface BasicMenuProps {
+export interface ManageMenuProps {
   routes: DynamicRouteContext.RouteItem[];
   basePath: string;
 }

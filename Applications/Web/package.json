@@ -39,9 +39,9 @@
     "@types/react-loadable": "^5.5.4",
     "@types/react-router-dom": "^5.3.2",
     "cross-env": "^7.0.3",
+    "dyl-protal": "^0.1.7",
     "electron": "^16.0.0",
     "electron-builder": "^22.13.1",
-    "protal": "^1.0.1",
     "web-vitals": "^1.0.1"
   },
   "eslintConfig": {

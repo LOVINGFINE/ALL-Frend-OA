@@ -3,7 +3,7 @@
  *
  */
 import { ReactElement, FC, MouseEvent } from "react";
-import "./button.less";
+import "./button.scss";
 const Button: FC<ButtonProps> = ({
   children,
   type,

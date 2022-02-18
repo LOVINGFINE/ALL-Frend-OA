@@ -5,10 +5,12 @@
 
 import { ReactElement, useEffect, FC } from "react";
 import { RouteItem } from "dyl-plugins";
-import { ManageLayoutProps } from "./type";
-import className from "./style.scss";
-import GlobalHeader from "@/layouts/GlobalHeader";
-import BasicMenu from "./BasicMenu";
+import { ManageLayoutProps } from "../type";
+import className from "../style.scss";
+import LayoutPageHeader from "@/layouts/LayoutPageHeader";
+import ManageMenu from "./menu";
+import { imgFaviconIco } from "@/assets";
+import AppConfig from "@/app.config";
 
 const ManageLayout: FC<ManageLayoutProps> = ({
   routes,
@@ -39,9 +41,9 @@ const ManageLayout: FC<ManageLayoutProps> = ({
   /** render */
   return (
     <div className={className["manageLayout"]}>
-      <GlobalHeader />
+      <LayoutPageHeader logo={imgFaviconIco} title={AppConfig.websiteName} />
       <div className={className["manageLayout-main"]}>
-        <BasicMenu
+        <ManageMenu
           routes={getRoutes(
             routes.map((item) => ({
               ...item,
