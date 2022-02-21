@@ -5,21 +5,18 @@
 import { ReactElement } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { DynamicRouteProvider } from "dyl-plugins";
-import {
-  GlobalContextProvider,
-  useGlobalContext,
-  ProviderType,
-} from "@/GlobalContext";
+import { GlobalContextProvider } from "@/global";
+import { LocaleContextProvider } from "./locales";
 import routes from "./app.route";
 const App = (): ReactElement => {
-  /** state */
-  const globalContext: ProviderType = useGlobalContext();
   /** render */
   return (
-    <GlobalContextProvider value={globalContext}>
-      <BrowserRouter>
-        <DynamicRouteProvider routes={routes} />
-      </BrowserRouter>
+    <GlobalContextProvider>
+      <LocaleContextProvider>
+        <BrowserRouter>
+          <DynamicRouteProvider routes={routes} />
+        </BrowserRouter>
+      </LocaleContextProvider>
     </GlobalContextProvider>
   );
 };

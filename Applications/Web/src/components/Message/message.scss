@@ -1,0 +1,25 @@
+.dyl {
+  &-message {
+    position: fixed;
+    display: inline-block;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1200;
+    transition: all 0.1s linear;
+    &-render {
+      height: 32px;
+      display: flex;
+      padding: 0 6px;
+      align-items: center;
+      box-shadow: 0 0px 5px 0 var(--border-color),
+        0 3px 5px 0 var(--border-color);
+      border-radius: 3px;
+      &-success {
+        span {
+          color: var(--font-color-sec);
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,8 @@
 import { localeDataSourceType } from "../index";
 import homepage from "./homepage.json";
 
-const esUS: localeDataSourceType = {
-  homepage: {
-    ...homepage,
-  },
+const esUS = {
+  ...homepage,
 };
 
 export default esUS;

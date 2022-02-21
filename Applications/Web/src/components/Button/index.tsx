@@ -11,13 +11,21 @@ const Button: FC<ButtonProps> = ({
   onClick,
   style,
   disabled,
+  prefix = "dyl",
 }: ButtonProps): ReactElement => {
+  const classNames = [
+    "button",
+    `button-${type || "default"}`,
+    `button-${size || "middle"}`,
+    `${!!disabled ? "button-disabled" : ""}`,
+  ]
+    .filter((ele) => !!ele)
+    .map((ele) => {
+      return `${prefix}-${ele}`;
+    });
   /** render */
-  const mainClassName = `dyl-button dyl-button-${
-    type || "default"
-  } dyl-button-${size || "middle"} ${!!disabled ? "dyl-button-disabled" : ""}`;
   return (
-    <div onClick={onClick} className={mainClassName} style={style}>
+    <div onClick={onClick} className={classNames.join(" ")} style={style}>
       {children}
     </div>
   );
@@ -29,5 +37,6 @@ export interface ButtonProps {
   style?: React.CSSProperties;
   onClick?(e: MouseEvent): void;
   disabled?: boolean;
+  prefix?: string;
 }
 export default Button;

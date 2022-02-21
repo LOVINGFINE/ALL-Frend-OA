@@ -1,15 +1,13 @@
-import { ReactElement, FC } from "react";
-import { useGlobalContext } from "@/GlobalContext";
+import { FC, useContext } from "react";
+import context from "./index";
 
 export interface TansformTextProps {
-  module?: string;
-  textKey: string;
+  name?: string;
 }
 
 export const TansformText: FC<TansformTextProps> = ({
-  module = "",
-  textKey,
+  name,
 }: TansformTextProps): React.ReactElement => {
-  const localeMaps = useGlobalContext()["locales"][module] || {};
-  return <>{localeMaps[textKey] || ""}</>;
+  const text = useContext(context).maps[name || "not-found"];
+  return <>{text}</>;
 };

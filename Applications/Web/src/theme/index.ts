@@ -1,23 +1,13 @@
-import dark from "./dark";
-import white from "./white";
+export type ThemeType = "white";
 
-const themeProvider = (theme: ThemeType): ThemeDataSource => {
-  switch (theme) {
-    case "dark":
-      return dark;
-    case "white":
-      return white;
-    default:
-      return white;
-  }
+const Themes: {
+  [key: string]: {
+    label: string;
+  };
+} = {
+  white: {
+    label: "浅色",
+  },
 };
 
-export type ThemeType = "dark" | "white";
-
-export interface ThemeDataSource {
-  [key: string]: {
-    [key: string]: string;
-  };
-}
-
-export default themeProvider;
+export default Themes;

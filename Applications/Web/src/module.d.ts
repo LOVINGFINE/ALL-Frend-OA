@@ -7,6 +7,6 @@ declare module "*.png";
 declare module "*.jpg";
 declare module "*.jpeg";
 declare module "*.gif";
-declare module '*.ico'
+declare module "*.ico";
 declare module "*.bmp";
 declare module "*.tiff";

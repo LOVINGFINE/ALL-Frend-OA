@@ -10,35 +10,32 @@ import { Menu } from "@/components";
 import { MenuItemType } from "@/components/Menu";
 import className from "../style.scss";
 
+const getMenuItmes = (list: RouteItem[]): MenuItemType[] => {
+  return list.map((ele) => {
+    return {
+      key: ele.path || "",
+      icon: ele.icon,
+      title: ele.title,
+      children: ele.routes
+        ? getMenuItmes(
+            ele.routes.map((item) => ({
+              ...item,
+              path: (ele.path || "*") + item.path,
+            }))
+          )
+        : undefined,
+    };
+  });
+};
 const ManageMenu: FC<ManageMenuProps> = ({
   routes,
 }: ManageMenuProps): ReactElement => {
   /** state */
   const location = useLocation();
   const navigate = useNavigate();
-  const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
+  const menuItems = getMenuItmes(routes);
   /** LifeCycle */
-  useEffect(() => {
-    // init
-    setMenuItems(getMenuItmes(routes));
-  }, [routes]);
-  const getMenuItmes = (list: RouteItem[]): MenuItemType[] => {
-    return list.map((ele) => {
-      return {
-        key: ele.path || "",
-        icon: ele.icon,
-        title: ele.title,
-        children: ele.routes
-          ? getMenuItmes(
-              ele.routes.map((item) => ({
-                ...item,
-                path: (ele.path || "*") + item.path,
-              }))
-            )
-          : undefined,
-      };
-    });
-  };
+
   const itemClick = (item: MenuItemType) => {
     navigate(item.key);
   };

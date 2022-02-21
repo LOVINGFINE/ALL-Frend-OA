@@ -7,17 +7,17 @@ const routes: RouteItem[] = [
     title: "登录",
   },
   {
-    name: "homepage",
-    path: "/homepage",
-    component: "pages/homepage",
-    title: "主页",
-  },
-  {
     name: "basic-page",
     path: "/",
     component: "layouts/BasicLayout",
     title: "basic",
     routes: [
+      {
+        name: "homepage",
+        path: "homepage",
+        component: "pages/homepage",
+        title: "主页",
+      },
       {
         name: "sheet-editor",
         path: "sheet-editor",

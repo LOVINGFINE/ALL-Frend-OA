@@ -1,0 +1,18 @@
+:root {
+  /* 基础字体 颜色 */
+  --font-color-base: #333;
+  /* 次级 颜色 */
+  --font-color-sec: #666;
+  /* 提示字体 success 颜色 */
+  --font-color-success: #52c41a;
+  /* 提示字体 颜色 */
+  --font-color-tip: #999;
+  /* 基础背景色 */
+  --bg-color: #fff;
+  /* 背景色 */
+  --bg-color-side: #f8f8f8;
+  /* 遮罩 颜色 */
+  --mask-bg-color: rgba(0, 0, 0, 0.4);
+  /* 边框 颜色 */
+  --border-color: #eee;
+}

@@ -1,13 +1,21 @@
-import { ReactElement, FC } from "react";
-import { Button } from "@/components";
-import { useGlobalContext } from "@/GlobalContext";
+import { ReactElement, FC, useState } from "react";
+import className from "./homepage.scss";
+import { Modal, Button, Message } from "@/components";
 
-const pageKey = "homepage";
 const HomePage: FC = (): ReactElement => {
-  const themeStyle = useGlobalContext().themes[pageKey]; // 主题样式
+  const [visible, setVisible] = useState(false);
+  // 主题样式
   return (
-    <div className={themeStyle[`page`]}>
-      <Button>aaaa</Button>
+    <div className={className["homepage"]}>
+      <Button
+        type={"primary"}
+        onClick={() => {
+          Message.success("ssss");
+        }}
+      >
+        open
+      </Button>
+      <Modal visible={visible} onClose={() => setVisible(false)} />
     </div>
   );
 };

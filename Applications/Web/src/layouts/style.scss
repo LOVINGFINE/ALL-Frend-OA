@@ -9,6 +9,7 @@
   box-sizing: border-box;
   position: fixed;
   top: 0;
+  z-index: 999;
   background-color: #fff;
   &-left {
     display: flex;
@@ -71,9 +72,9 @@
 
 .basicLayout {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background-color: #f7f7f7;
-  padding: 60px 0 0;
+  padding-top: 60px;
   box-sizing: border-box;
   overflow: hidden;
   &-contanier {
