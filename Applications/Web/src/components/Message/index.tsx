@@ -4,6 +4,7 @@
  */
 import "./message.scss";
 import ReactDOM from "react-dom";
+import { Icon } from "@/components";
 
 export interface MessageSuccessProps {
   zIndex?: number;
@@ -28,8 +29,9 @@ const setTop = (name: string) => {
     }
   });
   arr.forEach((ele, i) => {
-    ele.style.top = `${i * 47 + 12}px`;
+    ele.style.top = `${i * 55 + 15}px`;
   });
+  return (arr.length - 1) * 55 + 15;
 };
 
 export default class Message {
@@ -47,7 +49,8 @@ export default class Message {
     div.className = `${prefix}-message`;
     const content = (
       <div className={`${prefix}-message-render ${prefix}-message-${type}`}>
-        <span>{title || ""}</span>
+        <Icon name={"info-with-circle"} color={"var(--font-color-success)"} />
+        <span className={`${prefix}-message-render-title`}>{title || ""}</span>
       </div>
     );
     ReactDOM.render(content, div);

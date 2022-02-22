@@ -1,22 +1,27 @@
+import { FC, ReactElement } from "react";
 import unicodes from "@/assets/fonts/font-unicode.json";
 import "@/assets/fonts/font-face.scss";
+import "./icon.scss";
 
-const Icon = ({
-  fontSize = 14,
-  color = "var(--font-color-base)",
-  name,
-  prefix = "dyl",
-}: {
+export interface IconProps {
   fontSize?: number;
   color?: string;
   name?: string;
   prefix?: string;
-}): React.ReactElement => {
+}
+
+const Icon: FC<IconProps> = ({
+  fontSize = 14,
+  color = "var(--font-color-base)",
+  name,
+  prefix = "dyl",
+}: IconProps): ReactElement => {
   const types = unicodes as any;
   return (
     <i
       className={`${prefix}-icon-font`}
       style={{
+        width: 14,
         fontSize,
         color,
       }}

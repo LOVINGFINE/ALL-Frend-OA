@@ -25,19 +25,8 @@ export const cp_dir = ({ dir, target }: { dir: string; target: string }) => {
       for (let i = 0; i < files.length; i++) {
         let path = join(dir, files[i]);
         let cp_path = join(target, files[i]);
-        fs.readFile(path, "utf-8", (err, data: any) => {
-          if (err) {
-            throw err;
-          } else {
-            fs.writeFile(cp_path, data, "utf-8", (err) => {
-              if (err) {
-                throw err;
-              } else {
-                res();
-              }
-            });
-          }
-        });
+        fs.createReadStream(path).pipe(fs.createWriteStream(cp_path));
+        res();
       }
     } catch (e) {
       rej(e);

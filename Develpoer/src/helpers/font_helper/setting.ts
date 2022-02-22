@@ -21,7 +21,7 @@ const setting: FontConfigProps = {
     output: resolve("../Applications/Web/src/assets/fonts"),
     style: "font-face.scss",
     json: "font-unicode.json",
-    scssTemp: `@font-face {\n  font-family: "all-frend-oa-font";\n  src: url("all-frend-oa-font.eot?t=1643192025160#iefix")\n      format("embedded-opentype"),\n    url("all-frend-oa-font.woff2?t=1643192025160") format("woff2"),\n    url("all-frend-oa-font.woff?t=1643192025160") format("woff"),\n    url("all-frend-oa-font.ttf?t=1643192025160") format("truetype");\n}\n.icon-font {\n  font-family: "all-frend-oa-font" !important;\n}\n`,
+    scssTemp: `@font-face {\n  font-family: "all-frend-oa-font";\n  src: url("./all-frend-oa-font.eot?t=1643192025160#iefix")\n      format("embedded-opentype"),\n    url("./all-frend-oa-font.woff2?t=1643192025160") format("woff2"),\n    url("./all-frend-oa-font.woff?t=1643192025160") format("woff"),\n    url("./all-frend-oa-font.ttf?t=1643192025160") format("truetype");\n}\n`,
   },
 };
 

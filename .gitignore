@@ -32,6 +32,7 @@ pubspec.lock
 
 # dev 
 .development
+.temp
 
 # dist output
 

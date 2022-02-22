@@ -1,6 +1,6 @@
 import { ReactElement, FC, useState } from "react";
 import className from "./homepage.scss";
-import { Modal, Button, Message } from "@/components";
+import { Modal, Button, Message, Icon } from "@/components";
 
 const HomePage: FC = (): ReactElement => {
   const [visible, setVisible] = useState(false);

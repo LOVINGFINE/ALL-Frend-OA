@@ -1,5 +1,5 @@
 import svgToFont from "svgtofont";
-import { AppSetting, AppStatus } from "../../app.setting";
+import { AppStatus } from "../../app.setting";
 import AppServer from "../../app";
 import fs from "fs";
 import { resolve } from "path";
@@ -50,23 +50,24 @@ export class FontHelper {
         `\\$${setting["font-name"]}-(.+?):\"(.+?)\";`,
         "g"
       );
+
       const list = contentString.match(regx);
       list?.forEach((ele) => {
         const regx = new RegExp(
-          `\\$${setting["font-name"]}-(?<key>.*):\"(?<value>.*)\";`,
+          `\\$${setting["font-name"]}-(?<key>.*):\"\\\\(?<value>.*)\";`,
           "g"
         );
         const item = regx.exec(ele);
         if (item?.groups && !unicode[item.groups["key"]]) {
           unicode[item.groups["key"]] = new DocumentItem({
-            value: item.groups["value"],
+            value: `\\u${item.groups["value"]}`,
             key: item.groups["key"],
           });
         }
       });
       fs.writeFile(
         setting["unicode-path"],
-        JSON.stringify(unicode, null, "\t"),
+        JSON.stringify(unicode, null, "\t").replace(/\\u/g, "u"),
         (err) => {
           if (!err) {
             if (init) {
@@ -107,7 +108,7 @@ export class FontHelper {
             if (!err) {
               fs.writeFile(
                 `${Web["output"]}/${Web["json"]}`,
-                JSON.stringify(json, null, "\t"),
+                JSON.stringify(json, null, "\t").replace(/\\u/g, "u"),
                 (err) => {
                   if (!err) {
                     AppServer.print("web font file write unicode json success");
@@ -165,7 +166,7 @@ class DocumentItem {
   svg_url = "";
   constructor(options: { [k: string]: any }) {
     this.key = options["key"];
-    this.value = options["value"];
-    this.svg_url = `http://${AppSetting.host}:${AppSetting.port}/font-svg/${options["key"]}.svg`;
+    this.value = options["value"].replace("\\\\", "\\");
+    this.svg_url = `/font-svg/${options["key"]}.svg`;
   }
 }

@@ -6,3 +6,8 @@
 //   fontHelper.write();
 
 // })();
+
+let text = "\\uea02"
+
+console.log(text.replace('\\\\','\\'));
+

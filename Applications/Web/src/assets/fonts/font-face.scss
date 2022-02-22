@@ -1,13 +1,8 @@
 @font-face {
   font-family: "all-frend-oa-font";
-  src: url("all-frend-oa-font.eot?t=1643192025160#iefix")
+  src: url("./all-frend-oa-font.eot?t=1643192025160#iefix")
       format("embedded-opentype"),
-    url("all-frend-oa-font.woff2?t=1643192025160") format("woff2"),
-    url("all-frend-oa-font.woff?t=1643192025160") format("woff"),
-    url("all-frend-oa-font.ttf?t=1643192025160") format("truetype");
-}
-.dyl {
-  &-icon-font {
-    font-family: "all-frend-oa-font" !important;
-  }
+    url("./all-frend-oa-font.woff2?t=1643192025160") format("woff2"),
+    url("./all-frend-oa-font.woff?t=1643192025160") format("woff"),
+    url("./all-frend-oa-font.ttf?t=1643192025160") format("truetype");
 }
