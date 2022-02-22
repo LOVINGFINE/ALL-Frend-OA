@@ -1,23 +1,27 @@
-import config from "./config";
-import "./fonts/font-face.scss";
+import unicodes from "@/assets/fonts/font-unicode.json";
+import "@/assets/fonts/font-face.scss";
+
 const Icon = ({
-  fontSize = 16,
-  color = "#333",
-  type = "not-found",
+  fontSize = 14,
+  color = "var(--font-color-base)",
+  name,
+  prefix = "dyl",
 }: {
   fontSize?: number;
   color?: string;
-  type?: string;
+  name?: string;
+  prefix?: string;
 }): React.ReactElement => {
+  const types = unicodes as any;
   return (
     <i
-      className="icon-font"
+      className={`${prefix}-icon-font`}
       style={{
         fontSize,
         color,
       }}
     >
-      {config[type]}
+      {types[name || ""] || ""}
     </i>
   );
 };

@@ -34,5 +34,521 @@
 		"value": "\\ea06",
 		"createTime": "2022/01/26 18:10:15",
 		"svg_url": "http://127.0.0.1:9999/font-svg/file_type_ansible.svg"
+	},
+	"add-to-list": {
+		"key": "add-to-list",
+		"value": "\\ea01",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/add-to-list.svg"
+	},
+	"align-bottom": {
+		"key": "align-bottom",
+		"value": "\\ea02",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/align-bottom.svg"
+	},
+	"align-horizontal-middle": {
+		"key": "align-horizontal-middle",
+		"value": "\\ea03",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/align-horizontal-middle.svg"
+	},
+	"align-left": {
+		"key": "align-left",
+		"value": "\\ea04",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/align-left.svg"
+	},
+	"align-right": {
+		"key": "align-right",
+		"value": "\\ea05",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/align-right.svg"
+	},
+	"align-top": {
+		"key": "align-top",
+		"value": "\\ea06",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/align-top.svg"
+	},
+	"align-vertical-middle": {
+		"key": "align-vertical-middle",
+		"value": "\\ea07",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/align-vertical-middle.svg"
+	},
+	"arrow-down": {
+		"key": "arrow-down",
+		"value": "\\ea08",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/arrow-down.svg"
+	},
+	"arrow-left": {
+		"key": "arrow-left",
+		"value": "\\ea09",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/arrow-left.svg"
+	},
+	"arrow-right": {
+		"key": "arrow-right",
+		"value": "\\ea0a",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/arrow-right.svg"
+	},
+	"arrow-up": {
+		"key": "arrow-up",
+		"value": "\\ea0b",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/arrow-up.svg"
+	},
+	"bar-graph": {
+		"key": "bar-graph",
+		"value": "\\ea0c",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/bar-graph.svg"
+	},
+	"beamed-note": {
+		"key": "beamed-note",
+		"value": "\\ea0d",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/beamed-note.svg"
+	},
+	"bell": {
+		"key": "bell",
+		"value": "\\ea0e",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/bell.svg"
+	},
+	"block": {
+		"key": "block",
+		"value": "\\ea0f",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/block.svg"
+	},
+	"bookmark": {
+		"key": "bookmark",
+		"value": "\\ea10",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/bookmark.svg"
+	},
+	"bookmarks": {
+		"key": "bookmarks",
+		"value": "\\ea11",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/bookmarks.svg"
+	},
+	"box": {
+		"key": "box",
+		"value": "\\ea12",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/box.svg"
+	},
+	"ccw": {
+		"key": "ccw",
+		"value": "\\ea13",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/ccw.svg"
+	},
+	"chevron-down": {
+		"key": "chevron-down",
+		"value": "\\ea14",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-down.svg"
+	},
+	"chevron-left": {
+		"key": "chevron-left",
+		"value": "\\ea15",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-left.svg"
+	},
+	"chevron-right": {
+		"key": "chevron-right",
+		"value": "\\ea16",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-right.svg"
+	},
+	"chevron-up": {
+		"key": "chevron-up",
+		"value": "\\ea17",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-up.svg"
+	},
+	"chevron-with-circle-down": {
+		"key": "chevron-with-circle-down",
+		"value": "\\ea18",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-with-circle-down.svg"
+	},
+	"chevron-with-circle-left": {
+		"key": "chevron-with-circle-left",
+		"value": "\\ea19",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-with-circle-left.svg"
+	},
+	"chevron-with-circle-right": {
+		"key": "chevron-with-circle-right",
+		"value": "\\ea1a",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-with-circle-right.svg"
+	},
+	"chevron-with-circle-up": {
+		"key": "chevron-with-circle-up",
+		"value": "\\ea1b",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/chevron-with-circle-up.svg"
+	},
+	"circle-with-cross": {
+		"key": "circle-with-cross",
+		"value": "\\ea1c",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/circle-with-cross.svg"
+	},
+	"circle-with-minus": {
+		"key": "circle-with-minus",
+		"value": "\\ea1d",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/circle-with-minus.svg"
+	},
+	"circle-with-plus": {
+		"key": "circle-with-plus",
+		"value": "\\ea1e",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/circle-with-plus.svg"
+	},
+	"cloud": {
+		"key": "cloud",
+		"value": "\\ea1f",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/cloud.svg"
+	},
+	"code": {
+		"key": "code",
+		"value": "\\ea20",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/code.svg"
+	},
+	"cog": {
+		"key": "cog",
+		"value": "\\ea21",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/cog.svg"
+	},
+	"controller-fast-backward": {
+		"key": "controller-fast-backward",
+		"value": "\\ea22",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-fast-backward.svg"
+	},
+	"controller-fast-forward": {
+		"key": "controller-fast-forward",
+		"value": "\\ea23",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-fast-forward.svg"
+	},
+	"controller-jump-to-start": {
+		"key": "controller-jump-to-start",
+		"value": "\\ea24",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-jump-to-start.svg"
+	},
+	"controller-next": {
+		"key": "controller-next",
+		"value": "\\ea25",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-next.svg"
+	},
+	"controller-paus": {
+		"key": "controller-paus",
+		"value": "\\ea26",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-paus.svg"
+	},
+	"controller-play": {
+		"key": "controller-play",
+		"value": "\\ea27",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-play.svg"
+	},
+	"controller-record": {
+		"key": "controller-record",
+		"value": "\\ea28",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-record.svg"
+	},
+	"controller-stop": {
+		"key": "controller-stop",
+		"value": "\\ea29",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/controller-stop.svg"
+	},
+	"cross": {
+		"key": "cross",
+		"value": "\\ea2a",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/cross.svg"
+	},
+	"cw": {
+		"key": "cw",
+		"value": "\\ea2b",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/cw.svg"
+	},
+	"cycle": {
+		"key": "cycle",
+		"value": "\\ea2c",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/cycle.svg"
+	},
+	"dots-three-horizontal": {
+		"key": "dots-three-horizontal",
+		"value": "\\ea2d",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/dots-three-horizontal.svg"
+	},
+	"dots-three-vertical": {
+		"key": "dots-three-vertical",
+		"value": "\\ea2e",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/dots-three-vertical.svg"
+	},
+	"dots-two-horizontal": {
+		"key": "dots-two-horizontal",
+		"value": "\\ea2f",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/dots-two-horizontal.svg"
+	},
+	"dots-two-vertical": {
+		"key": "dots-two-vertical",
+		"value": "\\ea30",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/dots-two-vertical.svg"
+	},
+	"download": {
+		"key": "download",
+		"value": "\\ea31",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/download.svg"
+	},
+	"flow-branch": {
+		"key": "flow-branch",
+		"value": "\\ea32",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/flow-branch.svg"
+	},
+	"flow-tree": {
+		"key": "flow-tree",
+		"value": "\\ea33",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/flow-tree.svg"
+	},
+	"folder": {
+		"key": "folder",
+		"value": "\\ea34",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/folder.svg"
+	},
+	"forward": {
+		"key": "forward",
+		"value": "\\ea35",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/forward.svg"
+	},
+	"help-with-circle": {
+		"key": "help-with-circle",
+		"value": "\\ea36",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/help-with-circle.svg"
+	},
+	"home": {
+		"key": "home",
+		"value": "\\ea37",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/home.svg"
+	},
+	"info-with-circle": {
+		"key": "info-with-circle",
+		"value": "\\ea38",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/info-with-circle.svg"
+	},
+	"level-down": {
+		"key": "level-down",
+		"value": "\\ea39",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/level-down.svg"
+	},
+	"level-up": {
+		"key": "level-up",
+		"value": "\\ea3a",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/level-up.svg"
+	},
+	"light-bulb": {
+		"key": "light-bulb",
+		"value": "\\ea3b",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/light-bulb.svg"
+	},
+	"location-pin": {
+		"key": "location-pin",
+		"value": "\\ea3c",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/location-pin.svg"
+	},
+	"log-out": {
+		"key": "log-out",
+		"value": "\\ea3d",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/log-out.svg"
+	},
+	"login": {
+		"key": "login",
+		"value": "\\ea3e",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/login.svg"
+	},
+	"magnifying-glass": {
+		"key": "magnifying-glass",
+		"value": "\\ea3f",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/magnifying-glass.svg"
+	},
+	"menu": {
+		"key": "menu",
+		"value": "\\ea40",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/menu.svg"
+	},
+	"music": {
+		"key": "music",
+		"value": "\\ea41",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/music.svg"
+	},
+	"pencil": {
+		"key": "pencil",
+		"value": "\\ea42",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/pencil.svg"
+	},
+	"plus": {
+		"key": "plus",
+		"value": "\\ea43",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/plus.svg"
+	},
+	"price-tag": {
+		"key": "price-tag",
+		"value": "\\ea44",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/price-tag.svg"
+	},
+	"reply": {
+		"key": "reply",
+		"value": "\\ea45",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/reply.svg"
+	},
+	"resize-100": {
+		"key": "resize-100",
+		"value": "\\ea46",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/resize-100.svg"
+	},
+	"resize-full-screen": {
+		"key": "resize-full-screen",
+		"value": "\\ea47",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/resize-full-screen.svg"
+	},
+	"select-arrows": {
+		"key": "select-arrows",
+		"value": "\\ea48",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/select-arrows.svg"
+	},
+	"share": {
+		"key": "share",
+		"value": "\\ea49",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/share.svg"
+	},
+	"sound-mix": {
+		"key": "sound-mix",
+		"value": "\\ea4a",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/sound-mix.svg"
+	},
+	"squared-cross": {
+		"key": "squared-cross",
+		"value": "\\ea4b",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/squared-cross.svg"
+	},
+	"squared-minus": {
+		"key": "squared-minus",
+		"value": "\\ea4c",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/squared-minus.svg"
+	},
+	"squared-plus": {
+		"key": "squared-plus",
+		"value": "\\ea4d",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/squared-plus.svg"
+	},
+	"star-outlined": {
+		"key": "star-outlined",
+		"value": "\\ea4e",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/star-outlined.svg"
+	},
+	"star": {
+		"key": "star",
+		"value": "\\ea4f",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/star.svg"
+	},
+	"thumbs-down": {
+		"key": "thumbs-down",
+		"value": "\\ea50",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/thumbs-down.svg"
+	},
+	"thumbs-up": {
+		"key": "thumbs-up",
+		"value": "\\ea51",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/thumbs-up.svg"
+	},
+	"trash": {
+		"key": "trash",
+		"value": "\\ea52",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/trash.svg"
+	},
+	"upload-to-cloud": {
+		"key": "upload-to-cloud",
+		"value": "\\ea53",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/upload-to-cloud.svg"
+	},
+	"upload": {
+		"key": "upload",
+		"value": "\\ea54",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/upload.svg"
+	},
+	"user": {
+		"key": "user",
+		"value": "\\ea55",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/user.svg"
+	},
+	"warning": {
+		"key": "warning",
+		"value": "\\ea56",
+		"createTime": "2022/02/22 10:35:10",
+		"svg_url": "http://127.0.0.1:9999/font-svg/warning.svg"
 	}
 }

@@ -12,8 +12,8 @@
       display: flex;
       padding: 0 6px;
       align-items: center;
-      box-shadow: 0 0px 5px 0 var(--border-color),
-        0 3px 5px 0 var(--border-color);
+      box-shadow: 0 0px 5px 0 var(--border-color-sec),
+        0 3px 5px 0 var(--border-color-sec);
       border-radius: 3px;
       &-success {
         span {

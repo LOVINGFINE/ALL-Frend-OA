@@ -1,4 +1,5 @@
 :root {
+  --primary-color: #1890ff;
   /* 基础字体 颜色 */
   --font-color-base: #333;
   /* 次级 颜色 */
@@ -14,5 +15,7 @@
   /* 遮罩 颜色 */
   --mask-bg-color: rgba(0, 0, 0, 0.4);
   /* 边框 颜色 */
-  --border-color: #eee;
+  --border-color: #ddd;
+  /* 次级边框 颜色 */
+  --border-color-sec: #eee;
 }

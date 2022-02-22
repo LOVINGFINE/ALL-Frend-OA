@@ -10,8 +10,8 @@
       color: #666;
       background-color: transparent;
       &:hover {
-        color: #1890ff;
-        border-color: #1890ff;
+        color: var(--primary-color);
+        border-color: var(--primary-color);
       }
     }
     &-error {
@@ -23,7 +23,7 @@
     }
     &-primary {
       color: #fff;
-      background-color: #1890ff;
+      background-color: var(--primary-color);
       &:hover {
         opacity: 0.8;
       }
