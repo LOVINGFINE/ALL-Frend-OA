@@ -21,7 +21,6 @@ const Icon: FC<IconProps> = ({
     <i
       className={`${prefix}-icon-font`}
       style={{
-        width: 14,
         fontSize,
         color,
       }}

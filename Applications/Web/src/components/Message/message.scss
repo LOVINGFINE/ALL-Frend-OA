@@ -19,10 +19,8 @@
       &-title {
         margin-left: 8px;
       }
-      &-success {
-        span {
-          color: var(--font-color-sec);
-        }
+      span {
+        color: var(--tip-color);
       }
     }
   }

@@ -1,0 +1,45 @@
+.dyl {
+  &-input {
+    width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color-sec);
+    padding: 0 12px;
+    box-sizing: border-box;
+    color: var(--font-color-base);
+    border-radius: 3px;
+    box-sizing: border-box;
+    appearance: none;
+    outline: none;
+    transition: all ease-in 0.1s;
+    &::placeholder {
+      color: var(--font-color-tip);
+    }
+    &:focus {
+      border-color: var(--border-color-hover);
+    }
+    &:hover {
+      border-color: var(--border-color-hover);
+    }
+    &-default {
+      height: 38px;
+      font-size: 14px;
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+    &-large {
+      height: 45px;
+      font-size: 16px;
+      &::placeholder {
+        font-size: 16px;
+      }
+    }
+    &-small {
+      height: 28px;
+      font-size: 12px;
+      &::placeholder {
+        font-size: 12px;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
   &-button {
     display: inline-block;
     border-radius: 3px;
+    user-select: none;
     max-width: 100%;
     border: 1px solid #ddd;
     cursor: pointer;
@@ -30,15 +31,16 @@
     }
     &-middle {
       font-size: 14px;
-      padding: 7px 15px;
+      padding: 6px 15px;
     }
     &-small {
       font-size: 12px;
-      padding: 5px 12px;
+      padding: 4px 12px;
     }
     &-large {
+      border-radius: 5px;
       font-size: 16px;
-      padding: 10px 20px;
+      padding: 8px 20px;
     }
     &-disabled {
       opacity: 0.4;

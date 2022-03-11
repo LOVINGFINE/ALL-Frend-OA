@@ -1,19 +1,17 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:frend_mobile/plugins/ServerManager.dart';
+import 'package:frend_mobile/plugins/service.dart';
+
+// Create storage
+FlutterSecureStorage get storage => new FlutterSecureStorage();
+
+final serverManager = ServerManager().server;
+
+String AccessToken = '';
 
 class GlobalContext {
-  String token = '';
-  static Future serverManager<T>(String action,
-      {Map<String, dynamic> params}) async {
-    print(params);
-    return ServerManager().dispath<T>(action, params: params).then((value) {
-      print(value);
-    });
+  GlobalContext() {
+    AccessToken = readStoreageByKey('access-token');
   }
-
-  // Create storage
-  FlutterSecureStorage get storage => new FlutterSecureStorage();
-
 // Read value
   readStoreageByKey(key) {
     return storage.read(key: key);

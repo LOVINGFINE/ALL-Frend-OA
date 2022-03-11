@@ -5,11 +5,12 @@
 import { ReactElement, FC, ReactNode, useEffect, useState } from "react";
 import "./modal.scss";
 import ReactDOM from "react-dom";
+import { Icon } from "@/components";
 
 const Render = ({
   children,
   visible = false,
-  width = 400,
+  width = 425,
   height = 550,
   zIndex = 1000,
   close = true,
@@ -18,12 +19,8 @@ const Render = ({
   onClose,
   prefix = "dyl",
   footer,
+  placement = "bottom-left",
 }: ModalProps) => {
-  const handleClose = () => {
-    if (onClose) {
-      onClose();
-    }
-  };
   const renderFooter = () => {
     if (footer === null) {
       return <></>;
@@ -36,8 +33,15 @@ const Render = ({
   const renderClose = () => {
     if (typeof close === "boolean") {
       return close ? (
-        <div className={`${prefix}-modal-close`} onClick={handleClose}>
-          <span>X</span>
+        <div
+          className={`${prefix}-modal-close`}
+          onClick={() => {
+            if (maskClose && onClose) {
+              onClose();
+            }
+          }}
+        >
+          <Icon name={"cross"} fontSize={20} color={"var(--font-color-sec)"} />
         </div>
       ) : (
         <></>
@@ -46,19 +50,69 @@ const Render = ({
     if (typeof close === "function") return close;
   };
   const bodyStyle = () => {
-    return visible
-      ? {
-          width,
-          height,
-          left: `calc(100vw / 2 - ${width / 2}px)`,
-          bottom: `calc(100vh / 2 - ${height / 2}px)`,
-        }
-      : {
-          width: 0,
-          height: 0,
-          left: 0,
-          bottom: 0,
+    const over = -15;
+    const x = `calc(100vw / 2 - ${width / 2}px)`;
+    const y = `calc(100vh / 2 - ${height / 2}px)`;
+    const w = visible ? width : 0;
+    const h = visible ? height : 0;
+    switch (placement) {
+      case "bottom-left":
+        return {
+          left: visible ? x : over,
+          bottom: visible ? y : over,
+          width: w,
+          height: h,
         };
+      case "bottom-right":
+        return {
+          right: visible ? x : over,
+          bottom: visible ? y : over,
+          width: w,
+          height: h,
+        };
+      case "top-right":
+        return {
+          right: visible ? x : over,
+          top: visible ? y : over,
+          width: w,
+          height: h,
+        };
+      case "top-left":
+        return {
+          left: visible ? x : over,
+          top: visible ? y : over,
+          width: w,
+          height: h,
+        };
+      case "bottom":
+        return {
+          left: x,
+          bottom: visible ? y : over,
+          width,
+          height: h,
+        };
+      case "top":
+        return {
+          left: x,
+          top: visible ? y : over,
+          width,
+          height: h,
+        };
+      case "left":
+        return {
+          top: y,
+          left: visible ? x : over,
+          width: w,
+          height,
+        };
+      case "right":
+        return {
+          top: y,
+          right: visible ? x : over,
+          width: w,
+          height,
+        };
+    }
   };
   return (
     <div className={`${prefix}-modal`} style={{ zIndex }}>
@@ -66,8 +120,8 @@ const Render = ({
         <div
           className={`${prefix}-modal-mask`}
           onClick={() => {
-            if (maskClose) {
-              handleClose();
+            if (maskClose && onClose) {
+              onClose();
             }
           }}
         />
@@ -113,5 +167,14 @@ export interface ModalProps {
   maskClose?: boolean;
   mask?: boolean;
   prefix?: string;
+  placement?:
+    | "left"
+    | "top"
+    | "right"
+    | "bottom"
+    | "bottom-right"
+    | "bottom-left"
+    | "top-left"
+    | "top-right";
 }
 export default Modal;

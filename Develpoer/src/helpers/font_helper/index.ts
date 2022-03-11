@@ -8,6 +8,52 @@ import setting from "./setting";
 import { remove_dir, cp_dir } from "../../utils";
 
 export class FontHelper {
+  get getJsonKeyValueString() {
+    // json string
+    const document = require(setting["unicode-path"]);
+    return JSON.stringify(document, null, "\t").replace(/\\u/g, "u");
+  }
+
+  static getJsonKeyValueString(type?: "Web") {
+    // json string
+    const document = require(setting["unicode-path"]);
+    const keyValueJson: { [key: string]: any } = {};
+    for (let key in document) {
+      keyValueJson[key] = document[key]["value"];
+    }
+    if (type === "Web") {
+      return JSON.stringify(keyValueJson, null, "\t").replace(/\\u/g, "u");
+    }
+    return JSON.stringify(document, null, "\t").replace(/\\u/g, "u");
+  }
+
+  get valuesByStyle() {
+    // 获取style中json转化
+    const values: DocumentItem[] = [];
+    const contentString = fs
+      .readFileSync(resolve(__dirname, `.temp/style.scss`))
+      .toString()
+      .replace(/[\n\s]+/g, "");
+
+    const regx = new RegExp(`\\$${setting["font-name"]}-(.+?):\"(.+?)\";`, "g");
+    const list = contentString.match(regx);
+    list?.forEach((ele) => {
+      const regx = new RegExp(
+        `\\$${setting["font-name"]}-(?<key>.*):\"\\\\(?<value>.*)\";`,
+        "g"
+      );
+      const item = regx.exec(ele);
+      if (item?.groups) {
+        values.push(
+          new DocumentItem({
+            value: `\\u${item.groups["value"]}`,
+            key: item.groups["key"],
+          })
+        );
+      }
+    });
+    return values;
+  }
   static async init() {
     await new FontHelper().write(true);
   }
@@ -38,36 +84,18 @@ export class FontHelper {
       return AppStatus.ERROR;
     }
   }
+
   async writeDocument(init: Boolean): Promise<AppStatus> {
     return new Promise((res, rej) => {
       const unicode: any = require(setting["unicode-path"]);
-      const contentString = fs
-        .readFileSync(resolve(__dirname, `.temp/style.scss`))
-        .toString()
-        .replace(/[\n\s]+/g, "");
-
-      const regx = new RegExp(
-        `\\$${setting["font-name"]}-(.+?):\"(.+?)\";`,
-        "g"
-      );
-
-      const list = contentString.match(regx);
-      list?.forEach((ele) => {
-        const regx = new RegExp(
-          `\\$${setting["font-name"]}-(?<key>.*):\"\\\\(?<value>.*)\";`,
-          "g"
-        );
-        const item = regx.exec(ele);
-        if (item?.groups && !unicode[item.groups["key"]]) {
-          unicode[item.groups["key"]] = new DocumentItem({
-            value: `\\u${item.groups["value"]}`,
-            key: item.groups["key"],
-          });
+      this.valuesByStyle.forEach((ele) => {
+        if (!unicode[ele.key]) {
+          unicode[ele.key] = ele;
         }
       });
       fs.writeFile(
         setting["unicode-path"],
-        JSON.stringify(unicode, null, "\t").replace(/\\u/g, "u"),
+        this.getJsonKeyValueString,
         (err) => {
           if (!err) {
             if (init) {
@@ -92,39 +120,26 @@ export class FontHelper {
   writeWeb() {
     return new Promise<void>((res) => {
       const { Web } = setting;
-      const document = require(setting["unicode-path"]);
-      const json: { [key: string]: any } = {};
-      for (let key in document) {
-        json[key] = document[key]["value"];
-      }
+      const jsonString = FontHelper.getJsonKeyValueString("Web");
+      const webJsonFilePath = `${Web["output"]}/${Web["json"]}`;
       cp_dir({
         dir: setting["font-dist-path"],
         target: Web["output"],
-      }).then(() => {
-        fs.writeFile(
-          `${Web["output"]}/${Web["style"]}`,
-          Web["scssTemp"],
-          (err) => {
+      })
+        .then(() => {
+          fs.writeFile(webJsonFilePath, jsonString, (err) => {
             if (!err) {
-              fs.writeFile(
-                `${Web["output"]}/${Web["json"]}`,
-                JSON.stringify(json, null, "\t").replace(/\\u/g, "u"),
-                (err) => {
-                  if (!err) {
-                    AppServer.print("web font file write unicode json success");
-                  } else {
-                    AppServer.error(JSON.stringify(err));
-                  }
-                  res();
-                }
-              );
+              AppServer.print("web font file write unicode json success");
             } else {
               AppServer.error(JSON.stringify(err));
-              res();
             }
-          }
-        );
-      });
+            res();
+          });
+        })
+        .catch((e) => {
+          res();
+          AppServer.error("cp dir Error:" + JSON.stringify(e));
+        });
     });
   }
   // 移除多余文件
@@ -166,7 +181,7 @@ class DocumentItem {
   svg_url = "";
   constructor(options: { [k: string]: any }) {
     this.key = options["key"];
-    this.value = options["value"].replace("\\\\", "\\");
+    this.value = options["value"];
     this.svg_url = `/font-svg/${options["key"]}.svg`;
   }
 }

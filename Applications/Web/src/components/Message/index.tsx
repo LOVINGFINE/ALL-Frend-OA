@@ -15,7 +15,7 @@ export interface MessageSuccessProps {
 export interface MessageRenderProps {
   prefix?: string;
   title?: string;
-  type: "success";
+  type: "success" | "warning" | "error";
   duration?: number;
 }
 
@@ -39,6 +39,14 @@ export default class Message {
     Message.render({ title, type: "success", duration: options?.duration });
   }
 
+  static warning(title: string, options?: MessageSuccessProps) {
+    Message.render({ title, type: "warning", duration: options?.duration });
+  }
+
+  static error(title: string, options?: MessageSuccessProps) {
+    Message.render({ title, type: "error", duration: options?.duration });
+  }
+
   static render({
     title,
     prefix = "dyl",
@@ -47,9 +55,24 @@ export default class Message {
   }: MessageRenderProps) {
     const div = document.createElement("div");
     div.className = `${prefix}-message`;
+    const getIcon = () => {
+      switch (type) {
+        case "success":
+          return "check-alt";
+        case "error":
+          return "info-with-circle";
+        case "warning":
+          return "help-with-circle";
+      }
+    };
     const content = (
-      <div className={`${prefix}-message-render ${prefix}-message-${type}`}>
-        <Icon name={"info-with-circle"} color={"var(--font-color-success)"} />
+      <div
+        className={`${prefix}-message-render`}
+        style={{
+          backgroundColor: `var(--bg-color-${type})`,
+        }}
+      >
+        <Icon name={getIcon()} color={`var(--tip-color-${type})`} />
         <span className={`${prefix}-message-render-title`}>{title || ""}</span>
       </div>
     );

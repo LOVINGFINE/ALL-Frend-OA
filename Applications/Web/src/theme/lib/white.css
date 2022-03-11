@@ -1,21 +1,49 @@
 :root {
-  --primary-color: #1890ff;
-  /* 基础字体 颜色 */
+  /* primary 主题色 */
+  --primary-color: #08979c;
+  --primary-color-sec: #b5f5ec;
+  --primary-color-hover: #13c2c2;
+
+  /* 字体 颜色 */
   --font-color-base: #333;
-  /* 次级 颜色 */
   --font-color-sec: #666;
-  /* 提示字体 success 颜色 */
-  --font-color-success: #52c41a;
-  /* 提示字体 颜色 */
-  --font-color-tip: #999;
-  /* 基础背景色 */
-  --bg-color: #fff;
+  --font-color-thr: #999;
+
+  /* 提示 */
+  --tip-color: #999;
+  --tip-color-success: #52c41a;
+  --tip-color-warning: #faad14;
+  --tip-color-error: #f5222d;
+
   /* 背景色 */
-  --bg-color-side: #f8f8f8;
+  --bg-color: #fff;
+  --bg-color-opacity-hover: rgba(51, 51, 51, 0.08);
+  --bg-color-side: #f5f8f7;
+  --bg-color-success: #f6ffed;
+  --bg-color-warning: #fffbe6;
+  --bg-color-error: #fff1f0;
+
   /* 遮罩 颜色 */
-  --mask-bg-color: rgba(0, 0, 0, 0.4);
+  --mask-bg-color: #00232970;
+
   /* 边框 颜色 */
   --border-color: #ddd;
-  /* 次级边框 颜色 */
+  --border-color-hover: #b5f5ec;
   --border-color-sec: #eee;
+  --border-color-opacity-hover: rgba(51, 51, 51, 0.1);
+
+  /* 阴影颜色 */
+  --shadow-color: #eee;
+  --shadow-color-sec: #f8f8f8;
 }
+
+/* #002329 */
+/* #00474f */
+/* #006d75 */
+/* #08979c */
+/* #13c2c2 */
+/* #36cfc9 */
+/* #5cdbd3 */
+/* #87e8de */
+/* #b5f5ec */
+/* #e6fffb */

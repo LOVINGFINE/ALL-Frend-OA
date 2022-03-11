@@ -7,7 +7,7 @@ import Icon from "./Icon";
 import Input from "./Input";
 import Loading from "./Loading";
 import Menu from "./Menu";
-import Message from "./Message";
+import message from "./Message";
 import Modal from "./Modal";
 import Row from "./Row";
 import Space from "./Space";
@@ -22,7 +22,7 @@ export { default as Icon } from "./Icon";
 export { default as Input } from "./Input";
 export { default as Loading } from "./Loading";
 export { default as Menu } from "./Menu";
-export { default as Message } from "./Message";
+export { default as message } from "./Message";
 export { default as Modal } from "./Modal";
 export { default as Row } from "./Row";
 export { default as Space } from "./Space";
@@ -38,7 +38,7 @@ export default {
   Input,
   Loading,
   Menu,
-  Message,
+  message,
   Modal,
   Row,
   Space,

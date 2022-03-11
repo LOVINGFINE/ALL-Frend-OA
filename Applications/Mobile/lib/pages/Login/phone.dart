@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frend_mobile/global.dart';
+import 'package:frend_mobile/app.manager.dart';
 
 class PhoneInput extends StatefulWidget {
   @override
@@ -15,8 +15,7 @@ class _PhoneInput extends State<PhoneInput> {
 
   void _ok() {
     //获取验证码
-    GlobalContext.serverManager('USER_REGISTER', params: {'mobile': phone})
-        .then((res) {
+    dispath('USER_REGISTER', params: {'mobile': phone}).then((res) {
       print(res);
     });
   }

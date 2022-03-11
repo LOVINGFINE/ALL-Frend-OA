@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frend_mobile/pages/Login/_.dart';
 import 'package:frend_mobile/theme/_.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 

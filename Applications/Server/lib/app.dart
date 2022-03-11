@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'route.helper.dart';
 import 'setting/_setting.dart';
+// import 'package:shelf_body_parser/shelf_body_parser.dart';
 // import 'package:http_server/http_server.dart' show VirtualDirectory;
 
 void app() async {
@@ -9,6 +10,10 @@ void app() async {
 
 // 服务端口
   int port = 8080;
+  // var handler = const Pipeline()
+  //     .addMiddleware(logRequests())
+  //     .addMiddleware(bodyParser(storeOriginalBuffer: false))
+  //     .addHandler(_messages);
   await MongodSetting.open();
   HttpServer server = await shelf_io.serve(RouteHelper().router, host, port);
   server.defaultResponseHeaders.add('Access-Control-Allow-Origin', '*'); //允许跨域

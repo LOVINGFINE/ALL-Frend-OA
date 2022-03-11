@@ -1,6 +1,5 @@
 import fs from "fs";
 import { join } from "path";
-import AppServer from "../app";
 
 export const remove_dir = (dir: string) => {
   const files = fs.readdirSync(dir);
@@ -26,11 +25,10 @@ export const cp_dir = ({ dir, target }: { dir: string; target: string }) => {
         let path = join(dir, files[i]);
         let cp_path = join(target, files[i]);
         fs.createReadStream(path).pipe(fs.createWriteStream(cp_path));
-        res();
       }
+      res();
     } catch (e) {
       rej(e);
-      AppServer.error("cp dir Error:" + JSON.stringify(e));
     }
   });
 };
