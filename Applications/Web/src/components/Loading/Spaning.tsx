@@ -16,11 +16,11 @@ const Spaning = (): React.ReactElement => {
       }}
     >
       <div className={style["loading-spaning"]}>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
       </div>
     </div>
   );

@@ -8,13 +8,15 @@ import "./space.scss";
 const Space: FC<SpaceProps> = ({
   children,
   style,
-  className,
-  onClick,
+  prefix = "dyl",
+  direction = "row",
 }: SpaceProps): ReactElement => {
   /** render */
-  const boxClassName = `dyl-column ${className}`;
   return (
-    <div onClick={onClick} className={boxClassName} style={style}>
+    <div
+      className={`${prefix}-space ${prefix}-space-${direction}`}
+      style={style}
+    >
       {children}
     </div>
   );
@@ -22,8 +24,8 @@ const Space: FC<SpaceProps> = ({
 
 export interface SpaceProps {
   children?: ReactElement | ReactElement[];
-  className?: string;
   style?: React.CSSProperties;
-  onClick?(e: MouseEvent): void;
+  direction?: "row" | "column";
+  prefix?: string;
 }
 export default Space;
