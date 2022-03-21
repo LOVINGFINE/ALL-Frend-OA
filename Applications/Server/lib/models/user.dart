@@ -1,23 +1,24 @@
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:convert/convert.dart';
-import 'package:server/plugins/_plugins.dart';
-import 'package:server/setting/status.dart';
+import 'package:server/plugins/mongod.dart';
+import 'package:server/app.setting.dart';
 
 class User {
-  static final MongodPlugin mongod = MongodPlugin('user');
+  static final MongodPlugin mongod = MongodPlugin(APP_DB_USER);
   String id = '';
   String username = '';
   String password = '';
-  String mobile;
+  String mobile = '';
   String email = '';
   String avator = '';
   String description = '';
   String role = '';
   QrCode qrCode = QrCode();
   UserSetting setting = UserSetting();
-  User(this.mobile, {user}) {
+  User({user}) {
     Map options = user ?? {};
+    mobile = options['mobile'] ?? '';
     String optionPassword = generatePassword(password: options['password']);
     id = options['id'] ?? generateId(mobile + optionPassword);
     username = options['username'] ?? generateId(mobile);
@@ -58,29 +59,37 @@ class User {
     };
   }
 
-  // get
-  static Future<Map<String, dynamic>?> get(String userId) async {
-    // 查找用户
-    Map<String, dynamic>? user = await mongod.find({'id': userId});
-    if (user != null) {
-      return User(user['mobile'], user: user).toMap();
+  Future<bool> hasUser() async {
+    List<Map<String, dynamic>> users = await mongod.findBy({'mobile': mobile});
+    if (users.length > 0) {
+      return true;
     }
-    return user;
+    return false;
+  }
+
+  // get
+  static Future<User?> get(Map<String, dynamic> options) async {
+    // 查找用户
+    if (options['password'] != null) {
+      options['password'] = generatePassword(password: options['password']);
+      List<Map<String, dynamic>> users = await mongod.findBy(options);
+      if (users.length > 0) {
+        return User(user: users[0]);
+      }
+    }
+    return null;
   }
 
   // create
   Future<AppStatus> add() async {
     // 查找用户
-    var hasUser = await mongod.find({'id': id});
-    if (hasUser == null) {
-      return await mongod.insert(parse());
-    }
-    return AppStatus.Error;
+    await mongod.insert(parse());
+    return AppStatus.OK;
   }
 
   Future<AppStatus> update(Map<String, dynamic> options) async {
     // 查找用户
-    var hasUser = await mongod.find({'id': id});
+    var hasUser = await mongod.findById(id);
     if (hasUser != null) {
       Map user = parse();
       options.forEach((key, value) {
@@ -95,7 +104,7 @@ class User {
 
   static Future<AppStatus> delete(String userId) async {
     // 查找用户
-    var hasUser = await mongod.find({'id': userId});
+    var hasUser = await mongod.findById(userId);
     if (hasUser != null) {
       return await mongod.delate(userId);
     }
@@ -104,7 +113,7 @@ class User {
 
   static Future<dynamic> getUserInfoByMobile(String mobile) async {
     // 通过 mobile
-    return await mongod.find({'mobile': mobile});
+    return await mongod.findBy({'mobile': mobile});
   }
 }
 
@@ -112,8 +121,7 @@ class User {
 String generateId(data) {
   var content = Utf8Encoder().convert(data);
   var digest = md5.convert(content);
-  // 这里其实就是 digest.toString()
-  return 'LF-' + hex.encode(digest.bytes);
+  return 'LF-${hex.encode(digest.bytes)}';
 }
 
 // 生成密码

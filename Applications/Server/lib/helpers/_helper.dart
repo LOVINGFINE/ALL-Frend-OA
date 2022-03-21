@@ -11,9 +11,10 @@ class DartServerHelper {
   Map<String, String> get headers => request.headers;
   DartServerHelper(this.request);
 
-  Map<String, dynamic> getBody() {
+  Future<Map<String, dynamic>> getBody() async {
     // 获取body
-    return  request.context ;
+    var body = await request.readAsString();
+    return jsonDecode(body);
   }
 
   dynamic getQueryByKey(String key) {
@@ -31,7 +32,8 @@ class DartServerHelper {
     return target;
   }
 
-  Response response(int code, body) {
-    return Response(code, body: JsonEncoder(body));
+  Response response(int code, {body}) {
+    var data = body ?? '{}';
+    return Response(code, body: jsonEncode(data));
   }
 }

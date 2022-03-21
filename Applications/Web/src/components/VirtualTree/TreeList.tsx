@@ -2,7 +2,7 @@
  * Created by zhangq on 2022/03/10
  * tree list
  */
-import { ReactElement, FC, useEffect } from "react";
+import { ReactElement, FC, useEffect, Component } from "react";
 import "./VirtualTree.scss";
 import Icon from "../Icon";
 
@@ -33,17 +33,10 @@ const TreeList: FC<TreeListProps> = ({
   expand,
   nodeClick,
 }: TreeListProps): ReactElement => {
-  /** state */
-
-  console.log(dataSource);
   /** LifeCycle */
   useEffect(() => {
     // init
   }, []);
-
-  /**
-   * @method
-   */
 
   /** render */
 
@@ -91,7 +84,7 @@ const TreeList: FC<TreeListProps> = ({
                   <Icon
                     name="chevron-right"
                     fontSize={18}
-                    color={"var(--font-color-base)"}
+                    color={"var(--font-color-sec)"}
                   />
                 )}
               </span>

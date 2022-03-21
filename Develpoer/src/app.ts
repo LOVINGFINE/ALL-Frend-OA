@@ -1,3 +1,4 @@
+import next from "next";
 import bodyParser from "body-parser";
 import { blue, green, red, yellow } from "colors-cli";
 import cors from "cors";
@@ -9,8 +10,10 @@ import { FontHelper } from "./helpers/font_helper";
 import { EasyDate } from "./utils/date_format";
 import { register } from "./utils/router";
 import { info_log } from "./utils/info_log";
+
+const dev = process.env.NODE_ENV !== "production";
+const nextApp = next({ dev });
 export default class AppServer {
-  
   static info(text: string) {
     console.log(green(`     ${text}`));
   }
@@ -28,17 +31,23 @@ export default class AppServer {
   }
 
   run() {
-    const app = express();
-    app.use(cors());
-    // 静态文件托管
-    app.use(express.static(path.join(process.cwd(), "public")));
-    app.use(bodyParser.json());
-    app.use(register(routes));
-    // 监听端口
-    app.listen(AppSetting.port, () => {
-      console.clear();
-      info_log();
-      this.listen();
+    nextApp.prepare().then(() => {
+      const server = express();
+      server.use(cors());
+      // 静态文件托管
+      server.use(express.static(path.join(process.cwd(), "public")));
+      server.get("/pages/*", (req, res) => {
+        const handle = nextApp.getRequestHandler();
+        handle(req, res);
+      });
+      server.use(bodyParser.json());
+      // server.use(register(routes));
+      // 监听端口
+      server.listen(AppSetting.port, () => {
+        console.clear();
+        info_log();
+        this.listen();
+      });
     });
   }
 

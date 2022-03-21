@@ -4,22 +4,27 @@
  */
 
 import { ReactElement, useEffect, FC } from "react";
+import { useNavigate, useMatch } from "react-router-dom";
 import { RouteItem } from "dyl-plugins";
 import { ManageLayoutProps } from "../type";
 import className from "../style.scss";
-import LayoutPageHeader from "@/layouts/LayoutPageHeader";
+import PageHeader from "@/layouts/page-header";
 import ManageMenu from "./menu";
 import { imgFaviconIco } from "@/assets";
 import AppConfig from "@/app.config";
 
 const ManageLayout: FC<ManageLayoutProps> = ({
-  routes,
+  routes = [],
   path,
   children,
+  redirect,
 }: ManageLayoutProps): ReactElement => {
-  /** LifeCycle */
+  const navigate = useNavigate();
+  const match = useMatch(path || "");
   useEffect(() => {
-    // init
+    if (path && match && redirect && path !== redirect) {
+      navigate(redirect);
+    }
   }, []);
 
   /**
@@ -41,7 +46,7 @@ const ManageLayout: FC<ManageLayoutProps> = ({
   /** render */
   return (
     <div className={className["manageLayout"]}>
-      <LayoutPageHeader logo={imgFaviconIco} title={AppConfig.websiteName} />
+      <PageHeader logo={imgFaviconIco} title={AppConfig.websiteName} />
       <div className={className["manageLayout-main"]}>
         <ManageMenu
           routes={getRoutes(

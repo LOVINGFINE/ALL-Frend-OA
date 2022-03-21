@@ -17,7 +17,7 @@ export function reduceTreeSource(
   options: expendReducesOptions
 ) {
   const results: any[] = [];
-  const { expandKeys = [], childrenKey = "children", height, extra } = options;
+  const { expandKeys = [], childrenKey = "children", height } = options;
   const flatten = (data: any[], props: FlattenOptions) => {
     const length = data.length;
     const { level = 0, parentKey = null } = props;

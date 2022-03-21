@@ -1,5 +1,5 @@
-import 'package:server/plugins/_plugins.dart';
-import 'package:server/setting/status.dart';
+import 'package:server/plugins/mongod.dart';
+import 'package:server/app.setting.dart';
 
 class Auth {
   static MongodPlugin mongod = MongodPlugin('auth');
@@ -12,7 +12,7 @@ class Auth {
   }
 
   Future<AppStatus> create() async {
-    var hasKey = await mongod.find({'id': key});
+    var hasKey = await mongod.findById(key);
     if (hasKey != null) {
       await mongod.insert({'id': key, 'title': title, 'desc': desc});
       return AppStatus.OK;
@@ -31,7 +31,7 @@ class Auth {
   }
 
   Future<AppStatus> delete() async {
-    var hasKey = await mongod.find({'id': key});
+    var hasKey = await mongod.findById(key);
     if (hasKey != null) {
       await mongod.delate(key);
       return AppStatus.OK;
@@ -41,7 +41,7 @@ class Auth {
   }
 
   Future<AppStatus> update(options) async {
-    var hasKey = await mongod.find({'id': key});
+    var hasKey = await mongod.findById(key);
     if (hasKey != null) {
       await mongod.update(key, options);
       return AppStatus.OK;

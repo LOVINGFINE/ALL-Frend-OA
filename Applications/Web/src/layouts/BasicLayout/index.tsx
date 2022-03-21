@@ -3,20 +3,30 @@
  * layout
  */
 
-import { ReactElement, FC } from "react";
+import { ReactElement, FC, useEffect } from "react";
 import { BasicLayoutProps } from "../type";
 import className from "../style.scss";
-import LayoutPageHeader from "@/layouts/LayoutPageHeader";
+import { useNavigate, useMatch } from "react-router-dom";
+import PageHeader from "@/layouts/page-header";
 import { imgFaviconIco } from "@/assets";
 import AppConfig from "@/app.config";
 
 const BasicLayout: FC<BasicLayoutProps> = ({
   children,
+  redirect,
+  path,
 }: BasicLayoutProps): ReactElement => {
+  const navigate = useNavigate();
+  const match = useMatch(path || "");
+  useEffect(() => {
+    if (path && match && redirect && path !== redirect) {
+      navigate(redirect);
+    }
+  }, []);
   /** render */
   return (
     <div className={className["basicLayout"]}>
-      <LayoutPageHeader logo={imgFaviconIco} title={AppConfig.websiteName} />
+      <PageHeader logo={imgFaviconIco} title={AppConfig.websiteName} />
       <div className={className["basicLayout-contanier"]}>{children}</div>
     </div>
   );

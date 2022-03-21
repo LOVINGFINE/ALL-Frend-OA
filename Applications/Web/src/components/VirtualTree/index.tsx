@@ -2,7 +2,14 @@
  * Created by zhangq on 2022/03/09
  * 虚拟 滚动
  */
-import { ReactElement, FC, useEffect, useState, useRef } from "react";
+import {
+  ReactElement,
+  FC,
+  useEffect,
+  useState,
+  useRef,
+  Component,
+} from "react";
 import { reduceTreeSource } from "./utils";
 import "./VirtualTree.scss";
 import TreeList, { NodeProps } from "./TreeList";
@@ -32,21 +39,11 @@ const VirtualTree: FC<VirtualTreeProps> = ({
   nodeClick,
 }: VirtualTreeProps): ReactElement => {
   const { height = 32, extra = 10, childrenKey = "children" } = options;
-  const [treeData, setTreeData] = useState<any[]>([]);
   const [offsetHeight, setOffsetHeight] = useState(0);
   const [expandKeys, setExpendKeys] = useState<string[]>([]);
   const [scrollTop, setScrollTop] = useState(0);
   const wrapper = useRef(null);
 
-  const getTree = () => {
-    const targets = reduceTreeSource(dataSource, {
-      height,
-      extra,
-      expandKeys,
-      childrenKey,
-    });
-    return targets;
-  };
   const getConfig = (): { start: number; end: number; height: number } => {
     const start = scrollTop > height * extra ? scrollTop - height * extra : 0;
     const end = offsetHeight + extra * height * 2;
@@ -87,7 +84,12 @@ const VirtualTree: FC<VirtualTreeProps> = ({
       ref={wrapper}
     >
       <TreeList
-        dataSource={getTree()}
+        dataSource={reduceTreeSource(dataSource, {
+          height,
+          extra,
+          expandKeys,
+          childrenKey,
+        })}
         config={getConfig()}
         prefix={prefix}
         expand={expand}

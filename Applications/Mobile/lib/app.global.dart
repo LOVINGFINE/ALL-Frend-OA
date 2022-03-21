@@ -6,12 +6,13 @@ FlutterSecureStorage get storage => new FlutterSecureStorage();
 
 final serverManager = ServerManager().server;
 
-String AccessToken = '';
+String accessToken = '';
 
-class GlobalContext {
-  GlobalContext() {
-    AccessToken = readStoreageByKey('access-token');
+class AppStoreage {
+  AppStoreage() {
+    accessToken = readStoreageByKey('access-token');
   }
+
 // Read value
   readStoreageByKey(key) {
     return storage.read(key: key);

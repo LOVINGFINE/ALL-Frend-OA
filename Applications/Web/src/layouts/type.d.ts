@@ -1,6 +1,5 @@
-export interface ManageLayoutProps {
-  routes: DynamicRouteContext.RouteItem[];
-  path?: string;
+import { RouteItem } from "dyl-plugins";
+export interface ManageLayoutProps extends RouteItem {
   children?: React.ReactElement;
 }
 export interface ManageMenuProps {
@@ -8,6 +7,6 @@ export interface ManageMenuProps {
   basePath: string;
 }
 
-export interface BasicLayoutProps {
+export interface BasicLayoutProps extends RouteItem {
   children?: React.ReactElement;
 }

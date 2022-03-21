@@ -1,5 +1,5 @@
-import 'package:server/plugins/_plugins.dart';
-import 'package:server/setting/status.dart';
+import 'package:server/plugins/mongod.dart';
+import 'package:server/app.setting.dart';
 
 class Role {
   static MongodPlugin mongod = MongodPlugin('role');
@@ -32,7 +32,7 @@ class Role {
   }
 
   static Future<Map<String, dynamic>> get(String key) async {
-    var role = await mongod.find({'id': key});
+    var role = await mongod.findById(key);
     if (role != null) {
       return {
         'key': role['id'],
@@ -48,7 +48,7 @@ class Role {
   // create
   Future<AppStatus> create() async {
     // 查找用户
-    var hasUser = await mongod.find({'key': key});
+    var hasUser = await mongod.findById(key);
     if (hasUser == null) {
       return await mongod.insert(toMap());
     }
@@ -57,7 +57,7 @@ class Role {
 
   Future<AppStatus> update(Map<String, dynamic> options) async {
     // 查找用户
-    var hasUser = await mongod.find({'id': key});
+    var hasUser = await mongod.findById(key);
     if (hasUser != null) {
       Map auth = toMap();
       options.forEach((key, value) {
@@ -72,7 +72,7 @@ class Role {
 
   static Future<AppStatus> delete(String key) async {
     // 查找用户
-    var hasUser = await mongod.find({'id': key});
+    var hasUser = await mongod.findById(key);
     if (hasUser != null) {
       return await mongod.delate(key);
     }

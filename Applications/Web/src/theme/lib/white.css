@@ -7,7 +7,7 @@
   /* 字体 颜色 */
   --font-color-base: #333;
   --font-color-sec: #666;
-  --font-color-thr: #999;
+  --font-color-tip: #999;
 
   /* 提示 */
   --tip-color: #999;
@@ -17,7 +17,7 @@
 
   /* 背景色 */
   --bg-color: #fff;
-  --bg-color-opacity-hover: rgba(51, 51, 51, 0.08);
+  --bg-color-opacity-hover: #e6fffb2c;
   --bg-color-side: #f5f8f7;
   --bg-color-success: #f6ffed;
   --bg-color-warning: #fffbe6;

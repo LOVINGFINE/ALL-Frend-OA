@@ -3,7 +3,7 @@ import 'package:dart_server_helper/dart_server_helper.dart' show DioManager;
 import 'package:frend_mobile/app.global.dart';
 
 class ServerManager {
-  DioManager get server => DioManager(config);
+  DioManager server = DioManager(BaseOptions());
 
   BaseOptions config = BaseOptions(
       baseUrl: 'http://localhost:8080',
@@ -13,8 +13,9 @@ class ServerManager {
 
   ServerManager() {
     interceptor();
+    server = DioManager(config);
   }
   interceptor() {
-    config.headers['Access-Token'] = AccessToken;
+    config.headers['Access-Token'] = accessToken;
   }
 }
