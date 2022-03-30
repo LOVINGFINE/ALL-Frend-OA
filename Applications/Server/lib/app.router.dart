@@ -8,14 +8,13 @@ class RouteHelper {
     return await AccountHelper(request).register();
   }
 
-  @Route.post('/account/register') // 登录
+  @Route.post('/account/login') // 登录
   Future<Response> account_login(Request request) async {
     return await AccountHelper(request).login();
   }
 
   Router get router => _$RouteHelper(this);
 }
-
 
 Router _$RouteHelper(RouteHelper route) {
   final router = Router();

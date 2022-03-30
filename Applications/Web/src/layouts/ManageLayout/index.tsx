@@ -10,8 +10,8 @@ import { ManageLayoutProps } from "../type";
 import className from "../style.scss";
 import PageHeader from "@/layouts/page-header";
 import ManageMenu from "./menu";
-import { imgFaviconIco } from "@/assets";
-import AppConfig from "@/app.config";
+import { homeLogo } from "@/assets";
+import AppConfig from "@/app.setting";
 
 const ManageLayout: FC<ManageLayoutProps> = ({
   routes = [],
@@ -46,7 +46,7 @@ const ManageLayout: FC<ManageLayoutProps> = ({
   /** render */
   return (
     <div className={className["manageLayout"]}>
-      <PageHeader logo={imgFaviconIco} title={AppConfig.websiteName} />
+      <PageHeader logo={homeLogo} title={AppConfig.websiteName} />
       <div className={className["manageLayout-main"]}>
         <ManageMenu
           routes={getRoutes(

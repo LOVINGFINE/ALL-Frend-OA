@@ -34,7 +34,6 @@ class Authentication {
   static String generateKey(String userId) {
     var content = Utf8Encoder().convert(DateTime.now().toString() + userId);
     var digest = md5.convert(content);
-    // 这里其实就是 digest.toString()
     return hex.encode(digest.bytes);
   }
 }

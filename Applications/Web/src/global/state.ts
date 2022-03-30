@@ -3,6 +3,7 @@ import { StateProps } from "./index";
 const initState: StateProps = {
   theme: "white",
   locale: "zh-cn",
-  prefix: "dyl",
+  user: null,
+  dispatch: () => {},
 };
 export default initState;

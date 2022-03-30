@@ -11,6 +11,8 @@ import "./input.scss";
 export interface InputProps {
   value?: string | number;
   change?(e: any): void;
+  onEnter?(e: KeyboardEvent): void;
+  onBlur?(): void;
   size?: "default" | "small" | "large";
   perfix?: string;
   placeholder?: string;
@@ -21,10 +23,12 @@ const Input: FC<InputProps> = ({
   value = "",
   size = "default",
   change,
+  onBlur,
   perfix = "dyl",
   placeholder,
   width,
   style = {},
+  onEnter,
 }: InputProps): ReactElement => {
   const getStyle = () => {
     const obj = {
@@ -35,6 +39,12 @@ const Input: FC<InputProps> = ({
     }
     return obj;
   };
+  const onKeyDown = (e: KeyboardEvent) => {
+    const key = e.key;
+    if (key === "Enter" && onEnter) {
+      onEnter(e);
+    }
+  };
   /** render */
   return (
     <input
@@ -43,6 +53,8 @@ const Input: FC<InputProps> = ({
       placeholder={placeholder}
       style={getStyle()}
       value={value}
+      onBlur={onBlur}
+      onKeyDown={(e: any) => onKeyDown(e)}
       onChange={(e) => {
         const input = e.target.value || "";
         if (change) {

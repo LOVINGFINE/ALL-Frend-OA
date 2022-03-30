@@ -1,9 +1,8 @@
-import { ItemProps } from "./utils/router";
-import { FontHelper } from "./routes";
+import { FontHelper, ItemProps } from "./routes";
 
 const routes: ItemProps[] = [
   {
-    path: "/font",
+    path: "font",
     module: FontHelper,
   },
 ];

@@ -6,13 +6,27 @@ export interface ProviderType extends StateProps {
   dispatch<T>(key: string, data: T): void;
 }
 
+export interface UserProps {
+  avator: string;
+  description: string;
+  email: string;
+  id: string;
+  mobile: string;
+  nickname: string;
+  qrCode: { type: string; time: string };
+  role: "person";
+  setting: { background: string };
+}
 export interface StateProps {
   [key: string]: unknown;
+  dispatch: any;
   theme: ThemeType;
   locale: LocaleKey;
-  prefix: string;
+  user: UserProps | null;
 }
-const context = createContext(initGlobal);
+const initData: ProviderType = { ...initGlobal, dispatch: () => {} };
+
+const context = createContext(initData);
 
 export const GlobalContextProvider = ({
   children,

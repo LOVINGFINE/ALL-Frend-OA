@@ -7,23 +7,45 @@ export interface IconProps {
   fontSize?: number;
   color?: string;
   name?: string;
+  className?: string;
   prefix?: string;
+  onClick?(e: MouseEvent): void;
 }
 
 const Icon: FC<IconProps> = ({
-  fontSize = 14,
-  color = "var(--font-color-base)",
+  fontSize,
+  color,
   name,
+  className,
+  onClick,
   prefix = "dyl",
 }: IconProps): ReactElement => {
   const types = unicodes as any;
+  const getStyle = () => {
+    const temp: any = {};
+    if (fontSize) {
+      temp[""] = fontSize;
+    }
+    if (color) {
+      temp["color"] = color;
+    }
+    return temp;
+  };
+  const getClassName = () => {
+    if (className) {
+      return `${prefix}-icon-font ${className}`;
+    }
+    return `${prefix}-icon-font`;
+  };
   return (
     <i
-      className={`${prefix}-icon-font`}
-      style={{
-        fontSize,
-        color,
+      className={getClassName()}
+      onClick={(e: any) => {
+        if (onClick) {
+          onClick(e);
+        }
       }}
+      style={getStyle()}
     >
       {types[name || ""] || ""}
     </i>

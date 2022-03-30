@@ -4,8 +4,9 @@
  */
 import { ReactElement, FC, useEffect, useState } from "react";
 import className from "./style.scss";
-import { Button } from "@/components";
-import Input from "@/components/Input";
+import LoginForm from "./widgets/form";
+import AppSetting from "@/app.setting";
+
 const LoginPage: FC = (): ReactElement => {
   /** state */
   const [phone, setPhone] = useState<string>("");
@@ -22,15 +23,18 @@ const LoginPage: FC = (): ReactElement => {
 
   /** render */
   return (
-    <div className={className["login-page"]}>
-      <div className={className["login-page-logo"]}></div>
-      <div className={className["login-page-form"]}>
-        <Input
-          value={phone}
-          change={(e) => {
-            console.log(e);
-          }}
-        />
+    <div className={className["login"]}>
+      <div className={className["login-content"]}>
+        <div className={className["login-content-logo"]}>
+          <img
+            src={AppSetting.logo}
+            className={className["login-content-logo-img"]}
+          />
+        </div>
+        <span className={className["login-content-title"]}>
+          {AppSetting.websiteName}
+        </span>
+        <LoginForm />
       </div>
     </div>
   );

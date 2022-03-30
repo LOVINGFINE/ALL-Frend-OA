@@ -2,9 +2,11 @@
  * Created by zhangq on 2022/02/16
  * 表格 工具
  */
+
 import { ReactElement, FC, useEffect, useContext } from "react";
 import editorContext from "../../context";
 import className from "../../style.scss";
+import { Button } from "@/components";
 
 const EditorTable: FC = (): ReactElement => {
   const { dispatch } = useContext(editorContext);
@@ -15,10 +17,14 @@ const EditorTable: FC = (): ReactElement => {
   /**
    * @method
    */
-  const init = () => {};
+  const upload = () => {};
 
   /** render */
-  return <div className={className["top"]}></div>;
+  return (
+    <div className={className["top"]}>
+      <Button onClick={upload}>上传文件</Button>
+    </div>
+  );
 };
 
 export default EditorTable;

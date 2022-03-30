@@ -3,7 +3,7 @@ import { InitRequestProps } from "@/plugins/request/helper";
 import { interceptors, beforeRequest } from "./interceptor";
 
 const setting: InitRequestProps = {
-  BASE_PATH: "/",
+  BASE_PATH: "http://127.0.0.1:8080",
   interceptors,
   beforeRequest,
 };

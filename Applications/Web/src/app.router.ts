@@ -47,11 +47,6 @@ const routes: RouteItem[] = [
       },
     ],
   },
-  // {
-  //   path: "/",
-  //   exact: true,
-  //   redirect: "/homepage",
-  // },
 ];
 
 export default routes;

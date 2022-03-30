@@ -8,8 +8,8 @@ import { BasicLayoutProps } from "../type";
 import className from "../style.scss";
 import { useNavigate, useMatch } from "react-router-dom";
 import PageHeader from "@/layouts/page-header";
-import { imgFaviconIco } from "@/assets";
-import AppConfig from "@/app.config";
+import { homeLogo } from "@/assets";
+import AppConfig from "@/app.setting";
 
 const BasicLayout: FC<BasicLayoutProps> = ({
   children,
@@ -20,13 +20,13 @@ const BasicLayout: FC<BasicLayoutProps> = ({
   const match = useMatch(path || "");
   useEffect(() => {
     if (path && match && redirect && path !== redirect) {
-      navigate(redirect);
+      navigate(redirect, { replace: true });
     }
   }, []);
   /** render */
   return (
     <div className={className["basicLayout"]}>
-      <PageHeader logo={imgFaviconIco} title={AppConfig.websiteName} />
+      <PageHeader logo={homeLogo} title={AppConfig.websiteName} />
       <div className={className["basicLayout-contanier"]}>{children}</div>
     </div>
   );

@@ -10,6 +10,7 @@
 build
 
 # web
+dist_web
 node_modules
 package-lock.json
 yarn.lock
@@ -33,6 +34,7 @@ pubspec.lock
 # dev 
 .development
 .temp
+.next
 
 # dist output
 

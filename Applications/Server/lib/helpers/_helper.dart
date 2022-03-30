@@ -14,7 +14,11 @@ class DartServerHelper {
   Future<Map<String, dynamic>> getBody() async {
     // 获取body
     var body = await request.readAsString();
-    return jsonDecode(body);
+    try {
+      return jsonDecode(body);
+    } catch (e) {
+      return {};
+    }
   }
 
   dynamic getQueryByKey(String key) {

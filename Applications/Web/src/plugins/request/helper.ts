@@ -109,8 +109,10 @@ export class Request {
 
 export interface ActionType {
   path: string;
-  method?: string;
-  data?: string;
+  method?: "get" | "post" | "put" | "patch" | "delete" | "options";
+  data?: {
+    [key: string]: any;
+  };
 }
 
 export interface InitRequestProps {

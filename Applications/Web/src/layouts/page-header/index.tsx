@@ -6,10 +6,7 @@ import { ReactElement, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import className from "./style.scss";
 
-const PageHeader = ({
-  logo,
-  title,
-}: PageHeaderProps): ReactElement => {
+const PageHeader = ({ logo, title }: PageHeaderProps): ReactElement => {
   const basic = `page-header`;
   const navigate = useNavigate();
   /** LifeCycle */
@@ -27,10 +24,10 @@ const PageHeader = ({
   return (
     <div className={className[basic]}>
       <div className={className[`${basic}-left`]}>
-        {/* <div className={className[`${basic}-left-logo`]} onClick={home}>
+        <div className={className[`${basic}-left-logo`]} onClick={home}>
           <img src={logo} alt="" />
           {title && <span className={className["title"]}>{title}</span>}
-        </div> */}
+        </div>
       </div>
       <div className={className[`${basic}-right`]}></div>
     </div>

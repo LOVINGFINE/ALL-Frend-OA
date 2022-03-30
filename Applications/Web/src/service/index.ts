@@ -1,5 +1,1 @@
-const service = (): unknown => {
-  return "";
-};
-
-export default service;
+// export * from "./user";

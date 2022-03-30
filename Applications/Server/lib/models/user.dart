@@ -7,7 +7,7 @@ import 'package:server/app.setting.dart';
 class User {
   static final MongodPlugin mongod = MongodPlugin(APP_DB_USER);
   String id = '';
-  String username = '';
+  String nickname = '';
   String password = '';
   String mobile = '';
   String email = '';
@@ -21,7 +21,7 @@ class User {
     mobile = options['mobile'] ?? '';
     String optionPassword = generatePassword(password: options['password']);
     id = options['id'] ?? generateId(mobile + optionPassword);
-    username = options['username'] ?? generateId(mobile);
+    nickname = options['nickname'] ?? generateId(mobile);
     password = optionPassword;
     email = options['email'] ?? '';
     description = options['description'] ?? '';
@@ -33,7 +33,7 @@ class User {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'username': username,
+      'nickname': nickname,
       'mobile': mobile,
       'role': role,
       'email': email,
@@ -48,7 +48,7 @@ class User {
     return {
       'id': id,
       'password': password,
-      'username': username,
+      'nickname': nickname,
       'mobile': mobile,
       'role': role,
       'email': email,

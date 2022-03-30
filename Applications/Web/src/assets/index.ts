@@ -1,7 +1,7 @@
-import imgFaviconIco from "./img/favicon.ico";
+import homeLogo from "./img/logo.png";
 
-export { default as imgFaviconIco } from "./img/favicon.ico";
+export { default as homeLogo } from "./img/logo.png";
 
 export default {
-  imgFaviconIco,
+  homeLogo,
 };

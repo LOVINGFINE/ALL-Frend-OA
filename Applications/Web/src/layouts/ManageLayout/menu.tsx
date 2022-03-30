@@ -2,7 +2,7 @@
  * Created by zhangq on 2021/11/25
  *
  */
-import { ReactElement, FC, useEffect, useState } from "react";
+import { ReactElement, FC } from "react";
 import { RouteItem } from "dyl-plugins";
 import { ManageMenuProps } from "../type";
 import { useLocation, useNavigate } from "react-router-dom";

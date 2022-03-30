@@ -1,14 +1,14 @@
-import next from "next";
 import bodyParser from "body-parser";
+import next from "next";
 import { blue, green, red, yellow } from "colors-cli";
 import cors from "cors";
 import express from "express";
 import path from "path";
 import routes from "./app.routes";
 import { AppSetting } from "./app.setting";
-import { FontHelper } from "./helpers/font_helper";
+import fontHelper from "./utils/font";
 import { EasyDate } from "./utils/date_format";
-import { register } from "./utils/router";
+import { register } from "./routes/index";
 import { info_log } from "./utils/info_log";
 
 const dev = process.env.NODE_ENV !== "production";
@@ -33,15 +33,24 @@ export default class AppServer {
   run() {
     nextApp.prepare().then(() => {
       const server = express();
+      const nextAppHandle = nextApp.getRequestHandler();
       server.use(cors());
       // 静态文件托管
-      server.use(express.static(path.join(process.cwd(), "public")));
-      server.get("/pages/*", (req, res) => {
-        const handle = nextApp.getRequestHandler();
-        handle(req, res);
-      });
       server.use(bodyParser.json());
-      // server.use(register(routes));
+      server.use(express.static(path.join(process.cwd(), "public")));
+      server.use(
+        "svg",
+        express.static(path.join(process.cwd(), "public/.svg"))
+      );
+      server.get("*", (req, res, next) => {
+        if (req.method === "GET" && req.path.indexOf("/api") === -1) {
+          nextAppHandle(req, res);
+        } else {
+          next();
+        }
+      });
+      server.use(register(routes));
+
       // 监听端口
       server.listen(AppSetting.port, () => {
         console.clear();
@@ -52,6 +61,6 @@ export default class AppServer {
   }
 
   listen() {
-    FontHelper.init();
+    fontHelper();
   }
 }
