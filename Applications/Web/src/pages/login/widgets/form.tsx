@@ -5,7 +5,7 @@
 import { ReactElement, FC, useEffect, useState, useContext } from "react";
 import className from "../style.scss";
 import { useNavigate } from "react-router-dom";
-import { Button, Input, message } from "@/components";
+import { Button, Input, message } from "dyl-design";
 import { userLogin } from "@/service/user";
 import globalContext from "@/global";
 /**

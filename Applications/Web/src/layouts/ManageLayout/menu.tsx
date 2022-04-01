@@ -6,8 +6,8 @@ import { ReactElement, FC } from "react";
 import { RouteItem } from "dyl-plugins";
 import { ManageMenuProps } from "../type";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu } from "@/components";
-import { MenuItemType } from "@/components/Menu";
+import { Menu } from "dyl-design";
+import { MenuItemType } from "dyl-design/lib/Menu";
 import className from "../style.scss";
 
 const getMenuItmes = (list: RouteItem[]): MenuItemType[] => {

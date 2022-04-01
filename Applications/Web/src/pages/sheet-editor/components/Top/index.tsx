@@ -6,7 +6,7 @@
 import { ReactElement, FC, useEffect, useContext } from "react";
 import editorContext from "../../context";
 import className from "../../style.scss";
-import { Button } from "@/components";
+import { Button } from "dyl-design";
 
 const EditorTable: FC = (): ReactElement => {
   const { dispatch } = useContext(editorContext);

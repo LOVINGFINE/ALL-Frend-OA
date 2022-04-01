@@ -13,7 +13,7 @@ interface FontConfigProps {
 const setting: FontConfigProps = {
   "font-name": "all-frend-oa-font",
   "svg-files-path": "public/.svg",
-  "font-dist-path": resolve(process.cwd(), ".development/fonts"),
+  "font-dist-path": resolve(process.cwd(), "src/public/fonts"),
 };
 
 class DocumentItem {

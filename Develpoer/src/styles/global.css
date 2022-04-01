@@ -1,5 +1,3 @@
-@import url("./font_page.css");
-
 html,
 body,
 #root {
@@ -22,4 +20,16 @@ li {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+@font-face {
+  font-family: "all-frend-oa-font";
+  src: url("../../public/fonts/all-frend-oa-font.eot?t=1643192025160#iefix")
+      format("embedded-opentype"),
+    url("../../public/fonts/all-frend-oa-font.woff2?t=1643192025160")
+      format("woff2"),
+    url("../../public/fonts/all-frend-oa-font.woff?t=1643192025160")
+      format("woff"),
+    url("../../public/fonts/all-frend-oa-font.ttf?t=1643192025160")
+      format("truetype");
 }

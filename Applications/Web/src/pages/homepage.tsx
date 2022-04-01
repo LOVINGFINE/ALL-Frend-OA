@@ -1,6 +1,7 @@
 import { ReactElement, FC, useState, useEffect } from "react";
 import className from "./homepage.scss";
 import { getTempListImg } from "@/__test__/tree";
+import { Button } from "dyl-design";
 const HomePage: FC = (): ReactElement => {
   const [visible, setVisible] = useState(false);
   const [input, setInput] = useState("");
@@ -13,7 +14,9 @@ const HomePage: FC = (): ReactElement => {
           background: "#fff",
           margin: "0 auto",
         }}
-      ></div>
+      >
+        <Button>1111</Button>
+      </div>
     </div>
   );
 };

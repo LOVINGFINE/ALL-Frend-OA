@@ -4,7 +4,7 @@
  */
 import { ReactElement } from "react";
 import className from "./analysis.scss";
-import { Button } from "@/components";
+import { Button } from "dyl-design";
 const AnalysisPage = (): ReactElement => {
   /** render */
   return (
