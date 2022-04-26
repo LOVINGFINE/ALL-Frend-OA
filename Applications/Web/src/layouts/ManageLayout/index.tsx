@@ -6,9 +6,8 @@
 import { ReactElement, useEffect, FC } from "react";
 import { useNavigate, useMatch } from "react-router-dom";
 import { RouteItem } from "dyl-plugins";
-import { ManageLayoutProps } from "../type";
 import className from "../style.scss";
-import PageHeader from "@/layouts/page-header";
+import PageHeader from "@/components/PageHeader";
 import ManageMenu from "./menu";
 import { homeLogo } from "@/assets";
 import AppConfig from "@/app.setting";
@@ -17,16 +16,7 @@ const ManageLayout: FC<ManageLayoutProps> = ({
   routes = [],
   path,
   children,
-  redirect,
 }: ManageLayoutProps): ReactElement => {
-  const navigate = useNavigate();
-  const match = useMatch(path || "");
-  useEffect(() => {
-    if (path && match && redirect && path !== redirect) {
-      navigate(redirect);
-    }
-  }, []);
-
   /**
    * @method
    */
@@ -65,4 +55,7 @@ const ManageLayout: FC<ManageLayoutProps> = ({
   );
 };
 
+export interface ManageLayoutProps extends RouteItem {
+  children?: React.ReactElement;
+}
 export default ManageLayout;

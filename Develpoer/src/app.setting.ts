@@ -3,8 +3,10 @@ export enum AppStatus {
   ERROR,
 }
 
+export type MongoCollection = "font_unicodes";
+
 export class AppSetting {
-  static APIPATH = "/api/";
+  static APIPATH = "/api";
   static port = 9999;
   static host = "127.0.0.1";
   static get LOCAL_IP() {

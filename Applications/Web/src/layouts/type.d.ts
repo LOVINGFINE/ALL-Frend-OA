@@ -3,10 +3,6 @@ export interface ManageLayoutProps extends RouteItem {
   children?: React.ReactElement;
 }
 export interface ManageMenuProps {
-  routes: DynamicRouteContext.RouteItem[];
+  routes: RouteItem[];
   basePath: string;
-}
-
-export interface BasicLayoutProps extends RouteItem {
-  children?: React.ReactElement;
 }

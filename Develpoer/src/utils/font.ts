@@ -1,7 +1,7 @@
 import fs from "fs";
 import { resolve } from "path";
 import svgToFont from "svgtofont";
-import { EasyDate } from "./date_format";
+import { EasyDate } from "./esay_date";
 import { remove_dir } from "./file";
 import AppServer from "../app";
 interface FontConfigProps {
@@ -12,8 +12,8 @@ interface FontConfigProps {
 
 const setting: FontConfigProps = {
   "font-name": "all-frend-oa-font",
-  "svg-files-path": "public/.svg",
-  "font-dist-path": resolve(process.cwd(), "src/public/fonts"),
+  "svg-files-path": "src/static/svg",
+  "font-dist-path": resolve(process.cwd(), "src/static/style/fonts"),
 };
 
 class DocumentItem {
@@ -56,7 +56,17 @@ const getItemByStyle = (key: string) => {
   }
   return target;
 };
-const fontHelper = async (key?: string) => {
+const getStyleString = (base64: string) => {
+  return `@font-face {
+    font-family: "${setting["font-name"]}";
+    src: url("data:font/ttf;charset=utf-8;base64,${base64}")
+      format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }`;
+};
+const transformFont = async (key?: string) => {
   try {
     const temp = console.log;
     console.log = () => {};
@@ -88,6 +98,20 @@ const fontHelper = async (key?: string) => {
         fs.unlinkSync(`${setting["font-dist-path"]}/${file}`);
       }
     });
+    fs.readFile(
+      `${setting["font-dist-path"]}/${setting["font-name"]}.ttf`,
+      (err, res) => {
+        if (!err) {
+          const base64 = res.toString("base64");
+          const str = getStyleString(base64);
+          fs.writeFileSync(
+            resolve(__dirname, `../static/style/iconfont.css`),
+            str
+          );
+          remove_dir(resolve(__dirname, "../static/style/fonts"));
+        }
+      }
+    );
     if (!key) {
       AppServer.print("font files init success");
     }
@@ -99,4 +123,4 @@ const fontHelper = async (key?: string) => {
   }
 };
 
-export default fontHelper;
+export default transformFont;

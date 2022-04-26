@@ -1,7 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 
-export const remove_dir = (dir: string) => {
+export function remove_dir(dir: string) {
   const files = fs.readdirSync(dir);
   for (let i = 0; i < files.length; i++) {
     let newPath = join(dir, files[i]);
@@ -14,10 +14,10 @@ export const remove_dir = (dir: string) => {
       fs.unlinkSync(newPath);
     }
   }
-  fs.rmdirSync(dir); //如果文件夹是空的，就将自己删除掉
-};
+  fs.rmdirSync(dir);
+}
 
-export const cp_dir = ({ dir, target }: { dir: string; target: string }) => {
+export async function cp_dir({ dir, target }: { dir: string; target: string }) {
   return new Promise<void>((res, rej) => {
     try {
       const files = fs.readdirSync(dir);
@@ -31,4 +31,4 @@ export const cp_dir = ({ dir, target }: { dir: string; target: string }) => {
       rej(e);
     }
   });
-};
+}

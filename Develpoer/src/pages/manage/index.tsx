@@ -2,31 +2,18 @@
  * Created by zhangq on 2022/03/30
  *
  */
-import { ReactElement, FC, useEffect, useState } from "react";
-import className from "../../styles/style.module.scss";
+import { ReactElement, FC } from "react";
+import Head from "next/head";
 
-/**
- * @interface props
- */
-export interface indexProps {
-  children?: ReactElement;
-}
-const index: FC<indexProps> = ({ children }: indexProps): ReactElement => {
-  /** state */
-  const [tep, setTep] = useState<string>("");
-
-  /** LifeCycle */
-  useEffect(() => {
-    // init
-  }, []);
-
-  /**
-   * @method
-   */
-  const init = () => {};
-
+const MangePage: FC = (): ReactElement => {
   /** render */
-  return <div className={className["manage"]}></div>;
+  return (
+    <div>
+      <Head>
+        <title>管理页</title>
+      </Head>
+    </div>
+  );
 };
 
-export default index;
+export default MangePage;

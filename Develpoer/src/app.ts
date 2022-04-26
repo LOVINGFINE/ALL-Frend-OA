@@ -4,12 +4,11 @@ import { blue, green, red, yellow } from "colors-cli";
 import cors from "cors";
 import express from "express";
 import path from "path";
-import routes from "./app.routes";
+import service from "./service";
+import routes from "./app.router";
 import { AppSetting } from "./app.setting";
-import fontHelper from "./utils/font";
-import { EasyDate } from "./utils/date_format";
-import { register } from "./routes/index";
-import { info_log } from "./utils/info_log";
+import { EasyDate } from "./utils/esay_date";
+import transformFont from "./utils/font";
 
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
@@ -38,29 +37,23 @@ export default class AppServer {
       // 静态文件托管
       server.use(bodyParser.json());
       server.use(express.static(path.join(process.cwd(), "public")));
-      server.use(
-        "svg",
-        express.static(path.join(process.cwd(), "public/.svg"))
-      );
-      server.get("*", (req, res, next) => {
-        if (req.method === "GET" && req.path.indexOf("/api") === -1) {
-          nextAppHandle(req, res);
-        } else {
-          next();
-        }
+      // next
+      routes.forEach((ele) => {
+        server.get(ele.path, (req, res) => {
+          return nextApp.render(req, res, ele.component);
+        });
       });
-      server.use(register(routes));
 
+      server.use(service);
       // 监听端口
-      server.listen(AppSetting.port, () => {
+      const { LOCAL_IP, port, host } = AppSetting;
+      server.listen(port, () => {
         console.clear();
-        info_log();
-        this.listen();
+        AppServer.info(
+          `IP: http://${LOCAL_IP}:${port}           Local: http://${host}:${port} `
+        );
+        transformFont();
       });
     });
-  }
-
-  listen() {
-    fontHelper();
   }
 }

@@ -1,0 +1,250 @@
+{
+  "aa-0": {
+    "id": "aa-0",
+    "code": "AA0",
+    "title": "文本",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "Text",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PICTURE",
+        "size": 100
+      }
+    }
+  },
+  "aa-1": {
+    "id": "aa-1",
+    "code": "AA1",
+    "title": "数字",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "Number",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PIC",
+        "size": 100
+      }
+    }
+  },
+  "aa-2": {
+    "id": "aa-2",
+    "code": "AA2",
+    "title": "百分比",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "Percent",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PICTURE",
+        "size": 100
+      }
+    }
+  },
+  "aa-3": {
+    "id": "aa-3",
+    "code": "AA3",
+    "title": "Boolean值",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "Boolean",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PICTURE",
+        "size": 100
+      }
+    }
+  },
+  "aa-4": {
+    "id": "aa-4",
+    "code": "AA4",
+    "title": "时间",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "Date",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PICTURE",
+        "size": 100
+      }
+    }
+  },
+  "aa-5": {
+    "id": "aa-5",
+    "code": "AA5",
+    "title": "二维码",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "QrCode",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PICTURE",
+        "size": 100
+      }
+    }
+  },
+  "aa-6": {
+    "id": "aa-6",
+    "code": "AA6",
+    "title": "单选",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "Options",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PICTURE",
+        "size": 100
+      }
+    }
+  },
+  "aa-7": {
+    "id": "aa-7",
+    "code": "AA7",
+    "title": "文件",
+    "width": 220,
+    "formula": {
+      "value": "",
+      "html": ""
+    },
+    "type": "File",
+    "meta": {
+      "Text": {},
+      "Boolean": {},
+      "Number": {
+        "decimal": "auto",
+        "unit": "none"
+      },
+      "Percent": {
+        "decimal": "auto"
+      },
+      "Date": {
+        "format": "YYYY-MM-DD HH:mm:ss"
+      },
+      "Options": [],
+      "File": {},
+      "QrCode": {
+        "type": "PICTURE",
+        "size": 100
+      }
+    }
+  }
+}

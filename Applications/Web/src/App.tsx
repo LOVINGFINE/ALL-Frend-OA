@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { DynamicRouteProvider } from "dyl-plugins";
 import { GlobalContextProvider } from "@/global";
 import { LocaleContextProvider } from "./locales";
+
 import routes from "./app.router";
 const App = (): ReactElement => {
   /** render */

@@ -22,7 +22,7 @@ const EditorTable: FC = (): ReactElement => {
   /** render */
   return (
     <div className={className["top"]}>
-      <Button onClick={upload}>上传文件</Button>
+      {/* <Button onClick={upload}>上传文件</Button> */}
     </div>
   );
 };

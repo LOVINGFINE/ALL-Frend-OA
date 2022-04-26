@@ -1,0 +1,40 @@
+.manage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  padding-top: 60px;
+  background-color: #f8f8f8;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  &-top {
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px #f8f8f8;
+  }
+  &-menu {
+    width: 280px;
+    height: 100%;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+    background-color: #fff;
+  }
+  &-main {
+    flex: 1;
+    height: 100%;
+    overflow: auto;
+    padding: 30px;
+    box-sizing: border-box;
+    &-card {
+      width: 100%;
+      min-height: 100%;
+      background-color: #fff;
+    }
+  }
+}

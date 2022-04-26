@@ -32,6 +32,7 @@ export const getCodeByNumber = (index: number): string => {
   }
   return target;
 };
+
 export class Colunm {
   constructor(props: ColunmProps) {
     const { title, type, width, index, code } = props;
@@ -80,6 +81,7 @@ export class Colunm {
       this.width = data;
     }
   }
+  
   setOptions(options: any[]) {
     this.options = options.map((ele) => {
       return {

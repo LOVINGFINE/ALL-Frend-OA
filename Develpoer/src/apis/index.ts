@@ -1,8 +1,9 @@
-import { request } from "../utils/request";
+import { request } from "../plugins";
+import { FontItemType } from "../interface";
 
-export const getFontUnicodes = () => {
-  return request("/api/font");
-};
+export function getFontUnicodes() {
+  return request<FontItemType[]>("/fonts");
+}
 
 export const postFontSvg = () => {
   return request("/api/font", {

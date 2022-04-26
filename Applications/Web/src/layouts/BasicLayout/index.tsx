@@ -3,26 +3,17 @@
  * layout
  */
 
-import { ReactElement, FC, useEffect } from "react";
-import { BasicLayoutProps } from "../type";
+import { ReactElement, FC } from "react";
+import { RouteItem } from "dyl-plugins";
 import className from "../style.scss";
-import { useNavigate, useMatch } from "react-router-dom";
-import PageHeader from "@/layouts/page-header";
+import PageHeader from "@/components/PageHeader";
 import { homeLogo } from "@/assets";
 import AppConfig from "@/app.setting";
+import { useNavigate } from "react-router-dom";
 
 const BasicLayout: FC<BasicLayoutProps> = ({
   children,
-  redirect,
-  path,
 }: BasicLayoutProps): ReactElement => {
-  const navigate = useNavigate();
-  const match = useMatch(path || "");
-  useEffect(() => {
-    if (path && match && redirect && path !== redirect) {
-      navigate(redirect, { replace: true });
-    }
-  }, []);
   /** render */
   return (
     <div className={className["basicLayout"]}>
@@ -31,5 +22,9 @@ const BasicLayout: FC<BasicLayoutProps> = ({
     </div>
   );
 };
+
+export interface BasicLayoutProps extends RouteItem {
+  children?: React.ReactElement;
+}
 
 export default BasicLayout;
