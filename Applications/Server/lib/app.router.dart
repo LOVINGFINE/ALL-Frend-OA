@@ -1,7 +1,7 @@
 import 'package:server/helpers/_helper.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-
+import './service/account.dart';
 class RouteHelper {
   @Route.post('/account/register') // 用户注册
   Future<Response> account_register(Request request) async {

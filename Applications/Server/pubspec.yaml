@@ -12,6 +12,7 @@ dependencies:
   shelf: ^1.2.0
   shelf_router: ^1.1.2
   shelf_cors_headers: ^0.1.2
+  shelf_web_socket: ^1.0.1
 
 dev_dependencies:
   shelf_router_generator: ^1.0.1
