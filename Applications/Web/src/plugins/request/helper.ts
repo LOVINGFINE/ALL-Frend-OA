@@ -67,26 +67,24 @@ export class Request {
 
   private axios: AxiosStatic;
 
-  public send(
-    props: string | ActionType | Array<ActionType>
-  ): Promise<unknown> {
+  public send<T>(props: string | ActionType): Promise<T> {
     if (typeof props === "string") {
       return axios.get(props);
     }
-    if (props instanceof Array) {
-      return new Promise((resolve, reject) => {
-        axios
-          .all(props.map((ele) => this.send(ele)))
-          .then(
-            axios.spread((...theArgs) => {
-              resolve([...theArgs]);
-            })
-          )
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    }
+    // if (props instanceof Array) {
+    //   return new Promise((resolve, reject) => {
+    //     axios
+    //       .all(props.map((ele) => this.send<T>(ele)))
+    //       .then(
+    //         axios.spread((...theArgs) => {
+    //           resolve([...theArgs] as T);
+    //         })
+    //       )
+    //       .catch((error) => {
+    //         reject(error);
+    //       });
+    //   });
+    // }
     const { path, method, data }: ActionType = props;
     switch (method) {
       case "get":

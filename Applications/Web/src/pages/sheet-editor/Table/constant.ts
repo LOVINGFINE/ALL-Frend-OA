@@ -123,3 +123,4 @@ export class Colunm {
     this.meta[key] = payload;
   }
 }
+

@@ -17,6 +17,8 @@ export const beforeRequest = {
  * */
 export const interceptors = {
   success: (response: AxiosResponse): Promise<unknown> => {
+    console.log(response);
+
     return Promise.resolve(response || {});
     // const { status, data } = response;
     // console.log(response);

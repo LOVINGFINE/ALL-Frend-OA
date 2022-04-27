@@ -4,7 +4,7 @@
  */
 import { ReactElement, FC, useState, useEffect } from "react";
 import className from "./style.scss";
-import { getSheetHeaders, getSheetEntries } from "@/service";
+import { getSheet } from "@/service";
 import { EditorContextProvider } from "./context";
 import MetaTable from "./Table";
 import Top from "./components/Top";
@@ -15,13 +15,13 @@ const SheetEditor: FC = (): ReactElement => {
   const [entries, setEntries] = useState<SheetEntry[]>([]);
 
   useEffect(() => {
-    const sheetId = "lf-sheet-AA123456";
-    getSheetHeaders(sheetId).then((res) => {
-      setHeaders(res);
+    const sheetId = "1D6E08787455399B075E76677E428EAA";
+    getSheet(sheetId).then((res) => {
+      setHeaders(res.columns);
     });
-    getSheetEntries(sheetId, { page: 1, pageSize: 50 }).then((res) => {
-      setEntries(res.list);
-    });
+    // getSheetEntries(sheetId, { page: 1, pageSize: 50 }).then((res) => {
+    //   setEntries(res.list);
+    // });
   }, []);
 
   return (

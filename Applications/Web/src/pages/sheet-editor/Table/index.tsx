@@ -25,7 +25,7 @@ const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
     height: 0,
   });
 
-  const displayStyle = getDisplayStyle(colunms, props.entries.length);
+  const ulStyle = getDisplayStyle(colunms, props.entries.length);
   const displayColunms = transformVcColunm(colunms, {
     scrollTo,
     extra: 5,
@@ -76,12 +76,16 @@ const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
       onScroll={onScroll}
       ref={tableDisplayRef}
     >
-      <ul className={className["table"]} style={{ ...displayStyle }}>
+      <ul className={className["table"]} style={{ ...ulStyle }}>
         {displayColunms.map((col) => {
           return (
             <li
               key={col.id}
-              className={className["table-col"]}
+              className={
+                display.width > ulStyle.width
+                  ? className["table-col-right"]
+                  : className["table-col"]
+              }
               style={{
                 width: col.width,
               }}
@@ -89,7 +93,7 @@ const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
               <div
                 className={className["table-top"]}
                 style={{
-                  width: col.width,
+                  width: col.width - 1,
                 }}
               >
                 <ColunmItem colunm={col} />

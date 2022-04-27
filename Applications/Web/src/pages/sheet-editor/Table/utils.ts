@@ -27,7 +27,7 @@ export const getDisplayStyle = (colunms: Colunm[], row: number) => {
     width += ele.width;
   });
   return {
-    width,
+    width: !!width ? width : 64,
     height: row * 40,
   };
 };

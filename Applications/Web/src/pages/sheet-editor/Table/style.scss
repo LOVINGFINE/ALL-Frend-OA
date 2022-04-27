@@ -16,14 +16,21 @@ $table-fixed-height: 64px;
     box-sizing: border-box;
     position: sticky;
     top: 0;
-    width: 100%;
+    box-sizing: border-box;
     background-color: var(--bg-color);
   }
   &-col {
+    box-sizing: border-box;
+    min-height: 64px;
     border-right: 1px solid var(--border-color);
     &:last-child {
-      border-right: none;
+      border-right: none !important;
     }
+  }
+  &-col-right {
+    box-sizing: border-box;
+    min-height: 64px;
+    border-right: 1px solid var(--border-color);
   }
   &-row {
     border-bottom: 1px solid var(--border-color);

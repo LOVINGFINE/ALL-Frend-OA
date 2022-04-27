@@ -3,6 +3,8 @@ export interface Sheet {
   code: string;
   name: string;
   createTime: string;
+  updateTime: string;
+  columns: SheetHeader[];
 }
 
 export type MetaType =
