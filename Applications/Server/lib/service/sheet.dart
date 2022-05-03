@@ -143,11 +143,14 @@ class SheetService {
   @Route.get('/sheets/<id>/entries') // 获取表格 数据
   Future<Response> getSheetEntries(Request request, String id) async {
     RequestHelper helper = RequestHelper(request);
+    var page = int.parse(helper.querys['page'] ?? '1');
+    var pageSize = int.parse(helper.querys['pageSize'] ?? '30');
     Sheet sheet = Sheet();
     var data = await sheetDb.findById(id);
     if (data != null) {
       sheet.fromJson(data);
-      return helper.response(200, body: sheet.getRecordsByPage());
+      return helper.response(200,
+          body: sheet.getRecordsByPage(page: page, pageSize: pageSize));
     }
     return helper.response(400, body: {'message': 'sheet $id is notFound'});
   }

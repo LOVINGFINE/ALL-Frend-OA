@@ -1,25 +1,6 @@
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:server/app.setting.dart';
 
-class ModelInfo<T> {
-  T data;
-  ModelInfo(this.data);
-
-  static dynamic generateOBJ<T>(json) {
-    if (json == null) {
-      return null;
-    } else {
-      return json as T;
-    }
-  }
-
-  factory ModelInfo.fromJson(json) {
-    return ModelInfo(
-      generateOBJ<T>(json),
-    );
-  }
-}
-
 class MongodPlugin {
   DbCollection? document;
 
@@ -27,8 +8,15 @@ class MongodPlugin {
     document = APP_MONGODB.collection(name);
   }
 
+  Future awaitOpen() async {
+    if (!(APP_MONGODB.state == State.OPENING ||
+        APP_MONGODB.state == State.OPEN)) {
+      await APP_MONGODB.open();
+    }
+  }
+
   Future<AppStatus> insert(Map<String, dynamic> data) async {
-    await APP_MONGODB.open();
+    await awaitOpen();
     WriteResult? one = await document?.insertOne(data);
     await APP_MONGODB.close();
     if (one is WriteResult) {
@@ -40,18 +28,16 @@ class MongodPlugin {
 
   Future<Map<String, dynamic>?> findById(String id, {fieldName}) async {
     String idKey = fieldName ?? 'id';
-    await APP_MONGODB.open();
+    await awaitOpen();
     Map<String, dynamic>? res =
         await document?.findOne(where.eq(idKey, id).excludeFields(['_id']));
-    await APP_MONGODB.close();
     return res;
   }
 
   Future<AppStatus> update(String id, Map data) async {
-    await APP_MONGODB.open();
+    await awaitOpen();
     Map<String, dynamic>? res =
         await document?.update(where.eq('id', id), data);
-    await APP_MONGODB.close();
     if (res is Map<String, dynamic>) {
       return AppStatus.OK;
     } else {
@@ -60,23 +46,23 @@ class MongodPlugin {
   }
 
   Future<AppStatus> delate(String id) async {
-    await APP_MONGODB.open();
+    await awaitOpen();
     await document?.deleteOne(where.eq('id', id));
-    await APP_MONGODB.close();
+
     return AppStatus.OK;
   }
 
   Future<List<Map<String, dynamic>>> findBy(Map<String, dynamic> map) async {
-    await APP_MONGODB.open();
+    await awaitOpen();
     List<Map<String, dynamic>>? res = await document?.find(map).toList();
     await APP_MONGODB.close();
     return res ?? [];
   }
 
   Future<List<Map<String, dynamic>>> findAll() async {
-    await APP_MONGODB.open();
+    await awaitOpen();
     List<Map<String, dynamic>>? res = await document?.find().toList();
-    await APP_MONGODB.close();
+
     return res ?? [];
   }
 }
