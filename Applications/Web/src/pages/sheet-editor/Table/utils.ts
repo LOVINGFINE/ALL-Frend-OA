@@ -28,6 +28,6 @@ export const getDisplayStyle = (colunms: Colunm[], row: number) => {
   });
   return {
     width: !!width ? width : 64,
-    height: row * 40,
+    height: row * 40 + 64,
   };
 };

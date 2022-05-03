@@ -80,20 +80,20 @@ class Sheet {
     }
   }
 
-  Column? updateColumn(String id, {options}) {
+  Map? updateColumn(String id, {options}) {
     var col;
-    columns.map((ele) {
-      if (id == ele.id) {
+    for (int i = 0; i < columns.length; i++) {
+      if (id == columns[i]['id']) {
         if (options['title'] != null) {
-          ele.title = options['title'];
+          columns[i]['title'] = options['title'];
         }
         if (options['type'] != null && MetaType.isMetaType(options['type'])) {
-          ele.type = options['type'];
+          columns[i]['type'] = options['type'];
         }
+        col = columns[i];
+        break;
       }
-      col = ele;
-      return ele;
-    });
+    }
     return col;
   }
 
@@ -122,7 +122,8 @@ class Sheet {
     List<SheetEntry> list = [];
     data.forEach((ele) {
       var entry = SheetEntry(
-          generateKey(value: 'LF-sheet-entry-$id-${DateTime.now()}'));
+          generateKey(value: 'LF-sheet-entry-$id-${DateTime.now()}')
+              .substring(0, 11));
       entry.fromJson(ele, columns);
       list.add(entry);
 
@@ -162,7 +163,7 @@ class Column {
   Meta meta = Meta();
 
   fromJson(Map params) {
-    id = params['id'] ?? generateKey(value: 'LF-sheet-$code');
+    id = params['id'] ?? generateKey(value: 'LF-sheet-$code').substring(0, 11);
     if (params['type'] != null && MetaType.isMetaType(params['type'])) {
       type = params['type'];
     }

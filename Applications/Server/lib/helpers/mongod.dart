@@ -18,7 +18,6 @@ class MongodPlugin {
   Future<AppStatus> insert(Map<String, dynamic> data) async {
     await awaitOpen();
     WriteResult? one = await document?.insertOne(data);
-    await APP_MONGODB.close();
     if (one is WriteResult) {
       return AppStatus.OK;
     } else {
@@ -48,7 +47,6 @@ class MongodPlugin {
   Future<AppStatus> delate(String id) async {
     await awaitOpen();
     await document?.deleteOne(where.eq('id', id));
-
     return AppStatus.OK;
   }
 
@@ -62,7 +60,6 @@ class MongodPlugin {
   Future<List<Map<String, dynamic>>> findAll() async {
     await awaitOpen();
     List<Map<String, dynamic>>? res = await document?.find().toList();
-
     return res ?? [];
   }
 }

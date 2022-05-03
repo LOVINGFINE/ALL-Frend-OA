@@ -42,7 +42,7 @@ export class Colunm {
   type: MetaType = "Text";
   title = "";
 
-  getValue(text: SheetRecordValue) {
+  getValue(text: SheetRecordValue): SheetRecordValue {
     switch (this.type) {
       case "Boolean":
         return text.toString();
@@ -52,13 +52,13 @@ export class Colunm {
             return JSON.parse(text);
           } catch (_) {
             return {
-              text: "",
+              value: "",
               title: "",
             };
           }
         } else {
           return {
-            text: "",
+            value: "",
             title: "",
           };
         }
@@ -69,14 +69,14 @@ export class Colunm {
             return JSON.parse(text);
           } catch (_) {
             return {
-              link: "",
+              url: "",
               filename: "",
               type: "",
             };
           }
         } else {
           return {
-            link: "",
+            url: "",
             filename: "",
             type: "",
           };
@@ -87,7 +87,7 @@ export class Colunm {
     }
   }
 
-  getText(text: SheetRecordValue) {
+  getLabel(text: SheetRecordValue) {
     switch (this.type) {
       case "Boolean":
         return text;
@@ -123,4 +123,3 @@ export class Colunm {
     this.meta[key] = payload;
   }
 }
-

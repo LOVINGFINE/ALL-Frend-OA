@@ -4,7 +4,7 @@ export interface Sheet {
   name: string;
   createTime: string;
   updateTime: string;
-  columns: SheetHeader[];
+  columns: SheetColumn[];
 }
 
 export type MetaType =
@@ -38,7 +38,7 @@ export interface MetaOption {
   File: any;
 }
 
-export interface SheetHeader {
+export interface SheetColumn {
   id: string;
   code: string;
   title: string;
@@ -51,7 +51,21 @@ export interface SheetHeader {
   meta?: MetaOption;
 }
 
-export type SheetRecordValue = string | number | boolean;
+export type FileType = string;
+
+export type SheetRecordValue =
+  | string
+  | number
+  | boolean
+  | {
+      url: string;
+      filename: string;
+      type: FileType;
+    }
+  | {
+      title: string;
+      value: string;
+    };
 
 export interface SheetEntry {
   id: string;
@@ -60,6 +74,25 @@ export interface SheetEntry {
   };
 }
 
-export interface ColunmProps extends SheetHeader {
+export interface SheetEntriesPayload {
+  [k: string]: {
+    [k: string]: string | number | boolean;
+  };
+}
+
+export interface SheetColumnPayload {
+  id: string;
+  title?: string;
+  type?: MetaType;
+}
+
+export interface SheetEntriesProp {
+  total: number;
+  page: number;
+  pageSize: number;
+  records: SheetEntry[];
+}
+
+export interface ColunmProps extends SheetColumn {
   left: number;
 }

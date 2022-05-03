@@ -88,14 +88,15 @@ class SheetService {
       var body = await helper.getBody();
       if (body['id'] != null) {
         var column = sheet.updateColumn(body['id'], options: body);
-        if (column != null) {
-          return helper.response(200, body: column.toMap);
+        AppStatus status = await sheetDb.update(id, sheet.toMap);
+        if (column != null && status == AppStatus.OK) {
+          return helper.response(200, body: column);
         }
       }
       return helper.response(400,
-          body: {'message': 'column params ${body['id']} insert error'});
+          body: {'message': 'column id[${body['id']}] update error'});
     }
-    return helper.response(400, body: {'message': 'sheet $id not found'});
+    return helper.response(400, body: {'message': 'sheet[$id] not found'});
   }
 
   @Route.post('/sheets/<id>/entries') // 新增行数据

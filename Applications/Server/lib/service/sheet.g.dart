@@ -14,6 +14,7 @@ Router _$SheetServiceRouter(SheetService service) {
   router.add('POST', r'/sheets/<id>/column', service.insertSheetColumn);
   router.add('PUT', r'/sheets/<id>/column', service.updateSheetColumn);
   router.add('POST', r'/sheets/<id>/entries', service.insertSheetEntries);
+  router.add('PUT', r'/sheets/<id>/entries', service.updateSheetEntries);
   router.add('GET', r'/sheets/<id>/entries', service.getSheetEntries);
   return router;
 }

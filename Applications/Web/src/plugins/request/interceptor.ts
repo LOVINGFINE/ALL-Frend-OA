@@ -17,8 +17,6 @@ export const beforeRequest = {
  * */
 export const interceptors = {
   success: (response: AxiosResponse): Promise<unknown> => {
-    console.log(response);
-
     return Promise.resolve(response || {});
     // const { status, data } = response;
     // console.log(response);
@@ -39,7 +37,7 @@ export const interceptors = {
     // }
   },
   fail: (error: AxiosError): Promise<unknown> => {
-    console.log(error.response?.data);
+    console.log(error);
 
     return Promise.reject(error.response?.data);
   },

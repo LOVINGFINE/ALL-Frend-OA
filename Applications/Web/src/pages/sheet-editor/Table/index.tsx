@@ -7,7 +7,12 @@ import ColunmItem from "./widgets/Colunm";
 import CellItem from "./widgets/Cell";
 import className from "./style.scss";
 import { Colunm } from "./constant";
-import { SheetHeader, SheetEntry } from "../type";
+import {
+  SheetColumn,
+  SheetEntry,
+  SheetEntriesPayload,
+  SheetColumnPayload,
+} from "../type";
 import { transformVcColunm, getDisplayStyle } from "./utils";
 
 const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
@@ -69,6 +74,34 @@ const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
     });
   }
 
+  function updateCell({
+    val,
+    colunmId,
+    id,
+  }: {
+    val: number | string | boolean;
+    colunmId: string;
+    id: string;
+  }) {
+    // 单个修改
+    updateEntries({
+      [id]: {
+        [colunmId]: val,
+      },
+    });
+  }
+
+  function updateEntries(rows: SheetEntriesPayload) {
+    if (props?.onCellChange) {
+      props.onCellChange(rows);
+    }
+  }
+
+  function onColunmChange(payload: SheetColumnPayload) {
+    if (props?.onColumnChange) {
+      props.onColumnChange(payload);
+    }
+  }
   /** render */
   return (
     <div
@@ -77,7 +110,7 @@ const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
       ref={tableDisplayRef}
     >
       <ul className={className["table"]} style={{ ...ulStyle }}>
-        {displayColunms.map((col) => {
+        {displayColunms.map((col, colIndex) => {
           return (
             <li
               key={col.id}
@@ -96,15 +129,25 @@ const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
                   width: col.width - 1,
                 }}
               >
-                <ColunmItem colunm={col} />
+                <ColunmItem change={onColunmChange} colunm={col} />
               </div>
-              {props.entries.map((ele) => {
+              {props.entries.map((ele, i) => {
                 return (
                   <div
                     className={className["table-row"]}
                     key={`${col.id}-${ele.id}`}
                   >
-                    <CellItem colunm={col} text={ele.record[col.id]} />
+                    <CellItem
+                      colunm={col}
+                      onChange={(val) =>
+                        updateCell({
+                          val,
+                          colunmId: col.id,
+                          id: ele.id,
+                        })
+                      }
+                      text={ele.record[col.id]}
+                    />
                   </div>
                 );
               })}
@@ -117,8 +160,10 @@ const MetaTable: FC<MetaTableProps> = (props: MetaTableProps): ReactElement => {
 };
 
 export interface MetaTableProps {
-  headers: SheetHeader[];
+  headers: SheetColumn[];
   entries: SheetEntry[];
+  onCellChange?(e: SheetEntriesPayload): void;
+  onColumnChange?(e: SheetColumnPayload): void;
 }
 
 export default MetaTable;

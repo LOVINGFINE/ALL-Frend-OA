@@ -67,38 +67,27 @@ export class Request {
 
   private axios: AxiosStatic;
 
-  public send<T>(props: string | ActionType): Promise<T> {
+  public send<T>(
+    props: string | ActionType,
+    config?: AxiosRequestConfig
+  ): Promise<T> {
     if (typeof props === "string") {
-      return axios.get(props);
+      return axios.get(props, config);
     }
-    // if (props instanceof Array) {
-    //   return new Promise((resolve, reject) => {
-    //     axios
-    //       .all(props.map((ele) => this.send<T>(ele)))
-    //       .then(
-    //         axios.spread((...theArgs) => {
-    //           resolve([...theArgs] as T);
-    //         })
-    //       )
-    //       .catch((error) => {
-    //         reject(error);
-    //       });
-    //   });
-    // }
     const { path, method, data }: ActionType = props;
     switch (method) {
       case "get":
-        return axios.get(path);
+        return axios.get(path, config);
       case "post":
-        return axios.post(path, data);
+        return axios.post(path, data, config);
       case "put":
-        return axios.put(path, data);
+        return axios.put(path, data, config);
       case "patch":
-        return axios.patch(path, data);
+        return axios.patch(path, data, config);
       case "delete":
-        return axios.delete(path);
+        return axios.delete(path, config);
       case "options":
-        return axios.options(path);
+        return axios.options(path, config);
       default:
         return Promise.reject();
     }
