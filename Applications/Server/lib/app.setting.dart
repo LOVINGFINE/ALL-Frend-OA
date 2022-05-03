@@ -19,5 +19,3 @@ String APP_DB_USER = 'DB_USERS';
 
 // 表格
 String APP_DB_SHEET = 'DB_SHEETS';
-// 表格数据
-String APP_DB_SHEET_ENTRIES = 'DB_SHEETS_ENTRIES';

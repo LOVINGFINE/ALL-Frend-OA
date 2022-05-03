@@ -38,10 +38,11 @@ class MongodPlugin {
     }
   }
 
-  Future<Map<String, dynamic>?> findById(String id) async {
+  Future<Map<String, dynamic>?> findById(String id, {fieldName}) async {
+    String idKey = fieldName ?? 'id';
     await APP_MONGODB.open();
     Map<String, dynamic>? res =
-        await document?.findOne(where.eq('id', id).excludeFields(['_id']));
+        await document?.findOne(where.eq(idKey, id).excludeFields(['_id']));
     await APP_MONGODB.close();
     return res;
   }

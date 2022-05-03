@@ -12,7 +12,7 @@ class AccountService {
   Future<Response> user_login(Request request) async {
     RequestHelper helper = RequestHelper(request);
     var body = await helper.getBody();
-    String username = body!['username'] ?? '';
+    String username = body['username'] ?? '';
     String password = body['password'] ?? '';
     if (RegxTest.testMobile(username)) {
       User? user = await User.get({'mobile': username, "password": password});

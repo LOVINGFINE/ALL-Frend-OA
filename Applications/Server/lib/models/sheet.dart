@@ -2,44 +2,261 @@ import 'package:server/utils/generate.dart';
 
 class Sheet {
   String id = generateKey(value: 'LF-sheet-${DateTime.now()}').toUpperCase();
-  String code;
+  String code = "";
   String createTime = DateTime.now().toString();
   String updateTime = DateTime.now().toString();
   String name = '';
-  List<Column> columns = [];
-  Sheet(this.code, {params}) {
-    if (params != null) {
-      if (params['id'] != null) {
-        id = params['id'];
-      }
-      if (params['name'] != null) {
-        name = params['name'];
-      }
-      if (params['columns'] != null) {
-        params['columns'].forEach((ele) {
-          columns.add(Column(ele['code'], params: ele));
-        });
-      }
-      if (params['createTime'] != null) {
-        createTime = params['createTime'];
-      }
-      if (params['updateTime'] != null) {
-        updateTime = params['updateTime'];
-      }
-    }
-  }
-  get toMap {
-    List<Map> list = [];
-    for (var item in columns) {
-      list.add(item.toMap);
-    }
+  var columns = [];
+  var records = [];
+
+  get info {
     return {
       'id': id,
       'code': code,
       'name': name,
       'createTime': createTime,
       'updateTime': updateTime,
-      'columns': list,
+      'columns': columns,
+    };
+  }
+
+  get toMap {
+    return {
+      'id': id,
+      'code': code,
+      'name': name,
+      'createTime': createTime,
+      'updateTime': updateTime,
+      'columns': columns,
+      'records': records
+    };
+  }
+
+  fromJson(params) {
+    if (params['id'] != null) {
+      id = params['id'];
+    }
+    if (params['name'] != null) {
+      name = params['name'];
+    }
+    if (params['code'] != null) {
+      code = params['code'];
+    }
+
+    if (params['createTime'] != null) {
+      createTime = params['createTime'];
+    }
+    if (params['updateTime'] != null) {
+      updateTime = params['updateTime'];
+    }
+    columns = params['columns'] ?? [];
+    records = params['records'] ?? [];
+  }
+
+  Column insertColumn(title, {meta}) {
+    Meta metaConfig = Meta();
+    if (meta != null) {
+      metaConfig.fromJson(meta);
+    }
+    Column column = Column().fromJson({
+      'code': '$code${columns.length}',
+      'title': title,
+      'meta': metaConfig.toMap
+    });
+    columns.add(column.toMap);
+    return column;
+  }
+
+  deleteColumn(String id) {
+    int index = -1;
+    for (var i = 0; i < columns.length; i++) {
+      if (columns[i]['id'] == id) {
+        index = i;
+        break;
+      }
+    }
+    if (index != -1) {
+      columns.removeAt(index);
+    }
+  }
+
+  Column? updateColumn(String id, {options}) {
+    var col;
+    columns.map((ele) {
+      if (id == ele.id) {
+        if (options['title'] != null) {
+          ele.title = options['title'];
+        }
+        if (options['type'] != null && MetaType.isMetaType(options['type'])) {
+          ele.type = options['type'];
+        }
+      }
+      col = ele;
+      return ele;
+    });
+    return col;
+  }
+
+  Map getRecordsByPage({int page = 1, pageSize}) {
+    int total = records.length;
+    int size = pageSize ?? total;
+    List<Map<String, dynamic>> list = [];
+    int start = (page - 1) * size;
+    int end = page * size + 1;
+    if (start <= total) {
+      for (int i = start; i < end; i++) {
+        if (i < total) {
+          var entry = SheetEntry(records[i]['id']);
+          entry.fromJson(records[i]['record'], columns);
+          list.add(entry.toMap);
+        } else {
+          break;
+        }
+      }
+    }
+    return {'total': total, 'page': page, 'pageSize': size, 'records': list};
+  }
+
+  void insertRecords(List data) {
+    print(data);
+    List<SheetEntry> list = [];
+    data.forEach((ele) {
+      var entry = SheetEntry(
+          generateKey(value: 'LF-sheet-entry-$id-${DateTime.now()}'));
+      entry.fromJson(ele, columns);
+      list.add(entry);
+
+      records.add(entry.toMap);
+    });
+  }
+
+  updateRecords(Map<String, dynamic> data) {
+    int length = data.length;
+    for (var i = 0; i < records.length; i++) {
+      if (length != 0) {
+        if (data[records[i]['id']] != null) {
+          data[records[i]['id']].forEach((key, value) {
+            if (records[i]['record'][key] != null) {
+              records[i]['record'][key] = value;
+            }
+          });
+          length -= 1;
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+}
+
+class Column {
+  String id = '';
+  String code = '';
+  String createTime = DateTime.now().toString();
+  String updateTime = DateTime.now().toString();
+  String title = '';
+  int width = 180;
+  Map formula = {'value': '', 'html': ''};
+  String type = MetaType.string;
+  Meta meta = Meta();
+
+  fromJson(Map params) {
+    id = params['id'] ?? generateKey(value: 'LF-sheet-$code');
+    if (params['type'] != null && MetaType.isMetaType(params['type'])) {
+      type = params['type'];
+    }
+    if (params['width'] != null) {
+      width = params['width'];
+    }
+
+    if (params['title'] != null) {
+      title = params['title'];
+    }
+
+    if (params['updateTime'] != null) {
+      updateTime = params['updateTime'];
+    }
+
+    if (params['formula'] != null) {
+      formula = params['formula'];
+    }
+    if (params['meta'] != null) {
+      meta.fromJson(params['meta']);
+    }
+  }
+
+  get toMap {
+    return {
+      'id': id,
+      'code': code,
+      'title': title,
+      'createTime': createTime,
+      'updateTime': updateTime,
+      'type': type,
+      'meta': meta.toMap,
+      'width': width,
+      'formula': formula
+    };
+  }
+}
+
+class Meta {
+  Map Text = {};
+  Map Number = {
+    'decimal': "auto",
+    'unit': "none",
+  };
+  Map Percent = {'decimal': "auto"};
+  Map Boolean = {};
+  Map Date = {
+    'format': "YYYY-MM-DD HH:mm:ss",
+  };
+  Map QrCode = {
+    'type': "PIC",
+    'size': 100,
+  };
+  List Options = [];
+  Map File = {};
+  fromJson(params) {
+    if (params['Text'] != null) {
+      Text = params['Text'];
+    }
+    if (params['Number'] != null) {
+      Number = params['Text'];
+    }
+    if (params['Percent'] != null) {
+      Percent = params['Percent'];
+    }
+    if (params['Boolean'] != null) {
+      Boolean = params['Boolean'];
+    }
+    if (params['Date'] != null) {
+      Date = params['Date'];
+    }
+    if (params['QrCode'] != null) {
+      QrCode = params['QrCode'];
+    }
+
+    if (params['Options'] != null) {
+      Options = params['Options'];
+    }
+
+    if (params['File'] != null) {
+      File = params['File'];
+    }
+  }
+
+  get toMap {
+    return {
+      'Text': Text,
+      'Number': Number,
+      'Percent': Percent,
+      'Boolean': Boolean,
+      'Date': Date,
+      'QrCode': QrCode,
+      'Options': Options,
+      'File': File
     };
   }
 }
@@ -66,167 +283,17 @@ class MetaType {
   }
 }
 
-class Column {
+class SheetEntry {
   String id = '';
-  String code;
-  String createTime = DateTime.now().toString();
-  String updateTime = DateTime.now().toString();
-  String title = '';
-  int width = 180;
-  Map formula = {'value': '', 'html': ''};
-  String type = MetaType.string;
-  Map meta = Meta().toMap;
-
-  Column(this.code, {params}) {
-    if (params != null) {
-      id = params['id'] ?? generateKey(value: 'LF-sheet-$code');
-      if (params['type'] != null && MetaType.isMetaType(params['type'])) {
-        type = params['type'];
-      }
-      if (params['width'] != null) {
-        width = params['width'];
-      }
-
-      if (params['title'] != null) {
-        title = params['title'];
-      }
-
-      if (params['updateTime'] != null) {
-        updateTime = params['updateTime'];
-      }
-
-      if (params['formula'] != null) {
-        formula = params['formula'];
-      }
-      if (params['meta'] != null) {
-        meta = Meta(params: params['meta']).toMap;
-      }
-    }
-  }
-  get toMap {
-    return {
-      'id': id,
-      'code': code,
-      'title': title,
-      'createTime': createTime,
-      'updateTime': updateTime,
-      'type': type,
-      'meta': meta,
-      'width': width,
-      'formula': formula
-    };
-  }
-}
-
-class Meta {
-  Map Text = {};
-  Map Number = {
-    'decimal': "auto",
-    'unit': "none",
-  };
-  Map Percent = {'decimal': "auto"};
-  Map Boolean = {};
-  Map Date = {
-    'format': "YYYY-MM-DD HH:mm:ss",
-  };
-  Map QrCode = {
-    'type': "PIC",
-    'size': 100,
-  };
-  List Options = [];
-  Map File = {};
-  Meta({params}) {
-    if (params != null) {
-      if (params['Text'] != null) {
-        Text = params['Text'];
-      }
-      if (params['Number'] != null) {
-        Number = params['Text'];
-      }
-      if (params['Percent'] != null) {
-        Percent = params['Percent'];
-      }
-      if (params['Boolean'] != null) {
-        Boolean = params['Boolean'];
-      }
-      if (params['Date'] != null) {
-        Date = params['Date'];
-      }
-      if (params['QrCode'] != null) {
-        QrCode = params['QrCode'];
-      }
-
-      if (params['Options'] != null) {
-        Options = params['Options'];
-      }
-
-      if (params['File'] != null) {
-        File = params['File'];
-      }
-    }
-  }
-  get toMap {
-    return {
-      'Text': Text,
-      'Number': Number,
-      'Percent': Percent,
-      'Boolean': Boolean,
-      'Date': Date,
-      'QrCode': QrCode,
-      'Options': Options,
-      'File': File
-    };
-  }
-}
-
-class Entry {
-  String id = generateKey(value: 'LF-sheet-entry-${DateTime.now()}');
   Map<String, dynamic> record = {};
-  Entry({columns, entryId, data}) {
-    if (entryId != null) {
-      id = entryId;
-    }
-    List<Column> keys = columns ?? [];
-    keys.forEach((ele) {
-      record[ele.id] = data[ele.id] ?? '';
+  SheetEntry(this.id);
+  fromJson(Map<String, dynamic> data, columns) {
+    columns.forEach((ele) {
+      record[ele['id']] = data[ele['id']] ?? '';
     });
   }
+
   get toMap {
     return {'id': id, 'record': record};
   }
-}
-
-class EntryDb {
-  String id;
-  String createTime = DateTime.now().toString();
-  String updateTime = DateTime.now().toString();
-  List<Entry> records = [];
-  EntryDb(
-    this.id, {
-    list,
-    columns,
-  }) {
-    if (list != null) {
-      for (var item in list) {
-        records.add(Entry(entryId: item['id'], columns: columns, data: item));
-      }
-    }
-  }
-  get toMap {
-    List<Map> list = [];
-    for (var item in records) {
-      list.add(item.toMap);
-    }
-    return {
-      'id': id,
-      'records': list,
-      'createTime': createTime,
-      'updateTime': updateTime,
-    };
-  }
-}
-
-class InsrtEntryProp {
-  List<Map> records;
-  InsrtEntryProp(this.records);
 }

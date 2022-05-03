@@ -9,13 +9,13 @@ class RequestHelper {
   Map<String, String> get headers => request.headers;
   RequestHelper(this.request);
 
-  Future<Map<String, dynamic>> getBody() async {
+  Future getBody() async {
     // 获取body
     var body = await request.readAsString();
     try {
-      return jsonDecode(body);
+      return json.decode(body);
     } catch (e) {
-      return {};
+      return null;
     }
   }
 
@@ -35,7 +35,7 @@ class RequestHelper {
   }
 
   Response response(int code, {body: Map}) {
-    var data = body ?? '{}';
-    return Response(code, body: jsonEncode(data));
+    var data = body ?? {};
+    return Response(code, body: json.encode(data));
   }
 }
