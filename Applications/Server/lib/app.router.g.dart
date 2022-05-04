@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sheet.dart';
+part of 'app.router.dart';
 
 // **************************************************************************
 // ShelfRouterGenerator
 // **************************************************************************
 
-Router _$SheetServiceRouter(SheetService service) {
+Router _$AppServiceRouter(AppService service) {
   final router = Router();
   router.add('POST', r'/sheets', service.insertSheet);
   router.add('GET', r'/sheets/<id>', service.getSheetById);

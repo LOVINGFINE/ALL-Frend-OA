@@ -47,7 +47,9 @@ const ColunmItem: FC<ColunmItemProps> = ({
     <div className={className["colunmItem"]}>
       <div className={className["colunmItem-code"]}>{colunm.code}</div>
       <div className={className["colunmItem-meta"]}>
-        <span className={className["colunmItem-meta-icon"]}></span>
+        <span className={className["colunmItem-meta-icon"]}>
+          {!!colunm.icon && <Icon name={colunm.icon} />}
+        </span>
         <input
           type="text"
           value={input}

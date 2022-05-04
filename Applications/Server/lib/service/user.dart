@@ -3,14 +3,13 @@ import 'package:shelf_router/shelf_router.dart';
 import '../utils/regExp.dart';
 import '../helpers/request.dart';
 import 'package:server/models/user.dart';
-import 'dart:convert';
 
-part 'account.g.dart';
+part 'user.g.dart';
 
-class AccountService {
+class UserService {
   @Route.post('/login')
   Future<Response> user_login(Request request) async {
-    RequestHelper helper = RequestHelper(request);
+    RequestHelper helper = RequestHelper(request: request);
     var body = await helper.getBody();
     String username = body['username'] ?? '';
     String password = body['password'] ?? '';
@@ -28,5 +27,5 @@ class AccountService {
     return helper.response(400, body: {'code': 400, 'message': '用户信息错误'});
   }
 
-  Router get router => _$AccountServiceRouter(this);
+  Router get router => _$UserServiceRouter(this);
 }

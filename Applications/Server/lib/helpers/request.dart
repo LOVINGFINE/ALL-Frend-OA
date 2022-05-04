@@ -3,30 +3,41 @@ import 'dart:io';
 import 'package:shelf/shelf.dart';
 
 class RequestHelper {
-  Request request;
-  File get getFile => File(request.url.pathSegments.last);
-  Map<String, String> get querys => request.url.queryParameters;
-  Map<String, String> get headers => request.headers;
-  RequestHelper(this.request);
+  var originRequest;
+  Map<String, String> get querys => originRequest?.url.queryParameters ?? {};
+  Map<String, String> get headers => originRequest?.headers ?? {};
+  RequestHelper({request: Request}) {
+    originRequest = request;
+  }
+
+  File? get getFile {
+    // if (originRequest != null&&originRequest?.url!=null) {
+    //   File(originRequest.url.pathSegments.last);
+    // }
+    print(originRequest);
+    return null;
+  }
 
   Future getBody() async {
     // 获取body
-    var body = await request.readAsString();
-    try {
-      return json.decode(body);
-    } catch (e) {
-      return null;
+    var body = await originRequest?.readAsString();
+    if (body != null) {
+      try {
+        return json.decode(body);
+      } catch (e) {
+        return null;
+      }
     }
   }
 
-  dynamic getQueryByKey(String key) {
+  getQueryByKey(String key) {
     // 获取 params
-    return request.url.queryParameters[key];
+    return querys[key];
   }
 
   String getHeadersBykey(String name) {
     String target = '';
-    request.headers.forEach((key, value) {
+    headers.forEach((key, value) {
       if (name == key) {
         target = value.toString();
       }

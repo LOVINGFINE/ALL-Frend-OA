@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "dyl-design": "^0.0.8",
+    "dyl-design": "^0.0.9",
     "dyl-plugins": "^0.1.8",
     "jszip": "^3.7.1",
     "mocha": "^8.3.0",

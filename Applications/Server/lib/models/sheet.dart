@@ -263,7 +263,7 @@ class Meta {
 }
 
 class MetaType {
-  static String string = 'String';
+  static String string = 'Text';
   static String number = 'Number';
   static String boolean = 'Boolean';
   static String date = 'Date';
@@ -272,7 +272,7 @@ class MetaType {
   static String file = 'File';
   static isMetaType(String type) {
     List<String> arr = [
-      'String',
+      'Text',
       'Number',
       'Boolean',
       'Date',

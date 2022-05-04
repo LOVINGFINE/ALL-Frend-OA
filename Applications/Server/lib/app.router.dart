@@ -1,24 +1,49 @@
-import 'package:server/helpers/_helper.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
-import './service/account.dart';
-class RouteHelper {
-  @Route.post('/account/register') // 用户注册
-  Future<Response> account_register(Request request) async {
-    return await AccountHelper(request).register();
+import 'package:server/service/sheet.dart';
+
+part 'app.router.g.dart';
+
+class AppService {
+  @Route.post('/sheets') // 添加表格
+  Future<Response> insertSheet(Request request) async {
+    return SheetService(request).insert();
   }
 
-  @Route.post('/account/login') // 登录
-  Future<Response> account_login(Request request) async {
-    return await AccountHelper(request).login();
+  @Route.get('/sheets/<id>') // 获取表格
+  Future<Response> getSheetById(Request request, String id) async {
+    return SheetService(request).searchById(id);
   }
 
-  Router get router => _$RouteHelper(this);
-}
+  @Route.put('/sheets/<id>') // 修改表格属性
+  Future<Response> updateSheetById(Request request, String id) async {
+    return SheetService(request).update(id);
+  }
 
-Router _$RouteHelper(RouteHelper route) {
-  final router = Router();
-  router.all(r'/account/register', route.account_register);
-  router.all(r'/account/login', route.account_login);
-  return router;
+  @Route.post('/sheets/<id>/column') // 新增 表格列
+  Future<Response> insertSheetColumn(Request request, String id) async {
+    return SheetService(request).insertColumn(id);
+  }
+
+  @Route.put('/sheets/<id>/column') // 修改 表格列
+  Future<Response> updateSheetColumn(Request request, String id) async {
+    return SheetService(request).insertColumn(id);
+  }
+
+  @Route.post('/sheets/<id>/entries') // 新增行数据
+  Future<Response> insertSheetEntries(Request request, String id) async {
+    return SheetService(request).insertEntries(id);
+  }
+
+  @Route.put('/sheets/<id>/entries') // 修改行数据
+  Future<Response> updateSheetEntries(Request request, String id) async {
+    return SheetService(request).updateEntries(id);
+  }
+
+  @Route.get('/sheets/<id>/entries') // 获取表格 数据
+  Future<Response> getSheetEntries(Request request, String id) async {
+    return SheetService(request).getEntriesById(id);
+  }
+
+  Router get router => _$AppServiceRouter(this);
 }

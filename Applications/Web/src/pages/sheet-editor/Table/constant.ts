@@ -42,6 +42,29 @@ export class Colunm {
   type: MetaType = "Text";
   title = "";
 
+  get icon() {
+    const { type } = this;
+    switch (type) {
+      case "Text":
+        return "text";
+      case "Number":
+        return "number";
+      case "Percent":
+        return "number";
+      case "Boolean":
+        return "bool-icon";
+      case "Date":
+        return "date";
+      case "QrCode":
+        return "qrcode";
+      case "File":
+        return "filelink";
+      case "Options":
+        return "options";
+      default:
+        return "";
+    }
+  }
   getValue(text: SheetRecordValue): SheetRecordValue {
     switch (this.type) {
       case "Boolean":
@@ -119,6 +142,7 @@ export class Colunm {
         return text;
     }
   }
+  
   setMeta(key: MetaType, payload: any) {
     this.meta[key] = payload;
   }
